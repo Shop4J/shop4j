@@ -1,0 +1,69 @@
+Configuration:
+  status: warn
+  Appenders:
+    Console:  #输出到控制台
+      name: Console
+      target: SYSTEM_OUT
+      PatternLayout:
+        pattern: "%date %level %class %method :%t: %msg%n"
+    RollingFile : # 按天输出错误信息到文件
+      - name: RollingFileError
+        thresholdFilter:
+          level: error
+          onMatch: ACCEPT
+          onMismatch: DENY
+        fileName: "logs/error.log"
+        filePattern: "logs/error-%d{yyyy-MM-dd}.log"
+        PatternLayout:
+          pattern: "%d{yyyy-MM-dd HH:mm:ss,SSS}:%4p %t (%F) - %m%n"
+        DefaultRolloverStrategy:
+                  max: 500
+        Policies:
+          TimeBasedTriggeringPolicy:
+            - modulate: true
+              interval: 1
+    RollingFile : # 按天输出错误信息到文件
+          - name: RollingFileInfo
+            thresholdFilter:
+              level: debug
+              onMatch: ACCEPT
+              onMismatch: DENY
+            fileName: "logs/info.log"
+            filePattern: "logs/info-%d{yyyy-MM-dd}.log"
+            PatternLayout:
+              pattern: "%d{yyyy-MM-dd HH:mm:ss,SSS}:%4p %t (%F) - %m%n"
+            Policies:
+              TimeBasedTriggeringPolicy:
+                          - modulate: true
+                            interval: 1
+  Loggers:
+    Root:
+      level: info
+      AppenderRef:
+        - ref: Console
+        - ref: RollingFileError
+        - ref: RollingFileInfo
+    Logger:
+      - name: org.hibernate.SQL
+        additivity: true
+        level: debug
+        AppenderRef:
+          - ref: Console
+    Logger:
+      - name: org.hibernate.type.descriptor
+        additivity: true
+        level: debug
+        AppenderRef:
+          - ref: Console
+    Logger:
+      - name: java.sql
+        additivity: true
+        level: debug
+        AppenderRef:
+          - ref: RollingFileInfo
+    Logger:
+      - name: springfox.documentation
+        additivity: false
+        level: warn
+        AppenderRef:
+          - ref: Console
