@@ -60,14 +60,13 @@
 						<span th:each="yearOld : ${yearOlds}">
 							<a href=""><li th:text="${yearOld.name}"></li></a>
 						</span>
-
 					</ul>
 				</div>
 				<div class="filter-prop-item">
 					<span class="filter-prop-title">价格：</span>
 					<ul class="clearfix">
 						<a href=""><li class="active">全部</li></a>
-                        <span th="searchMoney : ${searchMoneys}">
+                        <span th:each="searchMoney : ${searchMoneys}">
 						    <a href=""><li th:text="${searchMoney.name}"></li></a>
                         </span>
 						<form class="price-order">

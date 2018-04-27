@@ -10,7 +10,6 @@ spring:
   thymeleaf:
      mode: HTML5
      cache: false
-     prefix:
 
 ##驼峰命名
 mybatis:
