@@ -20,27 +20,26 @@
 				<li class="active">商品筛选</li>
 			</ol>
 			<div class="filter-box">
+
 				<div class="all-filter">
 					<div class="filter-value">
 						<div class="filter-title">选择商品分类 <i class="iconfont icon-down"></i></div>
 						<!-- 已选选项 -->
 						<div class="ul_filter">
-							<span class="pull-left">
-								颜色：红色 <a href="javascript:;" class="close">&times;</a>
-							</span>
-							<span class="pull-left">
-								尺寸：XXL <a href="javascript:;" class="close">&times;</a>
-							</span>
+
 						</div>
-						<a class="reset pull-right" href="product_list.html">重置</a>
+						<a class="reset pull-right" href="javascript:;" onclick="resetTitle()">重置</a>
 					</div>
 				</div>
+
 				<div class="filter-prop-item">
 					<span class="filter-prop-title">分类：</span>
 					<ul class="clearfix">
 						<a href=""><li class="active">全部</li></a>
 						<span th:each="productType : ${productTypesMap.get(Long.parseLong(0))}">
-							<a href=""><li th:text="${productType.name}"></li></a>
+							<a href="javascript:;" >
+								<li th:text="${productType.name}" th:attr="onclick = |addSearchTitle('分类：${productType.name}')|"></li>
+							</a>
 						</span>
 					</ul>
 				</div>
@@ -49,7 +48,9 @@
 					<ul class="clearfix">
 						<a href=""><li class="active">全部</li></a>
 						<span th:each="color:${colors}">
-							<a href=""><li th:text="${color.name}"></li></a>
+							<a href="javascript:;">
+								<li th:text="${color.name}" th:attr="onclick = |addSearchTitle('颜色：${color.name}')|"></li>
+							</a>
 						</span>
 					</ul>
 				</div>
@@ -58,7 +59,9 @@
 					<ul class="clearfix">
 						<a href=""><li class="active">全部</li></a>
 						<span th:each="yearOld : ${yearOlds}">
-							<a href=""><li th:text="${yearOld.name}"></li></a>
+							<a href="javascript:;">
+								<li th:text="${yearOld.name}" th:attr="onclick = |addSearchTitle('年龄：${yearOld.name}')|"></li>
+							</a>
 						</span>
 					</ul>
 				</div>
@@ -67,7 +70,9 @@
 					<ul class="clearfix">
 						<a href=""><li class="active">全部</li></a>
                         <span th:each="searchMoney : ${searchMoneys}">
-						    <a href=""><li th:text="${searchMoney.name}"></li></a>
+						    <a href="javascript:;">
+								<li th:text="${searchMoney.name}" th:attr="onclick = |addSearchTitle('价格：${searchMoney.name}')|"></li>
+							</a>
                         </span>
 						<form class="price-order">
 							<input type="text">
@@ -78,6 +83,7 @@
 					</ul>
 				</div>
 			</div>
+			<div id="danger" class="alert alert-danger  hidden" role="alert"></div>
 			<div class="sort-box bgf5">
 				<div class="sort-text">排序：</div>
 				<a href=""><div class="sort-text">销量 <i class="iconfont icon-sortDown"></i></div></a>
@@ -435,4 +441,35 @@
 	<!-- 底部信息 -->
 	<div th:include="shop/common/template :: footer"></div>
 </body>
+<script>
+    //动态添加上方选中搜索框
+	function addSearchTitle(name){
+	    var oldTitle = $(".ul_filter").html();
+	    var newTitle = "<span class='pull-left'>"+name+"<a href='javascript:;' class='close'>&times;</a></span>";
+	    if(oldTitle.indexOf(name)>0){
+            $(".alert-danger").text("请不要添加重复得搜索条件！")
+			$(".alert-danger").removeClass("hidden");
+            //2秒后消失提示框
+            var id = setTimeout(
+                function () {
+                    $(".alert-danger").addClass("hidden");
+                }, 3000
+            );
+	        return;
+		}
+        $(".ul_filter").html(oldTitle+newTitle);
+	}
+	//删除单个标题
+    $(".ul_filter").on('click',".pull-left",function () {
+        event.stopPropagation();
+        $(this).remove();
+	})
+
+
+    //动态添加上方选中搜索框
+    function resetTitle(){
+        $(".ul_filter").html("");
+    }
+
+</script>
 </html>
