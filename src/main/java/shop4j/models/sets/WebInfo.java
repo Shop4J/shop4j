@@ -38,4 +38,10 @@ public class WebInfo extends BaseModel {
      */
     @Column(name = "key_world")
     private String keyWorld;
+
+    /**
+     * 小图片地址
+     */
+    @Column(name ="ico_url")
+    private String icoUrl;
 }
