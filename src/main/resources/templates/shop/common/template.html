@@ -21,7 +21,7 @@
 <body>
     <!-- 顶部tab -->
     <div th:fragment="top">
-        <div class="tab-header" th:fragment="top">
+        <div class="tab-header">
             <div class="inner">
                 <div class="pull-left">
                     <div class="pull-left">嗨，欢迎来到<span class="cr" th:text="${webInfo.name}"></span></div>
@@ -46,7 +46,7 @@
                 <a class="logo" href="/"><img src="" th:src="${webInfo.logoUrl}" alt="" th:alt="${webInfo.name}" class="cover"></a>
                 <div class="search-box">
                     <form class="input-group" action="/product/search">
-                        <input placeholder="Ta们都在搜" type="text" name="search">
+                        <input placeholder="Ta们都在搜" type="text" name="searchText" th:value="${searchText}">
                         <span class="input-group-btn">
 						<button type="submit">
 							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>

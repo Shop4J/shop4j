@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
-<head th:include="shop/common/template :: header">
-
-</head>
+<head th:include="shop/common/template :: header"></head>
 <body>
 	<div th:include="shop/common/template :: top"></div>
 	<div th:include="shop/common/template :: search"></div>
@@ -30,7 +28,7 @@
 										<span class="title" th:text="${productType.name}"></span>
 										<div class="genre-list">
 											<span th:each="productKidType,stat:${productTypesMap[Long.parseLong(productTypeId)]}">
-												<a href=""  th:text="${productKidType.name}"></a>
+												<a href=""  th:text="${productKidType.name}" th:href="|/product/search?productKidType=${productKidType.id}|"></a>
 												<span th:if="${stat.count % 5 eq 0}">
 													</br></br>
 												</span>
