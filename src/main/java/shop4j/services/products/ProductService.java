@@ -1,5 +1,6 @@
 package shop4j.services.products;
 
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 import shop4j.models.products.Product;
 import shop4j.vo.SearchProductVO;
@@ -19,7 +20,7 @@ public interface ProductService {
      * 查询可用商品
      * @return 可用商品SPU
      */
-    List<Product> findBySearchVO(SearchProductVO searchProductVO);
+    PageInfo<Product> findBySearchVO(SearchProductVO searchProductVO);
 
     /**
      * 添加商品

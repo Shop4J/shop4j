@@ -1,5 +1,7 @@
 package shop4j.services.products.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shop4j.dao.products.ProductMapper;
@@ -19,8 +21,11 @@ public class ProductServiceImpl implements ProductService{
     @Autowired
     private ProductMapper productMapper;
     @Override
-    public List<Product> findBySearchVO(SearchProductVO searchProductVO) {
-        return null;
+    public PageInfo<Product> findBySearchVO(SearchProductVO searchProductVO) {
+        PageHelper.startPage(searchProductVO.getPage(),searchProductVO.getSize());
+        List<Product> products = productMapper.findBySearchVO(searchProductVO);
+        PageInfo<Product> productsPageInfo = new PageInfo<>(products);
+        return productsPageInfo;
     }
 
     @Override

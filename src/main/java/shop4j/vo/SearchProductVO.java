@@ -41,4 +41,14 @@ public class SearchProductVO {
      * 金额
      */
     private List<Integer> moneys;
+
+    /**
+     * 默认当前页
+     */
+    private int page = 1;
+
+    /**
+     * 默认分页数量
+     */
+    private int size =20;
 }

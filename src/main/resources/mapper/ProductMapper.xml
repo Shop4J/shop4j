@@ -18,7 +18,11 @@
         SELECT <include refid="table_columns"/> from <include refid="table_name"/>
         WHERE
     </sql>
-    <select id="findAll" resultMap="Product">
+    <select id="findBySearchVO" resultMap="Product" parameterType="shop4j.vo.SearchProductVO">
         <include refid="select_all_columns"/> status = 1
+        <if test="searchText != null and searchText!=''">
+            and
+            name LIKE concat(concat('%',#{searchText}),'%')
+        </if>
     </select>
 </mapper>
