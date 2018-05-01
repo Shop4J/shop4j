@@ -12,11 +12,11 @@ import shop4j.services.sets.WebInfoService;
 /**
  * @Author: weixuedong
  * @Date: 2018/4/17 18:45
- * @Description:服务测试类
+ * @Description:站点信息测试类
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class ServiceTest {
+public class WebInfoTest {
 
     @Autowired
     private WebInfoService webInfoService;

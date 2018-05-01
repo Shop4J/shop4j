@@ -89,7 +89,7 @@
 			</div>
 			<div id="danger" class="alert alert-danger  hidden" role="alert"></div>
 		</section>
-		<div id="product_list" th:include="shop/products/product_list :: productList"></div>
+		<div id="product_list">加载中。。。</div>
 	</div>
 	<!-- 右侧浮动菜单 -->
 	<div th:include="shop/common/template :: rightMenu"></div>
@@ -139,5 +139,13 @@
 		    $("#product_list").html(data);
         })
 	}
+
+    /**
+     * 加载产品列表加载商品列表
+     */
+    $(function(){
+         loadProductList();
+	})
+
 </script>
 </html>

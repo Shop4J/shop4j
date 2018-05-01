@@ -2,6 +2,7 @@ package shop4j.models;
 
 import lombok.Data;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,25 +23,30 @@ public class BaseModel implements Serializable{
     /**
      * 添加时间
      */
+    @Column
     private Date addTime = new Date();
 
     /**
      * 更新时间
      */
+    @Column
     private Date updateTime;
 
     /**
      * 添加人
      */
+    @Column
     private long addOperator;
 
     /**
      * 更新人
      */
+    @Column
     private long updateOperator;
 
     /**
      * @see shop4j.enums.CommonDataStatus
      */
+    @Column
     private int status;
 }

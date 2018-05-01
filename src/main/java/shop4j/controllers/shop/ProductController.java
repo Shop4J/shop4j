@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.thymeleaf.expression.Strings;
+import shop4j.vo.SearchProductVO;
 import shop4j.annotions.shop.dataload.HeadDataLoad;
 import shop4j.models.products.ProductType;
 import shop4j.models.products.SearchMoney;
@@ -16,9 +16,9 @@ import shop4j.services.products.ProductTypeService;
 import shop4j.services.products.SearchMoneyService;
 import shop4j.services.products.YearOldService;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * @Author: weixuedong
@@ -53,7 +53,6 @@ public class ProductController {
         loadCommonData(model);//加载常量数据
         model.addAttribute("searchText",searchText);
         model.addAttribute("productKidType",productKidType);
-        model.addAttribute("count",2000);
         return "shop/products/product_search_index";
     }
 
@@ -83,10 +82,8 @@ public class ProductController {
      * 刷新商品
      */
     @GetMapping("/list")
-    public String searchProduct(String searchText,Model model){
-        int radom = new Random().nextInt(1000);
-        System.out.println(radom);
-        model.addAttribute("count",radom);
+    public String searchProduct( Model model,@NotNull SearchProductVO searchProductVO){
+
         return "shop/products/product_list :: productList";
     }
 }
