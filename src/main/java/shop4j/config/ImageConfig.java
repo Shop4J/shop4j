@@ -17,7 +17,7 @@ public class ImageConfig {
     private String handler;
 
     /**
-     * 第一位是windows路径 第二位是linux路径
+     * 图片路径，建议配置2个 一个用windows 一个用linux
      */
     private String[] location;
 }

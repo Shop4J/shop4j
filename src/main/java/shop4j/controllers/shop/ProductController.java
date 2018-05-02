@@ -7,13 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import shop4j.models.products.Product;
+import shop4j.models.products.*;
 import shop4j.services.products.*;
 import shop4j.vo.SearchProductVO;
 import shop4j.annotions.shop.dataload.HeadDataLoad;
-import shop4j.models.products.ProductType;
-import shop4j.models.products.SearchMoney;
-import shop4j.models.products.YearOld;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -41,6 +38,9 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private ProductImageService productImageService;
     /**
      * 商品搜索首页控制器
      * @param model thymeleaf模板
@@ -84,8 +84,13 @@ public class ProductController {
      */
     @GetMapping("/list")
     public String searchProduct(Model model,@NotNull SearchProductVO searchProductVO){
+
         PageInfo<Product> productPageInfo = productService.findBySearchVO(searchProductVO);
         model.addAttribute("productPageInfo",productPageInfo);
+
+        List<Product> products = productPageInfo.getList();
+        Map<Long, ProductImage> productImageMap = productImageService.findSPUMainImageByProductId(CollectionsParserUtil.collectFieldToList(products, Product::getId));
+
         return "shop/products/product_list :: productList";
     }
 }
