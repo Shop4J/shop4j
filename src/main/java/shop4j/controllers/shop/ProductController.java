@@ -90,6 +90,7 @@ public class ProductController {
 
         List<Product> products = productPageInfo.getList();
         Map<Long, ProductImage> productImageMap = productImageService.findSPUMainImageByProductId(CollectionsParserUtil.collectFieldToList(products, Product::getId));
+        model.addAttribute("productImageMap",productImageMap);
 
         return "shop/products/product_list :: productList";
     }

@@ -34,7 +34,7 @@ public class ProductImageTest {
             productImage.setSort(1);
             productImage.setType(ProductImageTypeEnum.SPU.getType());
             productImage.setAddTime(new Date());
-            productImage.setUrl("/image/M-"+i%20+".jpg");
+            productImage.setUrl("/business/images/product/M-"+i%20+".jpg");
             productImage.setStatus(CommonDataStatus.OK.getStatus());
             productImage.setAddOperator(1);
             productImages.add(productImage);

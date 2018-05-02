@@ -11,7 +11,7 @@
             <div class="item-list__area clearfix">
                 <div class="item-card" th:each="product : ${productPageInfo.list}">
                     <a href="item_show.html" class="photo">
-                        <img src="/image/product/M-001.jpg"  th:alt="${product.name}" class="cover">
+                        <img th:alt="${product.name}" th:src="${productImageMap.get(product.id).url}" class="cover">
                         <div class="name" th:text="${product.name}"></div>
                     </a>
                     <div class="middle">
