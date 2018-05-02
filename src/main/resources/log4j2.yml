@@ -38,7 +38,7 @@ Configuration:
                             interval: 1
   Loggers:
     Root:
-      level: info
+      level: debug
       AppenderRef:
         - ref: Console
         - ref: RollingFileError

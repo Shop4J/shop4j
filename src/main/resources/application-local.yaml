@@ -23,6 +23,13 @@ mapper:
   not-empty: false
   identity: MYSQL
 
+##商品图片地址 目标和链接
+images:
+  handler: /image/**
+  location: D:/images/,/opt/images/
+
+
+
 
 
 
