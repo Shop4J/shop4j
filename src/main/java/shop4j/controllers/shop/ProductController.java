@@ -1,5 +1,6 @@
 package shop4j.controllers.shop;
 
+import base.util.collections.CollectionUtil;
 import base.util.collections.parser.CollectionsParserUtil;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import shop4j.models.order.OrderDetail;
 import shop4j.models.products.*;
+import shop4j.services.order.OrderDetailService;
 import shop4j.services.products.*;
 import shop4j.vo.SearchProductVO;
 import shop4j.annotions.shop.dataload.HeadDataLoad;
@@ -41,6 +44,9 @@ public class ProductController {
 
     @Autowired
     private ProductImageService productImageService;
+
+    @Autowired
+    private OrderDetailService orderDetailService;
     /**
      * 商品搜索首页控制器
      * @param model thymeleaf模板
@@ -89,10 +95,15 @@ public class ProductController {
         model.addAttribute("productPageInfo",productPageInfo);
 
         List<Product> products = productPageInfo.getList();
-        Map<Long, ProductImage> productImageMap = productImageService.findSPUMainImageByProductId(CollectionsParserUtil.collectFieldToList(products, Product::getId));
-        model.addAttribute("productImageMap",productImageMap);
 
-        
+        if(CollectionUtil.isNotEmpty(products)) {
+            List<Long> productIds = CollectionsParserUtil.collectFieldToList(products, Product::getId);
+            Map<Long, ProductImage> productImageMap = productImageService.findSPUMainImageByProductId(productIds);
+            model.addAttribute("productImageMap", productImageMap);
+
+            Map<Long, Integer> sellCountMap = orderDetailService.sellCountBySPUIds(productIds);
+            model.addAttribute("sellCountMap", sellCountMap);
+        }
         return "shop/products/product_list :: productList";
     }
 }

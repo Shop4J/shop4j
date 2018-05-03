@@ -12,7 +12,7 @@ import java.math.BigDecimal;
  * @Date: 2018/5/3 10:24
  * @Description:订单详情
  */
-@Table(name = "tbl_order_detail")
+@Table(name = "db_order.tbl_order_detail")
 @Data
 public class OrderDetail extends BaseModel {
     /**
