@@ -15,12 +15,12 @@
                         <div class="name" th:text="${product.name}"></div>
                     </a>
                     <div class="middle">
-                        <div class="price"><small>￥</small>18.0</div>
+                        <div class="price"><small>￥</small><span th:text="${product.showPrice}"></span></div>
                         <div class="sale"><a href="">加入购物车</a></div>
                     </div>
                     <div class="buttom">
-                        <div>销量 <b>666</b></div>
-                        <div>人气 <b>888</b></div>
+                        <div>库存 <b>666</b></div>
+                        <div>销量 <b>888</b></div>
                         <div>评论 <b>1688</b></div>
                     </div>
                 </div>

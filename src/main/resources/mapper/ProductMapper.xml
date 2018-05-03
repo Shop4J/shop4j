@@ -9,7 +9,7 @@
         id,status,update_time,update_operator,add_operator,add_time
     </sql>
     <sql id="table_columns">
-        name,type,detail,<include refid="common_table_columns"/>
+        name,type,detail,show_price,<include refid="common_table_columns"/>
     </sql>
     <sql id="table_name">
         db_products.tbl_products

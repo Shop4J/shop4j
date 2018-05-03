@@ -8,9 +8,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import shop4j.models.products.Product;
 import shop4j.services.products.ProductService;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @Author: weixuedong
@@ -34,6 +36,7 @@ public class ProductTest {
             product.setAddOperator(1);
             product.setStatus(1);
             productList.add(product);
+            product.setShowPrice(BigDecimal.valueOf(new Random().nextInt(100)));
         }
         productService.addList(productList);
     }
