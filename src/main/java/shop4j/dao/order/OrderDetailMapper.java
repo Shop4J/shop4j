@@ -7,7 +7,6 @@ import shop4j.dao.BaseMapper;
 import shop4j.models.order.OrderDetail;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Author: weixuedong

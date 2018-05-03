@@ -19,7 +19,7 @@
         WHERE
     </sql>
     <select id="countBySPU" resultMap="OrderDetail">
-        SELECT spu_id,sum(num) from <include refid="table_name"/>  where status = 1 and spu_id in (
+        SELECT spu_id,sum(num) as num from <include refid="table_name"/>  where status = 1 and spu_id in (
             <foreach collection="spuIds" item="spuId" separator=",">
                 #{spuId}
             </foreach>
