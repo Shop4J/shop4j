@@ -19,8 +19,8 @@
                         <div class="sale"><a href="">加入购物车</a></div>
                     </div>
                     <div class="buttom">
-                        <div>库存 <b>666</b></div>
-                        <div>销量 <b th:text="${sellCountMap.get(product.id)}"></b></div>
+                        <div>库存 <b th:text="${storeCountMap?.get(product.id)}"></b></div>
+                        <div>销量 <b th:text="${sellCountMap?.get(product.id)}"></b></div>
                         <div>评论 <b>1688</b></div>
                     </div>
                 </div>

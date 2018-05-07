@@ -1,5 +1,6 @@
 package shop4j;
 
+import base.util.random.RandomUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +28,11 @@ public class ProductTest {
     @Test
     public void testAdd(){
         List<Product> productList = new ArrayList<>();
-        for(int i=0 ;i<5000;i++) {
+        for(int i=1 ;i<=5000;i++) {
             Product product = new Product();
             product.setName(i+" 春季新款光泽裤修身显瘦打底裤 弹力大码九分小脚裤子女");
             product.setDetail("拉里萨说的啥的货物的核武器和动物i哦亲");
-            product.setType(i%22);
+            product.setType(RandomUtil.rangeRandom(11,57));
             product.setAddTime(new Date());
             product.setAddOperator(1);
             product.setStatus(1);

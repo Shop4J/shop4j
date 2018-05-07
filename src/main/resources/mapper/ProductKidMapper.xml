@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="shop4j.dao.products.ProductKidMapper" >
+    <resultMap id="ProductKid" type="shop4j.models.products.ProductKid">
+
+    </resultMap>
+    <sql id="common_table_columns">
+        id,status,update_time,update_operator,add_operator,add_time
+    </sql>
+    <sql id="table_columns">
+        color,size,num,spu_id,<include refid="common_table_columns"/>
+    </sql>
+    <sql id="table_name">
+        db_products.tbl_product_kid
+    </sql>
+    <sql id="select_all_columns">
+        SELECT <include refid="table_columns"/> from <include refid="table_name"/>
+        WHERE
+    </sql>
+    <select id="countStoreBySPU" resultMap="ProductKid" >
+        SELECT spu_id,sum(num) as num from <include refid="table_name"/> where status = 1 and spu_id in
+        (
+        <foreach collection="spuIds"  item="spuId" separator=",">
+          #{spuId}
+        </foreach>
+        ) group by spu_id
+    </select>
+</mapper>

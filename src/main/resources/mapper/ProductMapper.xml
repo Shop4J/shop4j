@@ -24,5 +24,9 @@
             and
             name LIKE concat(concat('%',#{searchText}),'%')
         </if>
+        <if test="productKidType != null and productKidType!=0 ">
+            and
+            type = ${productKidType}
+        </if>
     </select>
 </mapper>

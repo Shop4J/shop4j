@@ -47,6 +47,9 @@ public class ProductController {
 
     @Autowired
     private OrderDetailService orderDetailService;
+
+    @Autowired
+    private ProductKidService productKidService;
     /**
      * 商品搜索首页控制器
      * @param model thymeleaf模板
@@ -99,10 +102,13 @@ public class ProductController {
         if(CollectionUtil.isNotEmpty(products)) {
             List<Long> productIds = CollectionsParserUtil.collectFieldToList(products, Product::getId);
             Map<Long, ProductImage> productImageMap = productImageService.findSPUMainImageByProductId(productIds);
-            model.addAttribute("productImageMap", productImageMap);
+            model.addAttribute("productImageMap", productImageMap);//商品图片
 
-            Map<Long, Integer> sellCountMap = orderDetailService.sellCountBySPUIds(productIds);
+            Map<Long, Integer> sellCountMap = orderDetailService.sellCountBySPUIds(productIds);//销量
             model.addAttribute("sellCountMap", sellCountMap);
+
+            Map<Long, Integer> storeCountMap = productKidService.countStoreBySpuIds(productIds);//库存
+            model.addAttribute("storeCountMap",storeCountMap);
         }
         return "shop/products/product_list :: productList";
     }

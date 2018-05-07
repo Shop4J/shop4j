@@ -12,14 +12,14 @@ import java.math.BigDecimal;
  * @Date: 2018/5/2 11:03
  * @Description:子品 sku
  */
-@Table(name = "db_products.tbl_kid_product")
+@Table(name = "db_products.tbl_product_kid")
 @Data
-public class KidProduct extends BaseModel{
+public class ProductKid extends BaseModel{
     /**
      * 颜色
      */
     @Column
-    private int color;
+    private long color;
 
     /**
      * 价格 元
@@ -28,14 +28,17 @@ public class KidProduct extends BaseModel{
     private BigDecimal price;
 
     /**
-     * 父类编号
-     */
-    @Column
-    private long spu;
-
-    /**
      * 库存
      */
     @Column
     private int num;
+
+    @Column
+    private long spuId;
+
+    /**
+     * 大小
+     */
+    @Column
+    private String size;
 }

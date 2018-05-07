@@ -28,13 +28,13 @@ public class ProductImageTest {
     @Test
     public void test(){
         List<ProductImage> productImages = new ArrayList<>();
-        for(int i=0 ;i<5000;i++) {
+        for(int i=1 ;i<=5000;i++) {
             ProductImage productImage = new ProductImage();
-            productImage.setProductId(75007+i);
+            productImage.setProductId(80006+i);
             productImage.setSort(1);
             productImage.setType(ProductImageTypeEnum.SPU.getType());
             productImage.setAddTime(new Date());
-            productImage.setUrl("/business/images/product/M-"+i%20+".jpg");
+            productImage.setUrl("/business/images/product/M-"+(i-1)%20+".jpg");
             productImage.setStatus(CommonDataStatus.OK.getStatus());
             productImage.setAddOperator(1);
             productImages.add(productImage);

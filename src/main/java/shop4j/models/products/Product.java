@@ -46,24 +46,5 @@ public class Product extends BaseModel{
     @Column
     private int status;
 
-    /**
-     * 买家编号
-     */
-    @Column
-    private long userId;
 
-    /**
-     * 收货人手机号
-     */
-    @Column
-    private String mobile;
-
-    /**
-     * 收货人地址
-     */
-    @Column
-    private String addr;
-
-    @Column
-    private long spuId;
 }
