@@ -141,6 +141,7 @@
 		$.get("/product/list?page="+page+"&"+data,function (data) {
 		    $("#product_list").html(data);
         })
+        $("html,body").animate({scrollTop:220}, 0);
 	}
     /**
      * 加载产品列表加载商品列表

@@ -117,4 +117,14 @@ public class ProductController {
         }
         return "shop/products/product_list :: productList";
     }
+
+    /**
+     * 刷新商品
+     */
+    @GetMapping("/detail")
+    @HeadDataLoad
+    public String searchProduct(Model model,long spuId){
+
+       return "shop/products/item_show";
+    }
 }

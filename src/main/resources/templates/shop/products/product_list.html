@@ -10,7 +10,7 @@
         <div class="pull-left">
             <div class="item-list__area clearfix">
                 <div class="item-card" th:each="product : ${productPageInfo.list}">
-                    <a href="item_show.html" class="photo">
+                    <a th:href="|/product/detail?spuId=${product.id}|" class="photo">
                         <img th:alt="${product.name}" th:src="${productImageMap.get(product.id).url}" class="cover">
                         <div class="name" th:text="${product.name}"></div>
                     </a>
@@ -34,9 +34,9 @@
                 <a class="disabled" th:text="|${productPageInfo.pageNum}/${productPageInfo.pages}|"></a>
                 <form action="" class="page-order">
                     到第
-                    <input type="text" name="page">
+                    <input type="text" name="page" id="page">
                     页
-                    <input class="sub" type="submit" value="确定">
+                    <input class="sub" onclick="loadProductList($('#page').val());" type="button" value="确定">
                 </form>
             </div>
         </div>
