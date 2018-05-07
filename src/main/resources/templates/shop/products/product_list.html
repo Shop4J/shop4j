@@ -10,7 +10,7 @@
         <div class="pull-left">
             <div class="item-list__area clearfix">
                 <div class="item-card" th:each="product : ${productPageInfo.list}">
-                    <a th:href="|/product/detail?spuId=${product.id}|" class="photo">
+                    <a th:href="|/product/detail?spuId=${product.id}|" target="_blank" class="photo">
                         <img th:alt="${product.name}" th:src="${productImageMap.get(product.id).url}" class="cover">
                         <div class="name" th:text="${product.name}"></div>
                     </a>

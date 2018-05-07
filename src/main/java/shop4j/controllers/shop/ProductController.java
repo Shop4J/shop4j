@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import shop4j.models.order.OrderDetail;
 import shop4j.models.products.*;
 import shop4j.services.order.OrderDetailService;
 import shop4j.services.products.*;
@@ -125,6 +124,6 @@ public class ProductController {
     @HeadDataLoad
     public String searchProduct(Model model,long spuId){
 
-       return "shop/products/item_show";
+       return "shop/products/product_detail";
     }
 }
