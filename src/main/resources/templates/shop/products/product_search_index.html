@@ -133,13 +133,15 @@
     /**
 	 * 加载产品列表
      */
-	function loadProductList(){
+	function loadProductList(page){
+	    if(page==null||page ==0||typeof(page)=="undefined"){
+	        page=1;
+		}
 		var data = $("#searchData").serialize();
-		$.get("/product/list?"+data,function (data) {
+		$.get("/product/list?page="+page+"&"+data,function (data) {
 		    $("#product_list").html(data);
         })
 	}
-
     /**
      * 加载产品列表加载商品列表
      */

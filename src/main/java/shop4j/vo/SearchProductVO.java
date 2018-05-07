@@ -1,5 +1,6 @@
 package shop4j.vo;
 
+import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import lombok.Data;
 
 import java.util.List;
@@ -51,4 +52,5 @@ public class SearchProductVO {
      * 默认分页数量
      */
     private int size =20;
+
 }

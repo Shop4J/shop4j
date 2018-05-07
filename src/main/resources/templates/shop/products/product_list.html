@@ -27,14 +27,11 @@
             </div>
             <!-- 分页 -->
             <div class="page text-right clearfix">
-                <a class="disabled">上一页</a>
-                <a class="select">1</a>
-                <a href="">2</a>
-                <a href="">3</a>
-                <a href="">4</a>
-                <a href="">5</a>
-                <a class="" href="">下一页</a>
-                <a class="disabled">1/5页</a>
+                <a href="javascript:loadProductList(1);">首页</a>
+                <a th:href="|javascript:loadProductList(${productPageInfo.prePage});|" th:class="${productPageInfo.hasPreviousPage==true?'':'disabled'}">上一页</a>
+                <a class="select" th:text="${productPageInfo.pageNum}"></a>
+                <a th:href="|javascript:loadProductList(${productPageInfo.nextPage});|" th:class="${productPageInfo.hasNextPage==true?'':'disabled'}">下一页</a>
+                <a class="disabled" th:text="|${productPageInfo.pageNum}/${productPageInfo.pages}|"></a>
                 <form action="" class="page-order">
                     到第
                     <input type="text" name="page">

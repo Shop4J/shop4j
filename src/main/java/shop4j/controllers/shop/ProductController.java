@@ -93,7 +93,12 @@ public class ProductController {
      */
     @GetMapping("/list")
     public String searchProduct(Model model,@NotNull SearchProductVO searchProductVO){
-
+        if(searchProductVO.getPage()==0){
+            searchProductVO.setPage(1);
+        }
+        if(searchProductVO.getSize()!=20){
+            searchProductVO.setSize(20);
+        }
         PageInfo<Product> productPageInfo = productService.findBySearchVO(searchProductVO);
         model.addAttribute("productPageInfo",productPageInfo);
 
