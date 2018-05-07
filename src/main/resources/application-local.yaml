@@ -8,7 +8,17 @@ spring:
      driverClassName: com.mysql.jdbc.Driver
      type: com.zaxxer.hikari.HikariDataSource
      hikari:
+       #连接超时时间 默认为30秒
        connection-timeout: 3000
+       #连接池最大容量
+       maximum-pool-size: 8
+       ##最小可用（如果不设置将和最大一致且永不会被回收）
+       #minimumIdle: 2
+       ##毫秒 空闲超时时间 当当前超过最小可用时才会被回收 默认10分钟
+       idleTimeout: 600000
+       #验证连接可用得超时时间
+       validation-timeout: 60000
+
   thymeleaf:
      mode: HTML5
      cache: false
@@ -17,8 +27,6 @@ spring:
 mybatis:
   type-aliases-package: shop4j.models
   mapper-locations: classpath:mapper/*.xml
-  configuration:
-    map-underscore-to-camel-case: true
 
 mapper:
   mappers: shop4j.dao.BaseMapper

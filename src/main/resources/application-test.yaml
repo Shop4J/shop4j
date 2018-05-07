@@ -6,18 +6,38 @@ spring:
      username: huimin0328
      password: cqLanRUbChX6
      driverClassName: com.mysql.jdbc.Driver
-     type: com.alibaba.druid.pool.DruidDataSource
+     type: com.zaxxer.hikari.HikariDataSource
      # 下面为连接池的补充设置，应用到上面所有数据源中
+     hikari:
+           #连接超时时间 默认为30秒
+           connection-timeout: 3000
+           #连接池最大容量
+           maximum-pool-size: 8
+           ##最小可用（如果不设置将和最大一致且永不会被回收）
+           #minimumIdle: 2
+           ##毫秒 空闲超时时间 当当前超过最小可用时才会被回收 默认10分钟
+           idleTimeout: 600000
+           #验证连接可用得超时时间
+           validation-timeout: 60000
 
+  thymeleaf:
+     mode: HTML5
+     cache: false
 
-#mybatis&&通用Mapper
+##驼峰命名
 mybatis:
-  type-aliases-package: shop4j.model
+  type-aliases-package: shop4j.models
   mapper-locations: classpath:mapper/*.xml
+
 mapper:
   mappers: shop4j.dao.BaseMapper
   not-empty: false
   identity: MYSQL
+
+##商品图片地址 目标和链接(最好写两个 一个用在linux上 一个用在windows上)
+images:
+  handler: /business/images/**
+  location: D:/images/,/opt/images/,
 
 
 
