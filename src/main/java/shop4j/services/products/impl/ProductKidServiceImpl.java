@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import shop4j.dao.products.ProductKidMapper;
 import shop4j.models.products.ProductKid;
 import shop4j.services.products.ProductKidService;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.*;
 
@@ -41,5 +42,24 @@ public class ProductKidServiceImpl implements ProductKidService {
     @Override
     public void addList(List<ProductKid> kidProducts) {
         productKidMapper.insertList(kidProducts);
+    }
+
+    @Override
+    public List<ProductKid> getBySPUIds(List<Long> spuIds) {
+        Example example = new Example(ProductKid.class);
+        example.createCriteria().andIn("spuId",spuIds);
+        return productKidMapper.selectByExample(example);
+    }
+
+    @Override
+    public ProductKid getById(long id) {
+        return productKidMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<ProductKid> getByIds(List<Long> ids) {
+        Example example = new Example(ProductKid.class);
+        example.createCriteria().andIn("id",ids);
+        return productKidMapper.selectByExample(example);
     }
 }
