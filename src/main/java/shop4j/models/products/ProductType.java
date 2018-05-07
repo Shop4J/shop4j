@@ -3,6 +3,7 @@ package shop4j.models.products;
 import lombok.Data;
 import shop4j.models.BaseModel;
 
+import javax.persistence.Column;
 import javax.persistence.Table;
 
 /**
@@ -17,15 +18,18 @@ public class ProductType extends BaseModel {
     /**
      * 父类型
      */
+    @Column
     private long parentId;
 
     /**
      * 类型名称
      */
+    @Column
     private String name;
 
     /**
      * 图片地址 用于首页 要求图形必须是300*560
      */
+    @Column
     private String imageUrl;
 }
