@@ -119,7 +119,7 @@
 				</div>
 				<div class="con-box">
 					<div class="hot-box">
-						<a href="item_show.html" class="floor-item" th:each="productKid:${productKidMax}">
+						<a th:each="productKid:${productKidMax}"target="_blank" th:href="|/product/detail?spuId=${productKid.spuId}|" class="floor-item" >
 							<div class="item-img hot-img">
 								<img th:alt="${productMaxMap.get(productKid.spuId).name}" th:src="${productImageMap.get(productKid.spuId).url}" class="cover">
 							</div>
@@ -196,7 +196,7 @@
 			</div>
 			<div class="con-box">
 				<div class="hot-box">
-					<a href="item_show.html" class="floor-item floor-item-width" th:each="product:${typeProductMap.get(productType.id)}">
+					<a th:href="|/product/detail?spuId=${product.id}|" target="_blank" class="floor-item floor-item-width" th:each="product:${typeProductMap.get(productType.id)}">
 						<div class="item-img hot-img">
 							<img th:alt="${product.name}" th:src="${productImageMap.get(product.id).url}" class="cover">
 						</div>
