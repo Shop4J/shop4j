@@ -709,6 +709,9 @@ body {overflow-y: scroll}
 	-webkit-transition: all .3s;
 	transition: all .3s;
 }
+.floor-item-width{
+    width: 20%;
+}
 .scroll-floor .right-box.hot-box .floor-item {width: 33.33333333%}
 .floor-item:hover {
 	background-color: #fff;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="shop4j.dao.products.ProductMapper" >
+<mapper namespace="shop4j.dao.products.ProductMapper"  >
     <resultMap id="Product" type="shop4j.models.products.Product">
 
     </resultMap>
@@ -28,5 +28,11 @@
             and
             type = ${productKidType}
         </if>
+    </select>
+    <select id="findByTypes" resultMap="Product">
+        <foreach collection="typeIds" item="typeId" separator="union all">
+            (SELECT product.name,product.show_price,product.id,productType.parent_id as TYPE FROM <include refid="table_name"/> as product INNER JOIN
+            db_products.tbl_product_type as productType on productType.id = product.type where product.status = 1 and productType.parent_id = #{typeId} order by product.add_time desc limit 0,#{size})
+        </foreach>
     </select>
 </mapper>

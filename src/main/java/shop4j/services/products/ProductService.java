@@ -6,6 +6,7 @@ import shop4j.models.products.Product;
 import shop4j.vo.SearchProductVO;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: weixuedong
@@ -41,4 +42,11 @@ public interface ProductService {
      * @return spu
      */
     List<Product> findByIds(List<Long> ids);
+
+    /**
+     * 通过产品类型获得首页推荐
+     * @param typeIds
+     * @return
+     */
+    List<Product> findByTypesIndexSuggest(List<Long> typeIds);
 }

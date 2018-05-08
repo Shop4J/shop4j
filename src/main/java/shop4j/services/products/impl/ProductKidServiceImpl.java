@@ -68,8 +68,7 @@ public class ProductKidServiceImpl implements ProductKidService {
     @Override
     public List<ProductKid> maxSellCountSuggest2Month() {
         PageHelper.startPage(1,8);
-        LocalDate MonthsAgo = LocalDate.now().minusMonths(2);
-        List<ProductKid> productKids = productKidMapper.maxSellCount(MonthsAgo);
+        List<ProductKid> productKids = productKidMapper.maxSellCount();
         return productKids;
     }
 }

@@ -26,7 +26,7 @@ public class Product extends BaseModel{
      * @SEE ProductType
      */
     @Column
-    private int type;
+    private long type;
 
     /**
      * 商品描述

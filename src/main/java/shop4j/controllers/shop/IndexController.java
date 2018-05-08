@@ -10,6 +10,7 @@ import shop4j.models.products.Product;
 import shop4j.models.products.ProductImage;
 import shop4j.models.products.ProductKid;
 import shop4j.models.products.ProductType;
+import shop4j.services.order.OrderDetailService;
 import shop4j.services.products.ProductImageService;
 import shop4j.services.products.ProductKidService;
 import shop4j.services.products.ProductService;
@@ -36,6 +37,9 @@ public class IndexController {
     private ProductKidService productKidService;
     @Autowired
     private ProductImageService productImageService;
+
+    @Autowired
+    private OrderDetailService orderDetailService;
     @HeadDataLoad
     @GetMapping("/")
     public String index(Model model){
@@ -45,8 +49,6 @@ public class IndexController {
         Map<Long, List<ProductType>> productTypesMap = CollectionsParserUtil.collectFieldToMapList(productTypes,ProductType::getParentId);
 
         model.addAttribute("productTypesMap",productTypesMap);
-
-        model.addAttribute("Long",new Long(0));
 
         List<ProductKid> productKidMax = productKidService.maxSellCountSuggest2Month();//热销推荐
 
@@ -58,9 +60,23 @@ public class IndexController {
 
         model.addAttribute("productMaxMap",CollectionsParserUtil.collectFieldToMap(productMax,Product::getId));
 
+        List<ProductType> parentTypes = productTypesMap.get((long)0);
+
+        List<Product> products = productService.findByTypesIndexSuggest(CollectionsParserUtil.collectFieldToList(parentTypes, ProductType::getId));//首页类型推荐
+
+        spuIds.addAll(CollectionsParserUtil.collectFieldToList(products, Product::getId));
+
         Map<Long, ProductImage> productImageMap = productImageService.findSPUMainImageByProductId(spuIds);
 
         model.addAttribute("productImageMap",productImageMap);
+
+        Map<Long, Integer> sellCountMap = orderDetailService.sellCountBySPUIds(spuIds);
+
+        model.addAttribute("sellCountMap",sellCountMap);//销量
+
+        Map<Long, List<Product>> typeProductMap = CollectionsParserUtil.collectFieldToMapList(products, Product::getType);
+
+        model.addAttribute("typeProductMap",typeProductMap);//按产品父类型区分产品
         return "/shop/index";
     }
 }

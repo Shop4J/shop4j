@@ -34,5 +34,7 @@ public interface ProductKidMapper extends BaseMapper<ProductKid>{
      * @param dateBegin
      * @return
      */
-    List<ProductKid> maxSellCount(@Param("dateBegin") LocalDate dateBegin);
+    List<ProductKid> maxSellCount();
+
+
 }
