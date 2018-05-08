@@ -6,6 +6,7 @@ import shop4j.dao.sets.WebInfoMapper;
 import shop4j.enums.WebInfoTypeEnum;
 import shop4j.models.sets.WebInfo;
 import shop4j.services.sets.WebInfoService;
+import tk.mybatis.mapper.entity.Example;
 
 /**
  * @Author: weixuedong
@@ -30,8 +31,8 @@ public class WebInfoServiceImpl implements WebInfoService{
 
     @Override
     public WebInfo getWebRoot() {
-
-        return webInfoMapper.findByType(WebInfoTypeEnum.Shop.getType());
-
+        Example example = new Example(WebInfo.class);
+        example.createCriteria().andEqualTo("type",WebInfoTypeEnum.Shop.getType());
+        return webInfoMapper.selectOneByExample(example);
     }
 }

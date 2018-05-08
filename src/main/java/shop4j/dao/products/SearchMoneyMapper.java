@@ -15,9 +15,5 @@ import java.util.List;
 @Component
 @Mapper
 public interface SearchMoneyMapper extends BaseMapper<SearchMoney>{
-    /**
-     * 查询所有可用搜索
-     * @return 可用金钱搜索
-     */
-    public List<SearchMoney> findAll();
+
 }

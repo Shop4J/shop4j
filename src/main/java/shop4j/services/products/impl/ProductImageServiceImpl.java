@@ -7,6 +7,7 @@ import shop4j.dao.products.ProductImageMapper;
 import shop4j.enums.ProductImageTypeEnum;
 import shop4j.models.products.ProductImage;
 import shop4j.services.products.ProductImageService;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 import java.util.Map;
@@ -23,9 +24,9 @@ public class ProductImageServiceImpl implements ProductImageService{
     private ProductImageMapper productImageMapper;
     @Override
     public Map<Long, ProductImage> findSPUMainImageByProductId(List<Long> productIds) {
-
-        List<ProductImage> productImages = productImageMapper.findFirstByProductIdsAndType(productIds, ProductImageTypeEnum.SPU.getType());
-
+        Example example = new Example(ProductImage.class);
+        example.createCriteria().andIn("productId",productIds).andEqualTo("type",ProductImageTypeEnum.SPU.getType());
+        List<ProductImage> productImages = productImageMapper.selectByExample(example);
         return CollectionsParserUtil.collectFieldToMap(productImages,ProductImage::getProductId);
 
     }

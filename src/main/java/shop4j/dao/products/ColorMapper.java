@@ -15,9 +15,5 @@ import java.util.List;
 @Component
 @Mapper
 public interface ColorMapper extends BaseMapper<Color> {
-    /**
-     * 查询全部可用颜色
-     * @return 可用颜色
-     */
-    public List<Color> findAll();
+
 }

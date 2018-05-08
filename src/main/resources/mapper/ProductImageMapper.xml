@@ -18,11 +18,5 @@
         SELECT <include refid="table_columns"/> from <include refid="table_name"/>
         WHERE
     </sql>
-    <select id="findFirstByProductIdsAndType" resultMap="ProductImage" >
-        <include refid="select_all_columns"/> status = 1 and type =#{type} and product_id in (
-            <foreach collection="productIds" item="productId" separator=",">
-                #{productId}
-            </foreach>
-        )
-    </select>
+
 </mapper>

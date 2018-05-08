@@ -18,7 +18,5 @@
         SELECT <include refid="table_columns"/> from <include refid="table_name"/>
         WHERE
     </sql>
-    <select id="findAll" resultMap="SearchMoney">
-        <include refid="select_all_columns"/> status = 1
-    </select>
+
 </mapper>

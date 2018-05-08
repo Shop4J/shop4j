@@ -16,9 +16,4 @@ import java.util.List;
 @Mapper
 public interface YearOldMapper extends BaseMapper<YearOld>{
 
-    /**
-     * 获得所有可用年龄
-     * @return 可用年领
-     */
-    public List<YearOld> findAll();
 }

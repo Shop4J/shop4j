@@ -15,9 +15,5 @@ import java.util.List;
 @Mapper
 @Component
 public interface ProductTypeMapper extends BaseMapper<ProductType> {
-    /**
-     * 获得全部可用得产品类型
-     * @return 可用得产品类型
-     */
-    public List<ProductType> findAll();
+
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import shop4j.dao.products.YearOldMapper;
 import shop4j.models.products.YearOld;
 import shop4j.services.products.YearOldService;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -19,6 +20,8 @@ public class YearOldServiceImpl implements YearOldService{
     private YearOldMapper yearOldMapper;
     @Override
     public List<YearOld> findAll() {
-        return yearOldMapper.findAll();
+        Example example = new Example(YearOld.class);
+        example.createCriteria().andEqualTo("status",1);
+        return yearOldMapper.selectByExample(example);
     }
 }
