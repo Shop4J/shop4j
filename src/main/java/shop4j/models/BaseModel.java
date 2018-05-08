@@ -18,6 +18,7 @@ import java.util.Date;
 public class BaseModel implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     private long id;
 
     /**

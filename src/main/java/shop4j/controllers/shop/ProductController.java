@@ -118,12 +118,11 @@ public class ProductController {
     }
 
     /**
-     * 刷新商品
+     * 商品详情页
      */
     @GetMapping("/detail")
     @HeadDataLoad
     public String searchProduct(Model model,long spuId){
-
        return "shop/products/product_detail";
     }
 }

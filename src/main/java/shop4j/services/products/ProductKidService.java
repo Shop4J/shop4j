@@ -48,5 +48,9 @@ public interface ProductKidService {
      */
     List<ProductKid> getByIds(List<Long> ids);
 
-
+    /**
+     * 2个月内得最高热销
+     * @return 8个热销商品
+     */
+    List<ProductKid> maxSellCountSuggest2Month();
 }

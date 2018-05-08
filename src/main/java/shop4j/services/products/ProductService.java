@@ -35,4 +35,10 @@ public interface ProductService {
      */
     void addList(List<Product> products);
 
+    /**
+     * 通过SPU编号获取SPU
+     * @param ids spu编号
+     * @return spu
+     */
+    List<Product> findByIds(List<Long> ids);
 }

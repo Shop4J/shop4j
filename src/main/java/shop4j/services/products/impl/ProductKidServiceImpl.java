@@ -1,6 +1,7 @@
 package shop4j.services.products.impl;
 
 import base.util.collections.CollectionUtil;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shop4j.dao.products.ProductKidMapper;
@@ -8,6 +9,7 @@ import shop4j.models.products.ProductKid;
 import shop4j.services.products.ProductKidService;
 import tk.mybatis.mapper.entity.Example;
 
+import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -61,5 +63,13 @@ public class ProductKidServiceImpl implements ProductKidService {
         Example example = new Example(ProductKid.class);
         example.createCriteria().andIn("id",ids);
         return productKidMapper.selectByExample(example);
+    }
+
+    @Override
+    public List<ProductKid> maxSellCountSuggest2Month() {
+        PageHelper.startPage(1,8);
+        LocalDate MonthsAgo = LocalDate.now().minusMonths(2);
+        List<ProductKid> productKids = productKidMapper.maxSellCount(MonthsAgo);
+        return productKids;
     }
 }

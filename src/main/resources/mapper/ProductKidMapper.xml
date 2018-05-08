@@ -26,4 +26,7 @@
         </foreach>
         ) group by spu_id
     </select>
+    <select id="maxSellCount" resultMap="ProductKid" >
+        SELECT spu_id,sum(num) as num from <include refid="table_name"/> where status = 1 and add_time> #{dateBegin} group by spu_id order by num desc
+    </select>
 </mapper>

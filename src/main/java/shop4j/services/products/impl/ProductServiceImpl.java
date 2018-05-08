@@ -8,6 +8,7 @@ import shop4j.dao.products.ProductMapper;
 import shop4j.models.products.Product;
 import shop4j.services.products.ProductService;
 import shop4j.vo.SearchProductVO;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -36,5 +37,12 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public void addList(List<Product> products) {
         productMapper.insertList(products);
+    }
+
+    @Override
+    public List<Product> findByIds(List<Long> ids) {
+        Example example = new Example(Product.class);
+        example.createCriteria().andIn("id",ids);
+        return productMapper.selectByExample(example);
     }
 }
