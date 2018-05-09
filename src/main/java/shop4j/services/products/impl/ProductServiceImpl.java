@@ -1,6 +1,5 @@
 package shop4j.services.products.impl;
 
-import base.util.collections.parser.CollectionsParserUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import shop4j.vo.SearchProductVO;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Author: weixuedong
@@ -52,5 +50,10 @@ public class ProductServiceImpl implements ProductService{
     public  List<Product> findByTypesIndexSuggest(List<Long> typeIds) {
         List<Product> products = productMapper.findByTypes(typeIds, 10);
         return products;
+    }
+
+    @Override
+    public Product findById(long id) {
+        return productMapper.selectByPrimaryKey(id);
     }
 }

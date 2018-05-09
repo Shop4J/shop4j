@@ -17,34 +17,24 @@
 		<section class="item-show__div item-show__head clearfix">
 			<div class="pull-left">
 				<ol class="breadcrumb">
-					<li><a href="index.html">首页</a></li>
-					<li><a href="item_sale_page.html">爆款推荐</a></li>
-					<li class="active">原创设计日常汉服女款绣花长褙子吊带改良宋裤春夏</li>
+					<li><a href="/">首页</a></li>
+					<li class="active" th:text="${product.name}"></li>
 				</ol>
 				<div class="item-pic__box" id="magnifier">
 					<div class="small-box">
-						<img class="cover" src="images/temp/S-001-1_s.jpg" alt="重回汉唐 旧忆 原创设计日常汉服女款绣花长褙子吊带改良宋裤春夏">
+						<img class="cover" src="images/temp/S-001-1_s.jpg"  th:alt="${product.name}">
 						<span class="hover"></span>
 					</div>
 					<div class="thumbnail-box">
 						<a href="javascript:;" class="btn btn-default btn-prev"></a>
 						<div class="thumb-list">
-							<ul class="wrapper clearfix">
+							<ul class="wrapper clearfix" th:each="product:${productKids}">
 								<li class="item active" data-src="images/temp/S-001-1_b.jpg"><img class="cover" src="images/temp/S-001-1_s.jpg" alt="商品预览图"></li>
-								<li class="item" data-src="images/temp/S-001-2_b.jpg"><img class="cover" src="images/temp/S-001-2_s.jpg" alt="商品预览图"></li>
-								<li class="item" data-src="images/temp/S-001-3_b.jpg"><img class="cover" src="images/temp/S-001-3_s.jpg" alt="商品预览图"></li>
-								<li class="item" data-src="images/temp/S-001-4_b.jpg"><img class="cover" src="images/temp/S-001-4_s.jpg" alt="商品预览图"></li>
-								<li class="item" data-src="images/temp/S-001-5_b.jpg"><img class="cover" src="images/temp/S-001-5_s.jpg" alt="商品预览图"></li>
-								<li class="item" data-src="images/temp/S-001-6_b.jpg"><img class="cover" src="images/temp/S-001-6_s.jpg" alt="商品预览图"></li>
-								<li class="item" data-src="images/temp/S-001-7_b.jpg"><img class="cover" src="images/temp/S-001-7_s.jpg" alt="商品预览图"></li>
-								<li class="item" data-src="images/temp/S-001-8_b.jpg"><img class="cover" src="images/temp/S-001-8_s.jpg" alt="商品预览图"></li>
-								<li class="item" data-src="images/temp/S-001-9_b.jpg"><img class="cover" src="images/temp/S-001-9_s.jpg" alt="商品预览图"></li>
-								<li class="item" data-src="images/temp/S-001-10_b.jpg"><img class="cover" src="images/temp/S-001-10_s.jpg" alt="商品预览图"></li>
 							</ul>
 						</div>
 						<a href="javascript:;" class="btn btn-default btn-next"></a>
 					</div>
-					<div class="big-box"><img src="images/temp/S-001-1_b.jpg" alt="重回汉唐 旧忆 原创设计日常汉服女款绣花长褙子吊带改良宋裤春夏"></div>
+					<div class="big-box"><img src="images/temp/S-001-1_b.jpg" th:alt="${product.name}"></div>
 				</div>
 				<script src="js/jquery.magnifier.js"></script>
 				<script>
@@ -54,13 +44,13 @@
 				</script>
 				<div class="item-info__box">
 					<div class="item-title">
-						<div class="name ep2">原创设计日常汉服女款绣花长褙子吊带改良宋裤春夏</div>
+						<div class="name ep2" th:text="${product.name}"></div>
 						<div class="sale cr">优惠活动：该商品享受8折优惠</div>
 					</div>
 					<div class="item-price bgf5">
 						<div class="price-box clearfix">
 							<div class="price-panel pull-left">
-								售价：<span class="price">￥19.20 <s class="fz16 c9">￥24.00</s></span>
+								售价：<span class="price"><span th:text="|￥${product.showPrice}|"></span> <s class="fz16 c9" th:text="|￥${product.showPrice}|"></s></span>
 							</div>
 							<div class="vip-price-panel pull-right">
 								会员等级价格 <i class="iconfont icon-down"></i>

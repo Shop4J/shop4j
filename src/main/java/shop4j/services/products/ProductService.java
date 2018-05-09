@@ -49,4 +49,11 @@ public interface ProductService {
      * @return
      */
     List<Product> findByTypesIndexSuggest(List<Long> typeIds);
+
+    /**
+     * 通过id查询
+     * @param id
+     * @return spu
+     */
+    Product findById(long id);
 }

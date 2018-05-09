@@ -59,6 +59,13 @@ public class ProductKidServiceImpl implements ProductKidService {
     }
 
     @Override
+    public List<ProductKid> getBySPUId(long spuId) {
+        Example example = new Example(ProductKid.class);
+        example.createCriteria().andEqualTo("spuId",spuId);
+        return productKidMapper.selectByExample(example);
+    }
+
+    @Override
     public List<ProductKid> getByIds(List<Long> ids) {
         Example example = new Example(ProductKid.class);
         example.createCriteria().andIn("id",ids);

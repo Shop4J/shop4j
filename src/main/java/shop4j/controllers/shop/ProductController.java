@@ -105,7 +105,7 @@ public class ProductController {
 
         if(CollectionUtil.isNotEmpty(products)) {
             List<Long> productIds = CollectionsParserUtil.collectFieldToList(products, Product::getId);
-            Map<Long, ProductImage> productImageMap = productImageService.findSPUMainImageByProductId(productIds);
+            Map<Long, ProductImage> productImageMap = productImageService.findSPUMainImageByProductIds(productIds);
             model.addAttribute("productImageMap", productImageMap);//商品图片
 
             Map<Long, Integer> sellCountMap = orderDetailService.sellCountBySPUIds(productIds);//销量
@@ -123,6 +123,9 @@ public class ProductController {
     @GetMapping("/detail")
     @HeadDataLoad
     public String searchProduct(Model model,long spuId){
-       return "shop/products/product_detail";
+        Product product = productService.findById(spuId);
+        model.addAttribute("product",product);
+        List<ProductImage> defaultImages = productImageService.findImagesLists(spuId);
+        return "shop/products/product_detail";
     }
 }
