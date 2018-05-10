@@ -1,10 +1,12 @@
 package shop4j.services.products.impl;
 
 import base.util.collections.CollectionUtil;
+import base.util.collections.parser.CollectionsParserUtil;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shop4j.dao.products.ProductKidMapper;
+import shop4j.enums.CommonDataStatus;
 import shop4j.models.products.ProductKid;
 import shop4j.services.products.ProductKidService;
 import tk.mybatis.mapper.entity.Example;
@@ -77,5 +79,30 @@ public class ProductKidServiceImpl implements ProductKidService {
         PageHelper.startPage(1,8);
         List<ProductKid> productKids = productKidMapper.maxSellCount();
         return productKids;
+    }
+
+
+    @Override
+    public List<ProductKid> findMainSkuListBySpuIds(List<Long> spuIds) {
+        Example example = new Example(ProductKid.class);
+        example.createCriteria().andEqualTo("status", CommonDataStatus.OK.getStatus())
+                .andIn("spuId",spuIds).andEqualTo("isMain",1);
+        List<ProductKid> skus = productKidMapper.selectByExample(example);
+        return skus;
+    }
+
+    @Override
+    public Map<Long, ProductKid> findMainSkuMapBySpuIds(List<Long> spuIds) {
+        List<ProductKid> skus = findMainSkuListBySpuIds(spuIds);
+        return CollectionsParserUtil.collectFieldToMap(skus,ProductKid::getSpuId);
+    }
+
+    @Override
+    public ProductKid findMainSkuBySpuId(long spuId) {
+        Example example = new Example(ProductKid.class);
+        example.createCriteria().andEqualTo("status", CommonDataStatus.OK.getStatus())
+                .andEqualTo("spuId",spuId).andEqualTo("isMain",1);
+        ProductKid sku = productKidMapper.selectOneByExample(example);
+        return sku;
     }
 }

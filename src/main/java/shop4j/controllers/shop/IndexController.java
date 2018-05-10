@@ -66,7 +66,7 @@ public class IndexController {
 
         spuIds.addAll(CollectionsParserUtil.collectFieldToList(products, Product::getId));
 
-        Map<Long, ProductImage> productImageMap = productImageService.findSPUMainImageByProductIds(spuIds);
+        Map<Long, ProductImage> productImageMap = productImageService.findSPUMainImageBySpuIds(spuIds);
 
         model.addAttribute("productImageMap",productImageMap);
 

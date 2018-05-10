@@ -59,4 +59,25 @@ public interface ProductKidService {
      * @return 8个热销商品
      */
     List<ProductKid> maxSellCountSuggest2Month();
+
+    /**
+     * 获得多个SPU得主品
+     * @param spuIds
+     * @return map key是spu id value是主品
+     */
+    public Map<Long,ProductKid> findMainSkuMapBySpuIds(List<Long> spuIds);
+
+    /**
+     * 获得多个SPU得主品
+     * @param spuIds
+     * @return spu得主品集合
+     */
+    public List<ProductKid> findMainSkuListBySpuIds(List<Long> spuIds);
+
+    /**
+     * 获得单个SPU得主品
+     * @param spuId
+     * @return spu得主品
+     */
+    public ProductKid findMainSkuBySpuId(long spuId);
 }

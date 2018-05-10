@@ -41,4 +41,10 @@ public class ProductKid extends BaseModel{
      */
     @Column
     private String size;
+
+    /**
+     * 是否为主品 1是 2否
+     */
+    @Column
+    private int isMain;
 }

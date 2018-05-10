@@ -16,17 +16,11 @@ import java.util.Map;
 public interface ProductImageService {
     /**
      * 获得SPU首图
-     * @param productIds SPU商品编号集合
+     * @param spuIds SPU商品编号集合
      * @return 商品图片
      */
-    public Map<Long,ProductImage> findSPUMainImageByProductIds(List<Long> productIds);
+    public Map<Long,ProductImage> findSPUMainImageBySpuIds(List<Long> spuIds);
 
-    /**
-     * 获得SPU首图
-     * @param productId SPU商品编号
-     * @return 商品图片
-     */
-    public ProductImage findSPUMainImageByProductId(long productId);
 
     /**
      * 批量添加
@@ -39,7 +33,7 @@ public interface ProductImageService {
      * @param spuId
      * @retur spu默认图
      */
-    List<ProductImage> findImagesLists(long spuId);
+    List<ProductImage> findImagesLists(long spuId,long skuId);
 
     /**
      * 搜索各SKU首图
@@ -47,4 +41,11 @@ public interface ProductImageService {
      * @return sku首图
      */
     public List<ProductImage> findSKUMainImageBySkuIds(List<Long> skuIds);
+
+    /**
+     * 通过sku获得sku得商品图片
+     * @param skuId sku编号
+     * @return 图片集合
+     */
+    public List<ProductImage> findSKUImageBySkuId(long skuId);
 }

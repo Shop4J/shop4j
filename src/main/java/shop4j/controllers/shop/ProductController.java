@@ -4,10 +4,12 @@ import base.util.collections.CollectionUtil;
 import base.util.collections.parser.CollectionsParserUtil;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import shop4j.models.products.*;
 import shop4j.services.order.OrderDetailService;
 import shop4j.services.products.*;
@@ -104,14 +106,14 @@ public class ProductController {
         List<Product> products = productPageInfo.getList();
 
         if(CollectionUtil.isNotEmpty(products)) {
-            List<Long> productIds = CollectionsParserUtil.collectFieldToList(products, Product::getId);
-            Map<Long, ProductImage> productImageMap = productImageService.findSPUMainImageByProductIds(productIds);
+            List<Long> spuIds = CollectionsParserUtil.collectFieldToList(products, Product::getId);
+            Map<Long, ProductImage> productImageMap = productImageService.findSPUMainImageBySpuIds(spuIds);
             model.addAttribute("productImageMap", productImageMap);//商品图片
 
-            Map<Long, Integer> sellCountMap = orderDetailService.sellCountBySPUIds(productIds);//销量
+            Map<Long, Integer> sellCountMap = orderDetailService.sellCountBySPUIds(spuIds);//销量
             model.addAttribute("sellCountMap", sellCountMap);
 
-            Map<Long, Integer> storeCountMap = productKidService.countStoreBySpuIds(productIds);//库存
+            Map<Long, Integer> storeCountMap = productKidService.countStoreBySpuIds(spuIds);//库存
             model.addAttribute("storeCountMap",storeCountMap);
         }
         return "shop/products/product_list :: productList";
@@ -122,10 +124,12 @@ public class ProductController {
      */
     @GetMapping("/detail")
     @HeadDataLoad
-    public String searchProduct(Model model,long spuId){
+    public String searchProduct(Model model,long spuId,@RequestParam(defaultValue = "0",required = false) long skuId){
         Product product = productService.findById(spuId);
         model.addAttribute("product",product);
-        List<ProductImage> defaultImages = productImageService.findImagesLists(spuId);
+
+        List<ProductImage> imageIndexes = productImageService.findImagesLists(spuId, skuId);//商品小图片位于详情页左上角
+        model.addAttribute("imageIndexes",imageIndexes);
         return "shop/products/product_detail";
     }
 }
