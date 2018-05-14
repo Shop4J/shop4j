@@ -50,7 +50,7 @@ public class IndexController {
 
         model.addAttribute("productTypesMap",productTypesMap);
 
-        List<ProductKid> productKidMax = productKidService.maxSellCountSuggest2Month();//热销推荐
+        List<ProductKid> productKidMax = productKidService.maxSellCountSuggest2Month(1,8);//热销推荐
 
         model.addAttribute("productKidMax",productKidMax);
 

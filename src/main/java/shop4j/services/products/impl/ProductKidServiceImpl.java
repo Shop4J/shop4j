@@ -1,6 +1,7 @@
 package shop4j.services.products.impl;
 
 import base.util.collections.CollectionUtil;
+import base.util.collections.opearator.CollectionsOperatorUtil;
 import base.util.collections.parser.CollectionsParserUtil;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,10 +76,17 @@ public class ProductKidServiceImpl implements ProductKidService {
     }
 
     @Override
-    public List<ProductKid> maxSellCountSuggest2Month() {
-        PageHelper.startPage(1,8);
+    public List<ProductKid> maxSellCountSuggest2Month(int page,int size) {
+        PageHelper.startPage(page,size);
         List<ProductKid> productKids = productKidMapper.maxSellCount();
         return productKids;
+    }
+
+    @Override
+    public Map<Integer,List<ProductKid>> productDetailSuggestMaxSell(int size) {
+        List<ProductKid> skus = maxSellCountSuggest2Month(1, size);
+        Map<Integer, List<ProductKid>> countMap = CollectionsOperatorUtil.countGroup(3, skus);
+        return countMap;
     }
 
 

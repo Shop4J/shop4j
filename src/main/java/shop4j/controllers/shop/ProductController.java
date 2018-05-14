@@ -1,6 +1,7 @@
 package shop4j.controllers.shop;
 
 import base.util.collections.CollectionUtil;
+import base.util.collections.opearator.CollectionsOperatorUtil;
 import base.util.collections.parser.CollectionsParserUtil;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -130,6 +131,18 @@ public class ProductController {
 
         List<ProductImage> imageIndexes = productImageService.findImagesLists(spuId, skuId);//商品小图片位于详情页左上角
         model.addAttribute("imageIndexes",imageIndexes);
+
+        List<ProductKid> maxSellCountSuggests = productKidService.maxSellCountSuggest2Month(1,15);//最大可显示12件
+        List<Long> spuIds = CollectionsParserUtil.collectFieldToList(maxSellCountSuggests, ProductKid::getSpuId);
+        List<Product> spus = productService.findByIds(spuIds);
+        Map<Integer, List<Product>> groupMaxCount = CollectionsOperatorUtil.countGroup(3, spus);//上部推荐
+        model.addAttribute("groupMaxCount",groupMaxCount);
+
+        Map<Integer, List<Product>> groupMaxCountFoot = CollectionsOperatorUtil.countGroup(5, spus);//底部推荐
+        model.addAttribute("groupMaxCountFoot",groupMaxCountFoot);
+
+        Map<Long, ProductImage> suggestImagesMap = productImageService.findSPUMainImageBySpuIds(spuIds);
+        model.addAttribute("suggestImageMap",suggestImagesMap);
         return "shop/products/product_detail";
     }
 }

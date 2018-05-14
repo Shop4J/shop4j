@@ -22,7 +22,7 @@
 				</ol>
 				<div class="item-pic__box" id="magnifier">
 					<div class="small-box">
-						<img class="cover" src="images/temp/S-001-1_s.jpg"  th:alt="${product.name}">
+						<img class="cover" th:src="${imageIndexes.get(0).url}"  th:alt="${product.name}">
 						<span class="hover"></span>
 					</div>
 					<div class="thumbnail-box">
@@ -34,9 +34,9 @@
 						</div>
 						<a href="javascript:;" class="btn btn-default btn-next"></a>
 					</div>
-					<div class="big-box"><img src="images/temp/S-001-1_b.jpg" th:alt="${product.name}"></div>
+					<div class="big-box"><img th:src="${imageIndexes.get(0).url}" th:alt="${product.name}"></div>
 				</div>
-				<script src="js/jquery.magnifier.js"></script>
+				<script src="/js/jquery.magnifier.js"></script>
 				<script>
 					$(function () {
 						$('#magnifier').magnifier();
@@ -188,74 +188,10 @@
 				</div>
 				<div class="swiper-container picked-swiper">
 					<div class="swiper-wrapper">
-						<div class="swiper-slide">
-							<a class="picked-item" href="">
-								<img src="images/temp/S-001-1_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
-							<a class="picked-item" href="">
-								<img src="images/temp/S-001-2_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
-							<a class="picked-item" href="">
-								<img src="images/temp/S-001-3_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
-						</div>
-						<div class="swiper-slide">
-							<a class="picked-item" href="">
-								<img src="images/temp/S-001-4_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
-							<a class="picked-item" href="">
-								<img src="images/temp/S-001-5_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
-							<a class="picked-item" href="">
-								<img src="images/temp/S-001-6_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
-						</div>
-						<div class="swiper-slide">
-							<a class="picked-item" href="">
-								<img src="images/temp/S-001-7_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
-							<a class="picked-item" href="">
-								<img src="images/temp/S-001-8_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
-							<a class="picked-item" href="">
-								<img src="images/temp/S-001-9_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
-						</div>
-						<div class="swiper-slide">
-							<a class="picked-item" href="">
-								<img src="images/temp/S-001-10_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
-							<a class="picked-item" href="">
-								<img src="images/temp/S-001-1_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
-							<a class="picked-item" href="">
-								<img src="images/temp/S-001-2_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
-						</div>
-						<div class="swiper-slide">
-							<a class="picked-item" href="">
-								<img src="images/temp/S-001-3_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
-							<a class="picked-item" href="">
-								<img src="images/temp/S-001-4_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
-							</a>
-							<a class="picked-item" href="">
-								<img src="images/temp/S-001-5_s.jpg" alt="" class="cover">
-								<div class="look_price">¥134.99</div>
+						<div class="swiper-slide" th:each="entry:${groupMaxCount}">
+							<a class="picked-item" href="" th:each="sku:${entry.value}">
+								<img th:src ="${suggestImageMap.get(sku.id).url}" alt="" class="cover">
+								<div class="look_price" th:text="|￥${sku.showPrice}|"></div>
 							</a>
 						</div>
 					</div>
@@ -288,9 +224,10 @@
 					<div role="tabpanel" class="tab-pane fade in active" id="detail" aria-labelledby="detail-tab">
 						<div class="item-detail__info clearfix">
 							<div class="record">商品编号：D-8812</div>
-							<div class="record">上架时间：2017-06-24</div>
-							<div class="record">商品毛重：200克</div>
-							<div class="record">商品库存：1000件</div>
+							<div class="record">面料：2017-06-24</div>
+							<div class="record">材质：2017-06-24</div>
+							<div class="record">安全等级：200克</div>
+							<div class="record">是否带帽子：1000件</div>
 						</div>
 						<div class="rich-text">
 							<p style="text-align: center;">
@@ -1140,7 +1077,7 @@
 									</div>
 								</div>
 							</div>
-							<script src="js/jquery.zoom.js"></script>
+							<script src="/js/jquery.zoom.js"></script>
 						</div>
 					</div>
 					<div role="tabpanel" class="tab-pane fade" id="service" aria-labelledby="service-tab">
@@ -1156,110 +1093,10 @@
 					</div>
 					<div class="swiper-container recommends-swiper">
 						<div class="swiper-wrapper">
-							<div class="swiper-slide">
-								<a class="picked-item" href="">
-									<img src="images/temp/S-001-1_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="images/temp/S-001-2_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="images/temp/S-001-3_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="images/temp/S-001-4_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="images/temp/S-001-5_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a class="picked-item" href="">
-									<img src="images/temp/S-001-1_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="images/temp/S-001-2_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="images/temp/S-001-3_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="images/temp/S-001-4_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="images/temp/S-001-5_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a class="picked-item" href="">
-									<img src="images/temp/S-001-1_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="images/temp/S-001-2_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="images/temp/S-001-3_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="images/temp/S-001-4_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="images/temp/S-001-5_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a class="picked-item" href="">
-									<img src="images/temp/S-001-1_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="images/temp/S-001-2_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="images/temp/S-001-3_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="images/temp/S-001-4_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="images/temp/S-001-5_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a class="picked-item" href="">
-									<img src="images/temp/S-001-3_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="images/temp/S-001-4_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="images/temp/S-001-5_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
-								</a>
-								<a class="picked-item" href="">
-									<img src="images/temp/S-001-5_s.jpg" alt="" class="cover">
-									<div class="look_price">¥134.99</div>
+							<div class="swiper-slide" th:each="entry:${groupMaxCountFoot}">
+								<a class="picked-item" href="" th:each="sku:${entry.value}">
+									<img th:src ="${suggestImageMap.get(sku.id).url}" alt="" class="cover">
+									<div class="look_price" th:text="|￥${sku.showPrice}|"></div>
 								</a>
 							</div>
 						</div>
