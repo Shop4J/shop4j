@@ -4,9 +4,6 @@ import org.springframework.stereotype.Service;
 import shop4j.models.products.ProductTypeParam;
 import shop4j.services.base.BaseService;
 
-import javax.validation.constraints.NotNull;
-import java.util.List;
-
 /**
  * @Author: weixuedong
  * @Date: 2018/5/14 18:48
