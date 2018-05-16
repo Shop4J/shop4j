@@ -1,4 +1,4 @@
-package shop4j;
+package shop4j.product;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -98,7 +98,7 @@ public class ProductParamTest {
             productParam.setAddTime(new Date());
             productParam.setStatus(CommonDataStatus.OK.getStatus());
         });
-        productParamService.addParams(params);
+        productParamService.addList(params);
     }
 
 }

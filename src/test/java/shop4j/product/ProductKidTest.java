@@ -1,4 +1,4 @@
-package shop4j;
+package shop4j.product;
 
 import base.util.collections.parser.CollectionsParserUtil;
 import base.util.random.RandomUtil;
@@ -8,10 +8,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 import shop4j.models.products.Color;
-import shop4j.models.products.ProductKid;
 import shop4j.models.products.Product;
+import shop4j.models.products.ProductKid;
 import shop4j.services.products.ColorService;
 import shop4j.services.products.ProductKidService;
 import shop4j.services.products.ProductService;

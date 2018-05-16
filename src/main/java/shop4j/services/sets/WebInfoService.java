@@ -2,6 +2,7 @@ package shop4j.services.sets;
 
 import org.springframework.stereotype.Service;
 import shop4j.models.sets.WebInfo;
+import shop4j.services.base.BaseService;
 
 /**
  * @Author: weixuedong
@@ -9,14 +10,7 @@ import shop4j.models.sets.WebInfo;
  * @Description:项目信息服务接口
  */
 @Service
-public interface WebInfoService {
-
-    /**
-     * 新增站点信息
-     * @param webInfo
-     * @return
-     */
-    int add(WebInfo webInfo);
+public interface WebInfoService extends BaseService<WebInfo>{
 
     /**
      * 获得主站站点信息

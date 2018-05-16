@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import shop4j.dao.products.ColorMapper;
 import shop4j.models.products.Color;
 import shop4j.models.products.ProductType;
+import shop4j.services.base.BaseServiceImpl;
 import shop4j.services.products.ColorService;
 import tk.mybatis.mapper.entity.Example;
 
@@ -16,7 +17,7 @@ import java.util.List;
  * @Description:颜色业务实现
  */
 @Service
-public class ColorServiceImpl implements ColorService {
+public class ColorServiceImpl extends BaseServiceImpl<Color> implements ColorService {
 
     @Autowired
     private ColorMapper colorMapper;

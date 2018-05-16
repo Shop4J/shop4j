@@ -5,8 +5,6 @@ import org.springframework.stereotype.Component;
 import shop4j.dao.BaseMapper;
 import shop4j.models.products.SearchMoney;
 
-import java.util.List;
-
 /**
  * @Author: weixuedong
  * @Date: 2018/4/27 15:17

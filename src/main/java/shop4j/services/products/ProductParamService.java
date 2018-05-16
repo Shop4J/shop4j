@@ -2,6 +2,7 @@ package shop4j.services.products;
 
 import org.springframework.stereotype.Service;
 import shop4j.models.products.ProductParam;
+import shop4j.services.base.BaseService;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -12,16 +13,6 @@ import java.util.List;
  * @Description:商品属性业务
  */
 @Service
-public interface ProductParamService {
-    /**
-     * 单个添加
-     * @param param 商品参数
-     */
-    public void addParam(@NotNull ProductParam param);
+public interface ProductParamService extends BaseService<ProductParam>{
 
-    /**
-     * 批量添加
-     * @param params 商品参数集合
-     */
-    public void addParams(@NotNull List<ProductParam> params);
 }

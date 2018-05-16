@@ -1,15 +1,16 @@
 package shop4j.dao;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import shop4j.models.BaseModel;
+import tk.mybatis.mapper.common.IdsMapper;
 import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.common.MySqlMapper;
 
 /**
- * @author: xuhao
- *  mybatis的通用mapper
- * @Date：Created on 2018/3/7 18:29.
+ * 通用mapper
+ * @param <T>
  */
-@Component
-public interface BaseMapper<T> extends Mapper<T>, MySqlMapper<T> {
+@Repository
+public interface BaseMapper<T extends BaseModel> extends Mapper<T>, MySqlMapper<T> ,IdsMapper<T>{
 
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import shop4j.dao.products.ProductKidMapper;
 import shop4j.enums.CommonDataStatus;
 import shop4j.models.products.ProductKid;
+import shop4j.services.base.BaseServiceImpl;
 import shop4j.services.products.ProductKidService;
 import tk.mybatis.mapper.entity.Example;
 
@@ -21,7 +22,7 @@ import java.util.*;
  * @Description:sku业务实现
  */
 @Service
-public class ProductKidServiceImpl implements ProductKidService {
+public class ProductKidServiceImpl extends BaseServiceImpl<ProductKid> implements ProductKidService {
     @Autowired
     private ProductKidMapper productKidMapper;
     @Override
@@ -45,11 +46,6 @@ public class ProductKidServiceImpl implements ProductKidService {
     }
 
     @Override
-    public void addList(List<ProductKid> kidProducts) {
-        productKidMapper.insertList(kidProducts);
-    }
-
-    @Override
     public List<ProductKid> getBySPUIds(List<Long> spuIds) {
         Example example = new Example(ProductKid.class);
         example.createCriteria().andIn("spuId",spuIds);
@@ -65,13 +61,6 @@ public class ProductKidServiceImpl implements ProductKidService {
     public List<ProductKid> getBySPUId(long spuId) {
         Example example = new Example(ProductKid.class);
         example.createCriteria().andEqualTo("spuId",spuId);
-        return productKidMapper.selectByExample(example);
-    }
-
-    @Override
-    public List<ProductKid> getByIds(List<Long> ids) {
-        Example example = new Example(ProductKid.class);
-        example.createCriteria().andIn("id",ids);
         return productKidMapper.selectByExample(example);
     }
 

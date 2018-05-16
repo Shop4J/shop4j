@@ -2,6 +2,7 @@ package shop4j.services.products;
 
 import org.springframework.stereotype.Service;
 import shop4j.models.products.ProductType;
+import shop4j.services.base.BaseService;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * @Description:产品类型业务
  */
 @Service
-public interface ProductTypeService {
+public interface ProductTypeService extends BaseService<ProductType>{
     /**
      * 获得全部得可用产品类型
      * @return

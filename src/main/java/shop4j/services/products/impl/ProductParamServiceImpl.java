@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shop4j.dao.products.ProductParamMapper;
 import shop4j.models.products.ProductParam;
+import shop4j.services.base.BaseServiceImpl;
 import shop4j.services.products.ProductParamService;
 
 import javax.validation.constraints.NotNull;
@@ -15,16 +16,6 @@ import java.util.List;
  * @Description:商品参数业务
  */
 @Service
-public class ProductParamServiceImpl implements ProductParamService{
-    @Autowired
-    private ProductParamMapper productParamMapper;
-    @Override
-    public void addParam(@NotNull ProductParam param) {
-        productParamMapper.insert(param);
-    }
+public class ProductParamServiceImpl extends BaseServiceImpl<ProductParam> implements ProductParamService{
 
-    @Override
-    public void addParams(@NotNull List<ProductParam> params) {
-        productParamMapper.insertList(params);
-    }
 }

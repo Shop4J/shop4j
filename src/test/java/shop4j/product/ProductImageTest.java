@@ -1,4 +1,4 @@
-package shop4j;
+package shop4j.product;
 
 import base.util.collections.parser.CollectionsParserUtil;
 import com.github.pagehelper.PageInfo;

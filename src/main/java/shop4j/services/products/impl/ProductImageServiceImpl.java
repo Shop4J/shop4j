@@ -8,6 +8,8 @@ import shop4j.enums.CommonDataStatus;
 import shop4j.enums.ProductImageTypeEnum;
 import shop4j.models.products.ProductImage;
 import shop4j.models.products.ProductKid;
+import shop4j.services.base.BaseService;
+import shop4j.services.base.BaseServiceImpl;
 import shop4j.services.products.ProductImageService;
 import shop4j.services.products.ProductKidService;
 import tk.mybatis.mapper.entity.Example;
@@ -22,7 +24,7 @@ import java.util.Map;
  * @Description:商品图片业务实现
  */
 @Service
-public class ProductImageServiceImpl implements ProductImageService{
+public class ProductImageServiceImpl extends BaseServiceImpl<ProductImage> implements ProductImageService{
     @Autowired
     private ProductKidService productKidService;
     @Autowired

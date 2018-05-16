@@ -107,11 +107,7 @@
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-yaml</artifactId>
         </dependency>
-        <dependency>
-            <groupId>tk.mybatis</groupId>
-            <artifactId>mapper</artifactId>
-            <version>4.0.1</version>
-        </dependency>
+
         <dependency>
             <!-- 就是加了一个springboot专用的stater后就OK了 -->
             <groupId>tk.mybatis</groupId>

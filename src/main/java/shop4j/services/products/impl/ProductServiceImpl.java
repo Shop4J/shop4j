@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shop4j.dao.products.ProductMapper;
 import shop4j.models.products.Product;
+import shop4j.services.base.BaseService;
+import shop4j.services.base.BaseServiceImpl;
 import shop4j.services.products.ProductService;
 import shop4j.vo.SearchProductVO;
 import tk.mybatis.mapper.entity.Example;
@@ -18,7 +20,7 @@ import java.util.List;
  * @Description:产品业务
  */
 @Service
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl extends BaseServiceImpl<Product> implements ProductService{
     @Autowired
     private ProductMapper productMapper;
     @Override
@@ -27,16 +29,6 @@ public class ProductServiceImpl implements ProductService{
         List<Product> products = productMapper.findBySearchVO(searchProductVO);
         PageInfo<Product> productsPageInfo = new PageInfo<>(products);
         return productsPageInfo;
-    }
-
-    @Override
-    public int add(Product product) {
-        return productMapper.insert(product);
-    }
-
-    @Override
-    public void addList(List<Product> products) {
-        productMapper.insertList(products);
     }
 
     @Override

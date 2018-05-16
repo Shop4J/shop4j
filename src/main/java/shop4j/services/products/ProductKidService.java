@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop4j.models.products.Product;
 import shop4j.models.products.ProductKid;
+import shop4j.services.base.BaseService;
 
 import java.util.List;
 import java.util.Map;
@@ -14,19 +15,13 @@ import java.util.Map;
  * @Description:SKU业务
  */
 @Service
-public interface ProductKidService {
+public interface ProductKidService extends BaseService<ProductKid>{
     /**
      * 通过spuIds计算库存
      * @param spuIds
      * @return key是spuId,value是数量
      */
     Map<Long,Integer> countStoreBySpuIds(List<Long> spuIds);
-
-    /**
-     * 添加sku
-     * @param kidProducts sku集合
-     */
-    void addList(List<ProductKid> kidProducts);
 
     /**
      * 通过SPUID集合获取SKU

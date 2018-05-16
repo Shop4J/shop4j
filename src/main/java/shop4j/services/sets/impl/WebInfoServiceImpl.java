@@ -3,8 +3,10 @@ package shop4j.services.sets.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shop4j.dao.sets.WebInfoMapper;
+import shop4j.enums.CommonDataStatus;
 import shop4j.enums.WebInfoTypeEnum;
 import shop4j.models.sets.WebInfo;
+import shop4j.services.base.BaseServiceImpl;
 import shop4j.services.sets.WebInfoService;
 import tk.mybatis.mapper.entity.Example;
 
@@ -14,25 +16,14 @@ import tk.mybatis.mapper.entity.Example;
  * @Description:站点信息业务
  */
 @Service
-public class WebInfoServiceImpl implements WebInfoService{
+public class WebInfoServiceImpl extends BaseServiceImpl<WebInfo> implements WebInfoService{
     @Autowired
     private WebInfoMapper webInfoMapper;
-
-    /**
-     * 新增站点信息
-     * @param webInfo
-     * @return
-     */
-    public int add(WebInfo webInfo){
-
-       return webInfoMapper.insert(webInfo);
-
-    }
 
     @Override
     public WebInfo getWebRoot() {
         Example example = new Example(WebInfo.class);
-        example.createCriteria().andEqualTo("type",WebInfoTypeEnum.Shop.getType());
+        example.createCriteria().andEqualTo("type",WebInfoTypeEnum.Shop.getType()).andEqualTo("status", CommonDataStatus.OK.getStatus());
         return webInfoMapper.selectOneByExample(example);
     }
 }

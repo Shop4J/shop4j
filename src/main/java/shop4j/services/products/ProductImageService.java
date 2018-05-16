@@ -3,6 +3,7 @@ package shop4j.services.products;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import shop4j.models.products.ProductImage;
+import shop4j.services.base.BaseService;
 
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,7 @@ import java.util.Map;
  * @Description:图片业务
  */
 @Service
-public interface ProductImageService {
+public interface ProductImageService extends BaseService<ProductImage>{
     /**
      * 获得SPU首图
      * @param spuIds SPU商品编号集合
