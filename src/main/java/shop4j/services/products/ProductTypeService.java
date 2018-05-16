@@ -13,9 +13,5 @@ import java.util.List;
  */
 @Service
 public interface ProductTypeService extends BaseService<ProductType>{
-    /**
-     * 获得全部得可用产品类型
-     * @return
-     */
-    public List<ProductType> findAll();
+
 }

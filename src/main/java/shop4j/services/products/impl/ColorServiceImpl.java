@@ -19,13 +19,4 @@ import java.util.List;
 @Service
 public class ColorServiceImpl extends BaseServiceImpl<Color> implements ColorService {
 
-    @Autowired
-    private ColorMapper colorMapper;
-
-    @Override
-    public List<Color> findAll() {
-        Example example = new Example(Color.class);
-        example.createCriteria().andEqualTo("status",1);
-        return colorMapper.selectByExample(example);
-    }
 }

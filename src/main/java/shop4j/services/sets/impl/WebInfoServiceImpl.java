@@ -22,8 +22,7 @@ public class WebInfoServiceImpl extends BaseServiceImpl<WebInfo> implements WebI
 
     @Override
     public WebInfo getWebRoot() {
-        Example example = new Example(WebInfo.class);
-        example.createCriteria().andEqualTo("type",WebInfoTypeEnum.Shop.getType()).andEqualTo("status", CommonDataStatus.OK.getStatus());
-        return webInfoMapper.selectOneByExample(example);
+       instanceCriteria().andEqualTo("type",WebInfoTypeEnum.Shop.getType()).andEqualTo("status", CommonDataStatus.OK.getStatus());
+       return webInfoMapper.selectOneByExample(exampleThreadLocal.get());
     }
 }

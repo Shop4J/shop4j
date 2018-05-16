@@ -134,7 +134,7 @@ public class ProductController {
 
         List<ProductKid> maxSellCountSuggests = productKidService.maxSellCountSuggest2Month(1,15);//最大可显示12件
         List<Long> spuIds = CollectionsParserUtil.collectFieldToList(maxSellCountSuggests, ProductKid::getSpuId);
-        List<Product> spus = productService.findByIds(spuIds);
+        List<Product> spus = productService.getByIds(spuIds);
         Map<Integer, List<Product>> groupMaxCount = CollectionsOperatorUtil.countGroup(3, spus);//上部推荐
         model.addAttribute("groupMaxCount",groupMaxCount);
 

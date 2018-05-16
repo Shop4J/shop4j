@@ -22,13 +22,6 @@ public interface ProductImageService extends BaseService<ProductImage>{
      */
     public Map<Long,ProductImage> findSPUMainImageBySpuIds(List<Long> spuIds);
 
-
-    /**
-     * 批量添加
-     * @param productImages
-     */
-    public void addList(List<ProductImage> productImages);
-
     /**
      * 通过spu获得SPU图片集合
      * @param spuId

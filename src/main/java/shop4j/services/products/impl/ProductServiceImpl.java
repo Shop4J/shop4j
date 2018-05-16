@@ -32,20 +32,9 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
     }
 
     @Override
-    public List<Product> findByIds(List<Long> ids) {
-        Example example = new Example(Product.class);
-        example.createCriteria().andIn("id",ids);
-        return productMapper.selectByExample(example);
-    }
-
-    @Override
     public  List<Product> findByTypesIndexSuggest(List<Long> typeIds) {
         List<Product> products = productMapper.findByTypes(typeIds, 10);
         return products;
     }
 
-    @Override
-    public Product findById(long id) {
-        return productMapper.selectByPrimaryKey(id);
-    }
 }

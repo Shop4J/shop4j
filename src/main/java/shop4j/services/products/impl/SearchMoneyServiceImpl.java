@@ -17,12 +17,5 @@ import java.util.List;
  */
 @Service
 public class SearchMoneyServiceImpl extends BaseServiceImpl<SearchMoney> implements SearchMoneyService{
-    @Autowired
-    private SearchMoneyMapper searchMoneyMapper;
-    @Override
-    public List<SearchMoney> findAll() {
-        Example example = new Example(SearchMoney.class);
-        example.createCriteria().andEqualTo("status",1);
-        return searchMoneyMapper.selectByExample(example);
-    }
+
 }

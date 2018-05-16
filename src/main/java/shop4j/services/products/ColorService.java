@@ -13,9 +13,5 @@ import java.util.List;
  */
 @Service
 public interface ColorService extends BaseService<Color>{
-    /**
-     * 获得可用颜色
-     * @return 可用颜色
-     */
-    public List<Color> findAll();
+
 }

@@ -14,9 +14,4 @@ import java.util.List;
 @Service
 public interface YearOldService extends BaseService<YearOld>{
 
-    /**
-     * 获得所有可用年龄
-     * @return 可用年龄
-     */
-    List<YearOld> findAll();
 }

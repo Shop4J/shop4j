@@ -7,6 +7,7 @@ import shop4j.models.BaseModel;
 import shop4j.models.products.ProductKid;
 import tk.mybatis.mapper.entity.Example;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -20,6 +21,7 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T >{
     @Autowired
     private  BaseMapper<T> baseMapper;
 
+    protected ThreadLocal<Example> exampleThreadLocal = new ThreadLocal<>();
     @Override
     public void add(T t) {
         baseMapper.insert(t);
@@ -46,18 +48,21 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T >{
     public T findById(Long id) {
         return baseMapper.selectByPrimaryKey(id);
     }
-
+    protected  Example.Criteria instanceCriteria(){
+        Class entityClass = (Class)((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        Example example = new Example(entityClass);
+        exampleThreadLocal.set(example);
+        return example.createCriteria();
+    }
     @Override
     public List<T> getByIds(List<Long> ids) {
-        Example example = new Example(ProductKid.class);
-        example.createCriteria().andIn("id",ids);
-        return baseMapper.selectByExample(example);
+        instanceCriteria().andIn("id",ids);
+        return baseMapper.selectByExample(exampleThreadLocal.get());
     }
 
     @Override
     public List<T> findAll() {
-        Example example = new Example(ProductKid.class);
-        example.createCriteria().andEqualTo("status", CommonDataStatus.OK.getStatus());
-        return baseMapper.selectByExample(example);
+        instanceCriteria().andEqualTo("status", CommonDataStatus.OK.getStatus());
+        return baseMapper.selectByExample(exampleThreadLocal.get());
     }
 }

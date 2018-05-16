@@ -19,13 +19,4 @@ import java.util.List;
 @Service
 public class ProductTypeServiceImpl extends BaseServiceImpl<ProductType> implements ProductTypeService {
 
-    @Autowired
-    private ProductTypeMapper productTypeMapper;
-
-    @Override
-    public List<ProductType> findAll() {
-        Example example = new Example(ProductType.class);
-        example.createCriteria().andEqualTo("status",1);
-        return productTypeMapper.selectByExample(example);
-    }
 }

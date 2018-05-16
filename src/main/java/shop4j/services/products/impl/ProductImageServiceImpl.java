@@ -54,11 +54,6 @@ public class ProductImageServiceImpl extends BaseServiceImpl<ProductImage> imple
     }
 
     @Override
-    public void addList(List<ProductImage> productImages) {
-        productImageMapper.insertList(productImages);
-    }
-
-    @Override
     public List<ProductImage> findImagesLists(long spuId,long skuId) {
         List<ProductImage> skuImages ;
         if(skuId == 0){//获得spu默认得主品图片
@@ -74,20 +69,19 @@ public class ProductImageServiceImpl extends BaseServiceImpl<ProductImage> imple
 
     @Override
     public List<ProductImage> findSKUMainImageBySkuIds(List<Long> skuIds) {
-        Example example = new Example(ProductImage.class);
-        example.createCriteria().andIn("productId",skuIds)
+       instanceCriteria().andIn("productId",skuIds)
                 .andEqualTo("type",ProductImageTypeEnum.SKU.getType())
                 .andEqualTo("sort",1).andEqualTo("status", CommonDataStatus.OK.getStatus());
-        List<ProductImage> productImage = productImageMapper.selectByExample(example);
+        List<ProductImage> productImage = productImageMapper.selectByExample(exampleThreadLocal.get());
         return productImage;
     }
 
     @Override
     public List<ProductImage> findSKUImageBySkuId(long skuId) {
-        Example example = new Example(ProductImage.class);
-        example.createCriteria().andEqualTo("productId",skuId)
+        instanceCriteria().andEqualTo("productId",skuId)
                 .andEqualTo("type",ProductImageTypeEnum.SKU.getType())
                 .andEqualTo("status", CommonDataStatus.OK.getStatus());
+        Example example = exampleThreadLocal.get();
         example.setOrderByClause("sort");
         List<ProductImage> productImage = productImageMapper.selectByExample(example);
         return productImage;

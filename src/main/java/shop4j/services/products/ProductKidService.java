@@ -29,12 +29,6 @@ public interface ProductKidService extends BaseService<ProductKid>{
      */
     List<ProductKid> getBySPUIds(List<Long> spuIds);
 
-    /**
-     * 通过skuId获取sku
-     * @param id skuI
-     * @return sku
-     */
-    ProductKid getById(long id);
 
     /**
      * 通过父类spu查询下面所有产品
@@ -42,12 +36,6 @@ public interface ProductKidService extends BaseService<ProductKid>{
      * @return sku集合
      */
     List<ProductKid> getBySPUId(long spuId);
-    /**
-     * 通过skuId集合获取sku
-     * @param ids
-     * @return sku集合
-     */
-    List<ProductKid> getByIds(List<Long> ids);
 
     /**
      * 2个月内得最高热销

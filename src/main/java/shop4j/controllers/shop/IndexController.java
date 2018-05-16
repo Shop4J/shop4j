@@ -56,7 +56,7 @@ public class IndexController {
 
         List<Long> spuIds = CollectionsParserUtil.collectFieldToList(productKidMax, ProductKid::getSpuId);
 
-        List<Product> productMax = productService.findByIds(spuIds);
+        List<Product> productMax = productService.getByIds(spuIds);
 
         model.addAttribute("productMaxMap",CollectionsParserUtil.collectFieldToMap(productMax,Product::getId));
 

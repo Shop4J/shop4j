@@ -25,23 +25,10 @@ public interface ProductService extends BaseService<Product>{
     PageInfo<Product> findBySearchVO(SearchProductVO searchProductVO);
 
     /**
-     * 通过SPU编号获取SPU
-     * @param ids spu编号
-     * @return spu
-     */
-    List<Product> findByIds(List<Long> ids);
-
-    /**
      * 通过产品类型获得首页推荐
      * @param typeIds
      * @return
      */
     List<Product> findByTypesIndexSuggest(List<Long> typeIds);
 
-    /**
-     * 通过id查询
-     * @param id
-     * @return spu
-     */
-    Product findById(long id);
 }

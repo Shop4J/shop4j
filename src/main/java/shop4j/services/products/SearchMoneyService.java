@@ -13,9 +13,5 @@ import java.util.List;
  */
 @Service
 public interface SearchMoneyService extends BaseService<SearchMoney>{
-    /**
-     * 搜索所有可用金钱范围
-     * @return 可用金钱范围
-     */
-    public List<SearchMoney> findAll();
+
 }

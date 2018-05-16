@@ -47,21 +47,14 @@ public class ProductKidServiceImpl extends BaseServiceImpl<ProductKid> implement
 
     @Override
     public List<ProductKid> getBySPUIds(List<Long> spuIds) {
-        Example example = new Example(ProductKid.class);
-        example.createCriteria().andIn("spuId",spuIds);
-        return productKidMapper.selectByExample(example);
-    }
-
-    @Override
-    public ProductKid getById(long id) {
-        return productKidMapper.selectByPrimaryKey(id);
+        instanceCriteria().andIn("spuId",spuIds);
+        return productKidMapper.selectByExample(exampleThreadLocal.get());
     }
 
     @Override
     public List<ProductKid> getBySPUId(long spuId) {
-        Example example = new Example(ProductKid.class);
-        example.createCriteria().andEqualTo("spuId",spuId);
-        return productKidMapper.selectByExample(example);
+        instanceCriteria().andEqualTo("spuId",spuId);
+        return productKidMapper.selectByExample(exampleThreadLocal.get());
     }
 
     @Override
@@ -81,10 +74,9 @@ public class ProductKidServiceImpl extends BaseServiceImpl<ProductKid> implement
 
     @Override
     public List<ProductKid> findMainSkuListBySpuIds(List<Long> spuIds) {
-        Example example = new Example(ProductKid.class);
-        example.createCriteria().andEqualTo("status", CommonDataStatus.OK.getStatus())
+        instanceCriteria().andEqualTo("status", CommonDataStatus.OK.getStatus())
                 .andIn("spuId",spuIds).andEqualTo("isMain",1);
-        List<ProductKid> skus = productKidMapper.selectByExample(example);
+        List<ProductKid> skus = productKidMapper.selectByExample(exampleThreadLocal.get());
         return skus;
     }
 
@@ -96,10 +88,9 @@ public class ProductKidServiceImpl extends BaseServiceImpl<ProductKid> implement
 
     @Override
     public ProductKid findMainSkuBySpuId(long spuId) {
-        Example example = new Example(ProductKid.class);
-        example.createCriteria().andEqualTo("status", CommonDataStatus.OK.getStatus())
+       instanceCriteria().andEqualTo("status", CommonDataStatus.OK.getStatus())
                 .andEqualTo("spuId",spuId).andEqualTo("isMain",1);
-        ProductKid sku = productKidMapper.selectOneByExample(example);
+        ProductKid sku = productKidMapper.selectOneByExample(exampleThreadLocal.get());
         return sku;
     }
 }

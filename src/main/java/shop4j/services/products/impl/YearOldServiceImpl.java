@@ -17,12 +17,5 @@ import java.util.List;
  */
 @Service
 public class YearOldServiceImpl extends BaseServiceImpl<YearOld> implements YearOldService{
-    @Autowired
-    private YearOldMapper yearOldMapper;
-    @Override
-    public List<YearOld> findAll() {
-        Example example = new Example(YearOld.class);
-        example.createCriteria().andEqualTo("status",1);
-        return yearOldMapper.selectByExample(example);
-    }
+
 }
