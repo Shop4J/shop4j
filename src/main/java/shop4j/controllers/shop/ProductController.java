@@ -5,17 +5,16 @@ import base.util.collections.opearator.CollectionsOperatorUtil;
 import base.util.collections.parser.CollectionsParserUtil;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import shop4j.annotions.shop.dataload.HeadDataLoad;
 import shop4j.models.products.*;
 import shop4j.services.order.OrderDetailService;
 import shop4j.services.products.*;
 import shop4j.vo.SearchProductVO;
-import shop4j.annotions.shop.dataload.HeadDataLoad;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -52,6 +51,12 @@ public class ProductController {
 
     @Autowired
     private ProductKidService productKidService;
+
+    @Autowired
+    private ProductTypeParamService productTypeParamService;
+
+    @Autowired
+    private ProductParamService productParamService;
     /**
      * 商品搜索首页控制器
      * @param model thymeleaf模板
@@ -143,6 +148,14 @@ public class ProductController {
 
         Map<Long, ProductImage> suggestImagesMap = productImageService.findSPUMainImageBySpuIds(spuIds);
         model.addAttribute("suggestImageMap",suggestImagesMap);
+
+        ProductKid currentSku = productKidService.findCurrentSku(spuId, skuId);
+        model.addAttribute("currentSku",currentSku);
+
+        List<ProductTypeParam> typeParams = productTypeParamService.findByType(product.getType());
+        List<ProductParam> params = productParamService.getByIds(CollectionsParserUtil.collectFieldToList(typeParams, ProductTypeParam::getParamId));
+        model.addAttribute("paramsSku",params);
+
         return "shop/products/product_detail";
     }
 }

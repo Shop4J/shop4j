@@ -93,4 +93,12 @@ public class ProductKidServiceImpl extends BaseServiceImpl<ProductKid> implement
         ProductKid sku = productKidMapper.selectOneByExample(exampleThreadLocal.get());
         return sku;
     }
+
+    @Override
+    public ProductKid findCurrentSku(long spuId, long skuId) {
+        if(skuId ==0){
+            return findMainSkuBySpuId(spuId);
+        }
+        return findById(skuId);
+    }
 }

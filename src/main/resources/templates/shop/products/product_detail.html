@@ -223,11 +223,10 @@
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane fade in active" id="detail" aria-labelledby="detail-tab">
 						<div class="item-detail__info clearfix">
-							<div class="record">商品编号：D-8812</div>
-							<div class="record">面料：2017-06-24</div>
-							<div class="record">材质：2017-06-24</div>
-							<div class="record">安全等级：200克</div>
-							<div class="record">是否带帽子：1000件</div>
+							<div class="record" th:text="|SPU编号：${product.id}|"></div>
+							<div class="record" th:text="|SKU编号：${currentSku.id}|"></div>
+							<div class="record" th:text="|上架时间：${#dates.format(currentSku.addTime,'yyyy-MM-dd')}|"></div>
+							<div class="record" th:each="paramR:${params}" th:text="|${paramR.meaing}:|"></div>
 						</div>
 						<div class="rich-text">
 							<p style="text-align: center;">

@@ -1104,7 +1104,7 @@ body {overflow-y: scroll}
 	border: 1px solid #e0e0e0;
 }
 .item-detail__info > .record {
-	width: 50%;
+	width: 33%;
 	float: left;
 	color: #666;
 }

@@ -25,4 +25,10 @@ public class ProductParam extends BaseModel{
      */
     @Column
     private String meaing;
+
+    /**
+     * 1是spu应用属性 2是sku应用属性
+     */
+    @Column
+    private int type;
 }

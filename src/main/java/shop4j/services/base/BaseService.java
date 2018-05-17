@@ -44,4 +44,5 @@ public interface BaseService<T extends BaseModel> {
      * @return
      */
     List<T> findAll();
+
 }

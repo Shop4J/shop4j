@@ -19,4 +19,5 @@ public class ProductTypeParam extends BaseModel{
 
     @Column
     private long paramId;
+
 }

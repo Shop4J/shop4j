@@ -71,4 +71,12 @@ public interface ProductKidService extends BaseService<ProductKid>{
      * @return spu得主品
      */
     public ProductKid findMainSkuBySpuId(long spuId);
+
+    /**
+     * 获得单个SPU得主品,如果skuId!=0则获取默认得，如果有则获取当前SKU
+     * @param spuId spuId
+     * @param skuId skuId
+     * @return spu得主品
+     */
+    public ProductKid findCurrentSku(long spuId,long skuId);
 }
