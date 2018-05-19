@@ -17,8 +17,7 @@ import shop4j.services.products.*;
 import shop4j.vo.SearchProductVO;
 
 import javax.validation.constraints.NotNull;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Author: weixuedong
@@ -57,6 +56,9 @@ public class ProductController {
 
     @Autowired
     private ProductParamService productParamService;
+
+    @Autowired
+    private ProductParamValueService productParamValueService;
     /**
      * 商品搜索首页控制器
      * @param model thymeleaf模板
@@ -150,11 +152,26 @@ public class ProductController {
         model.addAttribute("suggestImageMap",suggestImagesMap);
 
         ProductKid currentSku = productKidService.findCurrentSku(spuId, skuId);
+        skuId = currentSku.getId();
         model.addAttribute("currentSku",currentSku);
 
-        List<ProductTypeParam> typeParams = productTypeParamService.findByType(product.getType());
-        List<ProductParam> params = productParamService.getByIds(CollectionsParserUtil.collectFieldToList(typeParams, ProductTypeParam::getParamId));
-        model.addAttribute("paramsSku",params);
+        List<ProductParamValue> paramValues = productParamValueService.findBySkuAndSpu(skuId, spuId);
+        model.addAttribute("paramValueMap",CollectionsParserUtil.collectFieldToMapList(paramValues,ProductParamValue::getParamId));
+        List<Long> paramIds = CollectionsParserUtil.collectFieldToList(paramValues, ProductParamValue::getParamId);
+        List<ProductParam> params = productParamService.getByIds(paramIds);
+        Map<Integer, List<ProductParam>> paramMap = CollectionsParserUtil.collectFieldToMapList(params, ProductParam::getType);
+        List<ProductTypeParam> productTypeParams = productTypeParamService.findByTypeAndParamIds(product.getType(), paramIds);
+
+        productTypeParams.sort(Comparator.comparingInt(ProductTypeParam::getSort));//升序
+        List<Long> paramIdsSort = CollectionsParserUtil.collectFieldToList(productTypeParams, ProductTypeParam::getParamId);
+
+        List<ProductParam> spuParams = paramMap.get(1);
+        CollectionsOperatorUtil.sortBy(spuParams,new HashSet<>(paramIdsSort),ProductParam::getId);
+        model.addAttribute("spuParams",spuParams);
+
+        List<ProductParam> skuParams = paramMap.get(2);
+        CollectionsOperatorUtil.sortBy(spuParams,new HashSet<>(paramIdsSort),ProductParam::getId);
+        model.addAttribute("skuParams",skuParams);
 
         return "shop/products/product_detail";
     }

@@ -8,6 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import shop4j.enums.CommonDataStatus;
 import shop4j.models.BaseModel;
 import shop4j.models.products.ProductTypeParam;
+import shop4j.services.base.BaseService;
 import shop4j.services.products.ProductTypeParamService;
 
 import java.util.ArrayList;
@@ -24,7 +25,6 @@ import java.util.List;
 public class ProductTypeParamTest {
     @Autowired
     private ProductTypeParamService productTypeParamService;
-
     @Test
     public void test(){
         List<ProductTypeParam> list = new ArrayList<>();

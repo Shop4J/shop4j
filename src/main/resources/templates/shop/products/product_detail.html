@@ -96,39 +96,17 @@
 					</ul>
 					<div class="item-key">
 						<div class="item-sku">
-							<dl class="item-prop clearfix">
-								<dt class="item-metatit">颜色：</dt>
-								<dd><ul data-property="颜色" class="clearfix">
-									<li><a class="on" href="javascript:;" role="button" data-value="白色" aria-disabled="true">
-										<span>白色</span>
-									</a></li>
-									<li><a href="javascript:;" role="button" data-value="黑色" aria-disabled="true">
-										<span>黑色</span>
-									</a></li>
-									<li><a href="javascript:;" role="button" data-value="粉红色" aria-disabled="true">
-										<span>粉红色</span>
-									</a></li>
-									<li><a href="javascript:;" role="button" data-value="黄色" aria-disabled="true">
-										<span>黄色</span>
-									</a></li>
-								</ul></dd>
-							</dl>
-							<dl class="item-prop clearfix">
-								<dt class="item-metatit">尺码：</dt>
-								<dd><ul data-property="尺码" class="clearfix">
-									<li><a href="javascript:;" role="button" data-value="S" aria-disabled="true">
-										<span>S</span>
-									</a></li>
-									<li><a href="javascript:;" role="button" data-value="M" aria-disabled="true">
-										<span>M</span>
-									</a></li>
-									<li><a href="javascript:;" role="button" data-value="L" aria-disabled="true">
-										<span>L</span>
-									</a></li>
-									<li><a href="javascript:;" role="button" data-value="XL" aria-disabled="true">
-										<span>XL</span>
-									</a></li>
-								</ul></dd>
+							<dl class="item-prop clearfix" th:each="spuParam:${spuParams}">
+								<dt class="item-metatit" th:text="|选择${spuParam.meaing}：|"></dt>
+								<dd>
+									<ul th:data-property="${spuParam.meaing}" class="clearfix">
+										<li th:each="paramValue:${paramValueMap.get(spuParam.id)}">
+											<a  class="on" href="javascript:;" role="button" th:data-value="${paramValue.value}"  aria-disabled="true">
+												<span th:text="|${paramValue.value}|"></span>
+											</a>
+										</li>
+									</ul>
+								</dd>
 							</dl>
 						</div>
 						<div class="item-amount clearfix bgf5">
@@ -226,7 +204,7 @@
 							<div class="record" th:text="|SPU编号：${product.id}|"></div>
 							<div class="record" th:text="|SKU编号：${currentSku.id}|"></div>
 							<div class="record" th:text="|上架时间：${#dates.format(currentSku.addTime,'yyyy-MM-dd')}|"></div>
-							<div class="record" th:each="paramR:${params}" th:text="|${paramR.meaing}:|"></div>
+							<div class="record" th:each="skuParam:${skuParams}"><span th:text="|${skuParam.meaing}：|"></span><span th:each="paramValue:${paramValueMap.get(skuParam.id)}" th:text="|${paramValue.value} |"></span></div>
 						</div>
 						<div class="rich-text">
 							<p style="text-align: center;">

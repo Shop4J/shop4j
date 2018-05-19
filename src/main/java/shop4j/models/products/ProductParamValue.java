@@ -1,5 +1,6 @@
 package shop4j.models.products;
 
+import lombok.Data;
 import shop4j.models.BaseModel;
 
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.persistence.Table;
  * @Date: 2018/5/17 18:39
  * @Description:商品参数值
  */
+@Data
 @Table(name = "db_products.tbl_product_param_value")
 public class ProductParamValue extends BaseModel{
     /**
