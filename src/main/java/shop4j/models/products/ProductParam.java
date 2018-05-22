@@ -28,4 +28,5 @@ public class ProductParam extends BaseModel{
 
     @Column
     private int isSpuSee;
+
 }

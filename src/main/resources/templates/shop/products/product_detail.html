@@ -100,9 +100,9 @@
 								<dt class="item-metatit" th:text="|选择${spuParam.key}：|"></dt>
 								<dd>
 									<ul th:data-property="${spuParam.key}" class="clearfix">
-										<li th:each="paramValue:spuParam.value}">
-											<a  th:class="${paramValue.isCurrent?'on':''}" th:href="${paramValue.url}" role="button" th:data-value="${paramValue}"  aria-disabled="true">
-												<span th:text="${paramValue}"></span>
+										<li th:each="paramValue:${spuParam.value}">
+											<a  th:class="${paramValue.isCurrent()?'on':''}" th:href="${paramValue.url}" role="button" th:data-value="${paramValue.value}"  aria-disabled="true">
+												<span th:text="${paramValue.value}"></span>
 											</a>
 										</li>
 									</ul>

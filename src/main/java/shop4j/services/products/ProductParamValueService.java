@@ -26,4 +26,11 @@ public interface ProductParamValueService extends BaseService<ProductParamValue>
      * @return 获取到得属性值
      */
     public List<ProductParamValue> findDetailBySkuId(long skuId);
+
+    /**
+     * 通过参数ID查看参数值
+     * @param paramIds 参数ID
+     * @return 获取到得属性值
+     */
+    public List<ProductParamValue> findsByParamIds(List<Long> paramIds);
 }

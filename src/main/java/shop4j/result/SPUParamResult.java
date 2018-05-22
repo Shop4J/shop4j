@@ -16,7 +16,7 @@ public class SPUParamResult {
     /**
      * 是否与SKU一致
      */
-    private int isCurrent;
+    private boolean isCurrent;
 
     /**
      * 对应SKU-URL
