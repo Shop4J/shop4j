@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import shop4j.annotions.shop.dataload.HeadDataLoad;
 import shop4j.models.products.*;
+import shop4j.result.ProductParamResult;
 import shop4j.services.order.OrderDetailService;
 import shop4j.services.products.*;
 import shop4j.vo.SearchProductVO;
@@ -152,27 +153,10 @@ public class ProductController {
         model.addAttribute("suggestImageMap",suggestImagesMap);
 
         ProductKid currentSku = productKidService.findCurrentSku(spuId, skuId);
-        skuId = currentSku.getId();
         model.addAttribute("currentSku",currentSku);
 
-        List<ProductParamValue> paramValues = productParamValueService.findBySkuAndSpu(skuId, spuId);
-        model.addAttribute("paramValueMap",CollectionsParserUtil.collectFieldToMapList(paramValues,ProductParamValue::getParamId));
-        List<Long> paramIds = CollectionsParserUtil.collectFieldToList(paramValues, ProductParamValue::getParamId);
-        List<ProductParam> params = productParamService.getByIds(paramIds);
-        Map<Integer, List<ProductParam>> paramMap = CollectionsParserUtil.collectFieldToMapList(params, ProductParam::getType);
-        List<ProductTypeParam> productTypeParams = productTypeParamService.findByTypeAndParamIds(product.getType(), paramIds);
-
-        productTypeParams.sort(Comparator.comparingInt(ProductTypeParam::getSort));//升序
-        List<Long> paramIdsSort = CollectionsParserUtil.collectFieldToList(productTypeParams, ProductTypeParam::getParamId);
-
-        List<ProductParam> spuParams = paramMap.get(1);
-        CollectionsOperatorUtil.sortBy(spuParams,new HashSet<>(paramIdsSort),ProductParam::getId);
-        model.addAttribute("spuParams",spuParams);
-
-        List<ProductParam> skuParams = paramMap.get(2);
-        CollectionsOperatorUtil.sortBy(spuParams,new HashSet<>(paramIdsSort),ProductParam::getId);
-        model.addAttribute("skuParams",skuParams);
-
+        ProductParamResult paramResult = productParamService.findParams(currentSku);
+        model.addAttribute("paramResult",paramResult);
         return "shop/products/product_detail";
     }
 }

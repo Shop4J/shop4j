@@ -22,14 +22,13 @@ public class ProductParamValueServiceImpl extends BaseServiceImpl<ProductParamVa
     @Autowired
     private ProductParamValueMapper productParamValueMapper;
     @Override
-    public List<ProductParamValue> findBySkuAndSpu(long skuId, long spuId) {
-        Example.Criteria criteria = instanceCriteria().andEqualTo("productId", skuId).andEqualTo("productLevel",2);
-        Example.Criteria criteria2 = instanceCriteria().andEqualTo("productId", spuId).andEqualTo("productLevel",1);
-        Example.Criteria criteria3 = instanceCriteria().andEqualTo("status", CommonDataStatus.OK.getStatus());
-        Example example = exampleThreadLocal.get();
-        example.and(criteria);
-        example.or(criteria2);
-        example.and(criteria3);
-        return productParamValueMapper.selectByExample(example);
+    public List<ProductParamValue> findBySkuId(long skuId) {
+        instanceCriteria().andEqualTo("productId", skuId).andEqualTo("status", CommonDataStatus.OK.getStatus());
+        return productParamValueMapper.selectByExample(exampleThreadLocal.get());
+    }
+
+    @Override
+    public List<ProductParamValue> findDetailBySkuId(long skuId) {
+        return productParamValueMapper.findDetailBySkuId(skuId);
     }
 }

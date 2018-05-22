@@ -29,9 +29,4 @@ public class ProductParamValue extends BaseModel{
     @Column
     private long productId;
 
-    /**
-     * 商品阶级 1spu 2sku
-     */
-    @Column
-    private long productLevel;
 }
