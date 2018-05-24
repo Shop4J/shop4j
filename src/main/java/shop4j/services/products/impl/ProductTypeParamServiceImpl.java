@@ -27,9 +27,5 @@ public class ProductTypeParamServiceImpl extends BaseServiceImpl<ProductTypePara
         return productTypeParamMapper.selectByExample(exampleThreadLocal.get());
     }
 
-    @Override
-    public List<ProductTypeParam> findByTypeAndParamIds(long type, List<Long> paramIds) {
-        instanceCriteria().andEqualTo("typeId",type).andIn("paramId",paramIds);
-        return productTypeParamMapper.selectByExample(exampleThreadLocal.get());
-    }
+
 }

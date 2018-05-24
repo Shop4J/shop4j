@@ -18,7 +18,8 @@ import shop4j.services.products.*;
 import shop4j.vo.product.SearchProductVO;
 
 import javax.validation.constraints.NotNull;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: weixuedong
@@ -134,9 +135,7 @@ public class ProductController {
 
         List<ProductImage> imageIndexes = productImageService.findImagesLists(spuId, skuId);//商品小图片位于详情页左上角
         model.addAttribute("imageIndexes",imageIndexes);
-
-        List<ProductKid> maxSellCountSuggests = productKidService.maxSellCountSuggest2Month(1,15);//最大可显示12件
-        List<Long> spuIds = CollectionsParserUtil.collectFieldToList(maxSellCountSuggests, ProductKid::getSpuId);
+        List<Long> spuIds = orderDetailService.findMaxSellCount(15);
         List<Product> spus = productService.getByIds(spuIds);
         Map<Integer, List<Product>> groupMaxCount = CollectionsOperatorUtil.countGroup(3, spus);//上部推荐
         model.addAttribute("groupMaxCount",groupMaxCount);

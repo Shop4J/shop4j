@@ -1,9 +1,6 @@
 package shop4j.services.products.impl;
 
 import base.util.collections.CollectionUtil;
-import base.util.collections.opearator.CollectionsOperatorUtil;
-import base.util.collections.parser.CollectionsParserUtil;
-import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shop4j.dao.products.ProductKidMapper;
@@ -11,10 +8,11 @@ import shop4j.enums.CommonDataStatus;
 import shop4j.models.products.ProductKid;
 import shop4j.services.base.BaseServiceImpl;
 import shop4j.services.products.ProductKidService;
-import tk.mybatis.mapper.entity.Example;
 
-import java.time.LocalDate;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: weixuedong
@@ -58,32 +56,11 @@ public class ProductKidServiceImpl extends BaseServiceImpl<ProductKid> implement
     }
 
     @Override
-    public List<ProductKid> maxSellCountSuggest2Month(int page,int size) {
-        PageHelper.startPage(page,size);
-        List<ProductKid> productKids = productKidMapper.maxSellCount();
-        return productKids;
-    }
-
-    @Override
-    public Map<Integer,List<ProductKid>> productDetailSuggestMaxSell(int size) {
-        List<ProductKid> skus = maxSellCountSuggest2Month(1, size);
-        Map<Integer, List<ProductKid>> countMap = CollectionsOperatorUtil.countGroup(3, skus);
-        return countMap;
-    }
-
-
-    @Override
     public List<ProductKid> findMainSkuListBySpuIds(List<Long> spuIds) {
         instanceCriteria().andEqualTo("status", CommonDataStatus.OK.getStatus())
                 .andIn("spuId",spuIds).andEqualTo("isMain",1);
         List<ProductKid> skus = productKidMapper.selectByExample(exampleThreadLocal.get());
         return skus;
-    }
-
-    @Override
-    public Map<Long, ProductKid> findMainSkuMapBySpuIds(List<Long> spuIds) {
-        List<ProductKid> skus = findMainSkuListBySpuIds(spuIds);
-        return CollectionsParserUtil.collectFieldToMap(skus,ProductKid::getSpuId);
     }
 
     @Override

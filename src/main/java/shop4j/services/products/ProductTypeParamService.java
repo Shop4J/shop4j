@@ -20,11 +20,4 @@ public interface ProductTypeParamService extends BaseService<ProductTypeParam>{
      */
     List<ProductTypeParam> findByType(long type);
 
-    /**
-     * 通过类型+参数ID获取商品类型参数
-     * @param type 类型编号
-     * @param paramIds 参数ID
-     * @return 商品类型对应参数
-     */
-    List<ProductTypeParam> findByTypeAndParamIds(long type,List<Long> paramIds);
 }

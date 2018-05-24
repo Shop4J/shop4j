@@ -1,7 +1,6 @@
 package shop4j.services.products.impl;
 
 import base.util.collections.CollectionUtil;
-import base.util.collections.parser.CollectionsParserUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import shop4j.services.products.ProductService;
 import shop4j.vo.product.*;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -52,15 +50,8 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 
     @Override
     public  List<Product> findByTypesIndexSuggest(List<Long> typeIds) {
-        List<Product> products = productMapper.findByTypes(typeIds, 10);
+        List<Product> products = productMapper.findByTypes(typeIds,10);
         return products;
-    }
-
-    @Override
-    public void addProducts(List<ProductVO> productVOS,long operator) {
-        if(!CollectionUtil.isEmpty(productVOS)){
-
-        }
     }
 
     @Transactional

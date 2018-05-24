@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import shop4j.dao.BaseMapper;
 import shop4j.models.order.OrderDetail;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -22,4 +23,11 @@ public interface OrderDetailMapper extends BaseMapper<OrderDetail>{
      * @return key spuId,num生效
      */
     public List<OrderDetail> countBySPU(@Param("spuIds") List<Long> spuIds);
+
+    /**
+     * 获取某段时间到现在得最高动销品
+     * @param beginTime
+     * @return
+     */
+    List<Long> findMaxSellCount(LocalDate beginTime);
 }

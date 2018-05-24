@@ -21,4 +21,11 @@ public interface OrderDetailService {
     Map<Long,Integer> sellCountBySPUIds(List<Long> spuIds);
 
     void addList(List<OrderDetail> details);
+
+    /**
+     * 获得指定数量得动态热销品
+     * @param size 数量
+     * @return spuIds
+     */
+    List<Long> findMaxSellCount(int size);
 }

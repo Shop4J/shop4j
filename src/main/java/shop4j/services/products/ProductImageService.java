@@ -1,6 +1,5 @@
 package shop4j.services.products;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import shop4j.models.products.ProductImage;
 import shop4j.services.base.BaseService;
@@ -20,7 +19,7 @@ public interface ProductImageService extends BaseService<ProductImage>{
      * @param spuIds SPU商品编号集合
      * @return 商品图片
      */
-    public Map<Long,ProductImage> findSPUMainImageBySpuIds(List<Long> spuIds);
+    Map<Long,ProductImage> findSPUMainImageBySpuIds(List<Long> spuIds);
 
     /**
      * 通过spu获得SPU图片集合
@@ -34,12 +33,12 @@ public interface ProductImageService extends BaseService<ProductImage>{
      * @param skuIds sku编号集合
      * @return sku首图
      */
-    public List<ProductImage> findSKUMainImageBySkuIds(List<Long> skuIds);
+    List<ProductImage> findSKUMainImageBySkuIds(List<Long> skuIds);
 
     /**
      * 通过sku获得sku得商品图片
      * @param skuId sku编号
      * @return 图片集合
      */
-    public List<ProductImage> findSKUImageBySkuId(long skuId);
+    List<ProductImage> findSKUImageBySkuId(long skuId);
 }

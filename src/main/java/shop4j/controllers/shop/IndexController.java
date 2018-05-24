@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import shop4j.annotions.shop.dataload.HeadDataLoad;
 import shop4j.models.products.Product;
 import shop4j.models.products.ProductImage;
-import shop4j.models.products.ProductKid;
 import shop4j.models.products.ProductType;
 import shop4j.services.order.OrderDetailService;
 import shop4j.services.products.ProductImageService;
@@ -16,6 +15,7 @@ import shop4j.services.products.ProductKidService;
 import shop4j.services.products.ProductService;
 import shop4j.services.products.ProductTypeService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -50,13 +50,15 @@ public class IndexController {
 
         model.addAttribute("productTypesMap",productTypesMap);
 
-        List<ProductKid> productKidMax = productKidService.maxSellCountSuggest2Month(1,8);//热销推荐
+        List<Long> spuIds = new ArrayList<>();
 
-        model.addAttribute("productKidMax",productKidMax);
+        List<Long> maxSellSpuIds = orderDetailService.findMaxSellCount(8);
 
-        List<Long> spuIds = CollectionsParserUtil.collectFieldToList(productKidMax, ProductKid::getSpuId);
+        model.addAttribute("maxSellSpuIds",maxSellSpuIds);
 
-        List<Product> productMax = productService.getByIds(spuIds);
+        spuIds.addAll(maxSellSpuIds);
+
+        List<Product> productMax = productService.getByIds(maxSellSpuIds);
 
         model.addAttribute("productMaxMap",CollectionsParserUtil.collectFieldToMap(productMax,Product::getId));
 

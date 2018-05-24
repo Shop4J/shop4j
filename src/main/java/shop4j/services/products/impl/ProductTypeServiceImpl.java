@@ -5,10 +5,8 @@ import org.springframework.stereotype.Service;
 import shop4j.dao.products.ProductTypeMapper;
 import shop4j.enums.CommonDataStatus;
 import shop4j.models.products.ProductType;
-import shop4j.models.products.SearchMoney;
 import shop4j.services.base.BaseServiceImpl;
 import shop4j.services.products.ProductTypeService;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 

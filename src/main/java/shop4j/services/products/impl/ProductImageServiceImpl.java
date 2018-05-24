@@ -8,7 +8,6 @@ import shop4j.enums.CommonDataStatus;
 import shop4j.enums.ProductImageTypeEnum;
 import shop4j.models.products.ProductImage;
 import shop4j.models.products.ProductKid;
-import shop4j.services.base.BaseService;
 import shop4j.services.base.BaseServiceImpl;
 import shop4j.services.products.ProductImageService;
 import shop4j.services.products.ProductKidService;

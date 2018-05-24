@@ -1,6 +1,7 @@
 package shop4j.services.products;
 
 import com.github.pagehelper.PageInfo;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import shop4j.models.products.Product;
 import shop4j.services.base.BaseService;
@@ -30,13 +31,9 @@ public interface ProductService extends BaseService<Product>{
      * @param typeIds
      * @return
      */
+    @Cacheable(value = "typeSuggest",key = "#typeIds")
     List<Product> findByTypesIndexSuggest(List<Long> typeIds);
 
-    /**
-     * 逻辑添加商品
-     * @param productVOS 大量添加
-     */
-    void addProducts(List<ProductVO> productVOS,long operator);
 
     /**
      * 逻辑添加商品

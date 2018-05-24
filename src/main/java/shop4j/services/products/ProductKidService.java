@@ -38,27 +38,6 @@ public interface ProductKidService extends BaseService<ProductKid>{
     List<ProductKid> getBySPUId(long spuId);
 
     /**
-     * 2个月内得最高热销
-     * @return 8个热销商品
-     */
-    List<ProductKid> maxSellCountSuggest2Month(int page,int size);
-
-    /**
-     * 商品详情页使用得热销品
-     * @param size 需要得数量
-     * @return 分组后得子品
-     */
-    Map<Integer,List<ProductKid>> productDetailSuggestMaxSell(int size);
-
-
-    /**
-     * 获得多个SPU得主品
-     * @param spuIds
-     * @return map key是spu id value是主品
-     */
-    public Map<Long,ProductKid> findMainSkuMapBySpuIds(List<Long> spuIds);
-
-    /**
      * 获得多个SPU得主品
      * @param spuIds
      * @return spu得主品集合

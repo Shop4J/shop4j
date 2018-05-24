@@ -17,5 +17,5 @@ public interface ProductTypeService extends BaseService<ProductType>{
      * 获得所有可用得子类型
      * @return 所有可用子类型
      */
-    public List<ProductType> findAllKidTypes();
+    List<ProductType> findAllKidTypes();
 }

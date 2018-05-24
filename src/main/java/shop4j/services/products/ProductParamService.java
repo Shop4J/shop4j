@@ -6,9 +6,6 @@ import shop4j.models.products.ProductParam;
 import shop4j.result.ProductParamResult;
 import shop4j.services.base.BaseService;
 
-import javax.validation.constraints.NotNull;
-import java.util.List;
-
 /**
  * @Author: weixuedong
  * @Date: 2018/5/14 17:08

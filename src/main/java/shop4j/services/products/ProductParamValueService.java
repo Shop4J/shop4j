@@ -13,24 +13,18 @@ import java.util.List;
  */
 @Service
 public interface ProductParamValueService extends BaseService<ProductParamValue>{
-    /**
-     * 通过sku和spuID获得
-     * @param skuId SKUID
-     * @return 获取到得属性值
-     */
-    public List<ProductParamValue> findBySkuId(long skuId);
 
     /**
      * 通过SKUID的查看
      * @param skuId SKUID
      * @return 获取到得属性值
      */
-    public List<ProductParamValue> findDetailBySkuId(long skuId);
+    List<ProductParamValue> findDetailBySkuId(long skuId);
 
     /**
      * 通过参数ID查看参数值
      * @param paramIds 参数ID
      * @return 获取到得属性值
      */
-    public List<ProductParamValue> findsByParamIds(List<Long> paramIds,long skuId);
+    List<ProductParamValue> findsByParamIds(List<Long> paramIds,long skuId);
 }

@@ -18,11 +18,9 @@ spring:
        idleTimeout: 600000
        #验证连接可用得超时时间
        validation-timeout: 60000
-
   thymeleaf:
      mode: HTML5
      cache: false
-
 ##驼峰命名
 mybatis:
   type-aliases-package: shop4j.models

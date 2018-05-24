@@ -32,7 +32,7 @@
     <select id="findByTypes" resultMap="Product">
         <foreach collection="typeIds" item="typeId" separator="union all">
             (SELECT product.name,product.show_price,product.id,productType.parent_id as TYPE FROM <include refid="table_name"/> as product INNER JOIN
-            db_products.tbl_product_type as productType on productType.id = product.type where product.status = 1 and productType.parent_id = #{typeId} order by product.add_time desc limit 0,#{size})
+            db_products.tbl_product_type as productType on productType.id = product.type where product.status = 1 and productType.parent_id = #{typeId} and productType.status=1 order by product.add_time desc limit 0,#{size})
         </foreach>
     </select>
 </mapper>

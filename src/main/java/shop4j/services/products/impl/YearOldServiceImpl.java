@@ -1,14 +1,9 @@
 package shop4j.services.products.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import shop4j.dao.products.YearOldMapper;
 import shop4j.models.products.YearOld;
 import shop4j.services.base.BaseServiceImpl;
 import shop4j.services.products.YearOldService;
-import tk.mybatis.mapper.entity.Example;
-
-import java.util.List;
 
 /**
  * @Author: weixuedong

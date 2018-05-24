@@ -1,12 +1,14 @@
 package shop4j.services.order.impl;
 
 import base.util.collections.CollectionUtil;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shop4j.dao.order.OrderDetailMapper;
 import shop4j.models.order.OrderDetail;
 import shop4j.services.order.OrderDetailService;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,5 +44,12 @@ public class OrderDetailServiceImpl implements OrderDetailService{
     @Override
     public void addList(List<OrderDetail> details) {
         orderDetailMapper.insertList(details);
+    }
+
+    @Override
+    public List<Long> findMaxSellCount(int size) {
+        PageHelper.startPage(1,size);
+        List<Long> spuIds = orderDetailMapper.findMaxSellCount(LocalDate.now().minusMonths(2));
+        return spuIds;
     }
 }

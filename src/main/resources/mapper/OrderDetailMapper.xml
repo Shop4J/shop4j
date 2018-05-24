@@ -25,4 +25,7 @@
             </foreach>
         ) GROUP BY spu_id
     </select>
+    <select id="findMaxSellCount" resultType="long">
+        SELECT spu_id  from <include refid="table_name"/>  where status = 1 AND add_time>=#{beginTime} GROUP BY spu_id ORDER BY SUM(num) DESC
+    </select>
 </mapper>

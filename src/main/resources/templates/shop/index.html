@@ -119,15 +119,15 @@
 				</div>
 				<div class="con-box">
 					<div class="hot-box">
-						<a th:each="productKid:${productKidMax}"target="_blank" th:href="|/product/detail?spuId=${productKid.spuId}|" class="floor-item" >
+						<a th:each="maxSellSpuId:${maxSellSpuIds}"target="_blank" th:href="|/product/detail?spuId=${maxSellSpuId}|" class="floor-item" >
 							<div class="item-img hot-img">
-								<img th:alt="${productMaxMap.get(productKid.spuId).name}" th:src="${productImageMap.get(productKid.spuId).url}" class="cover">
+								<img th:alt="${productMaxMap.get(maxSellSpuId).name}" th:src="${productImageMap.get(maxSellSpuId).url}" class="cover">
 							</div>
 							<div class="price clearfix">
-								<span class="pull-left cr fz16" th:text="|￥${productMaxMap.get(productKid.spuId).showPrice}|"></span>
-								<span class="pull-right c6" th:text="|销量：${sellCountMap.get(productKid.spuId)}|"></span>
+								<span class="pull-left cr fz16" th:text="|￥${productMaxMap.get(maxSellSpuId).showPrice}|"></span>
+								<span class="pull-right c6" th:text="|销量：${sellCountMap.get(maxSellSpuId)}|"></span>
 							</div>
-							<div class="name ep" th:text="${productMaxMap.get(productKid.spuId).name}" th:title="${productMaxMap.get(productKid.spuId).name}"></div>
+							<div class="name ep" th:text="${productMaxMap.get(maxSellSpuId).name}" th:title="${productMaxMap.get(maxSellSpuId).name}"></div>
 						</a>
 					</div>
 				</div>

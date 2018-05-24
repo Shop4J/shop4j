@@ -8,7 +8,6 @@ import shop4j.enums.WebInfoTypeEnum;
 import shop4j.models.sets.WebInfo;
 import shop4j.services.base.BaseServiceImpl;
 import shop4j.services.sets.WebInfoService;
-import tk.mybatis.mapper.entity.Example;
 
 /**
  * @Author: weixuedong

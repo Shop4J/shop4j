@@ -1,11 +1,9 @@
 package shop4j.services.base;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import shop4j.dao.BaseMapper;
 import shop4j.enums.CommonDataStatus;
 import shop4j.models.BaseModel;
-import shop4j.models.products.ProductKid;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.validation.constraints.NotNull;
