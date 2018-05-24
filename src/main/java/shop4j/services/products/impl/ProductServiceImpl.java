@@ -54,6 +54,11 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
         return products;
     }
 
+    @Override
+    public void removeTypeIndexSuggestCache() {
+
+    }
+
     @Transactional
     @Override
     public void addProduct(ProductVO productVO,long operator) {

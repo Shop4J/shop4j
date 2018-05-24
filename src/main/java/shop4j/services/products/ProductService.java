@@ -1,7 +1,9 @@
 package shop4j.services.products;
 
 import com.github.pagehelper.PageInfo;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import shop4j.models.products.Product;
 import shop4j.services.base.BaseService;
@@ -31,9 +33,11 @@ public interface ProductService extends BaseService<Product>{
      * @param typeIds
      * @return
      */
-    @Cacheable(value = "typeSuggest",key = "#typeIds")
+    @Cacheable(value = "typeSuggest",key = "'typeIndexCache'",sync = true)
     List<Product> findByTypesIndexSuggest(List<Long> typeIds);
 
+    @CacheEvict(value="typeSuggest",key="'typeIndexCache'")
+    public void removeTypeIndexSuggestCache();
 
     /**
      * 逻辑添加商品
