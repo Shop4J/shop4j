@@ -51,13 +51,13 @@ public class CommonDataLoad {
 
                     Model model = (Model) arg;
 
-                    log.info("加载商城公共页面头信息...");
+                    log.debug("加载商城公共页面头信息...");
 
                     WebInfo webInfo = webInfoService.getWebRoot();
 
                     model.addAttribute("webInfo",webInfo);//站点信息
 
-                    log.info("加载商城公共页面头信息完成");
+                    log.debug("加载商城公共页面头信息完成");
                 }
             });
         }
