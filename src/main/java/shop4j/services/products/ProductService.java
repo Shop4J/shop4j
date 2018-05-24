@@ -37,7 +37,7 @@ public interface ProductService extends BaseService<Product>{
     List<Product> findByTypesIndexSuggest(List<Long> typeIds);
 
     @CacheEvict(value="typeSuggest",key="'typeIndexCache'")
-    default void removeTypeIndexSuggestCache(){};
+    default void removeTypeIndexSuggestCache(){}
 
     /**
      * 逻辑添加商品

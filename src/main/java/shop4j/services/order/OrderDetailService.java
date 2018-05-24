@@ -39,5 +39,5 @@ public interface OrderDetailService {
     List<Long> findMaxSellCountCache();
 
     @CacheEvict(value="order",key="'orderMaxSell'")
-    default void removeOrderMaxSellCache(){};
+    default void removeOrderMaxSellCache(){}
 }
