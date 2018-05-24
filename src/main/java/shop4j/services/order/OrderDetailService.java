@@ -1,5 +1,7 @@
 package shop4j.services.order;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import shop4j.models.order.OrderDetail;
 
@@ -28,4 +30,14 @@ public interface OrderDetailService {
      * @return spuIds
      */
     List<Long> findMaxSellCount(int size);
+
+    /**
+     * 获得指定数量得动态热销品
+     * @return spuIds
+     */
+    @Cacheable(value = "order",key = "'orderMaxSell'",sync = true)
+    List<Long> findMaxSellCountCache();
+
+    @CacheEvict(value="order",key="'orderMaxSell'")
+    default void removeOrderMaxSellCache(){};
 }

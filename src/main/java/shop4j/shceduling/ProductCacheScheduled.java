@@ -20,7 +20,7 @@ import java.util.Map;
  * @Description:
  */
 @Component
-public class IndexSuggestCacheScheDuling {
+public class ProductCacheScheduled {
     private Logger log = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private ProductService productService;

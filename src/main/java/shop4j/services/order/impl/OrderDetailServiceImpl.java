@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @Author: weixuedong
@@ -48,8 +49,15 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 
     @Override
     public List<Long> findMaxSellCount(int size) {
-        PageHelper.startPage(1,size);
+        List<Long> spuIds = findMaxSellCountCache();
+        return spuIds.stream().limit(size).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Long> findMaxSellCountCache() {
+         PageHelper.startPage(1,15);
         List<Long> spuIds = orderDetailMapper.findMaxSellCount(LocalDate.now().minusMonths(2));
         return spuIds;
     }
+
 }
