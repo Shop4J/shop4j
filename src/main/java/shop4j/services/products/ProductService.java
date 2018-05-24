@@ -4,10 +4,11 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 import shop4j.models.products.Product;
 import shop4j.services.base.BaseService;
-import shop4j.vo.SearchProductVO;
+import shop4j.vo.product.ProductVO;
+import shop4j.vo.product.SearchProductVO;
 
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Author: weixuedong
@@ -30,5 +31,18 @@ public interface ProductService extends BaseService<Product>{
      * @return
      */
     List<Product> findByTypesIndexSuggest(List<Long> typeIds);
+
+    /**
+     * 逻辑添加商品
+     * @param productVOS 大量添加
+     */
+    void addProducts(List<ProductVO> productVOS,long operator);
+
+    /**
+     * 逻辑添加商品
+     * @param productVO 单个
+     */
+    void addProduct(ProductVO productVO,long operator);
+
 
 }

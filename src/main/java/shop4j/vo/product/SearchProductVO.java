@@ -1,6 +1,5 @@
-package shop4j.vo;
+package shop4j.vo.product;
 
-import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import lombok.Data;
 
 import java.util.List;

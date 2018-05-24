@@ -15,11 +15,6 @@ import java.math.BigDecimal;
 @Table(name = "db_products.tbl_product_kid")
 @Data
 public class ProductKid extends BaseModel{
-    /**
-     * 颜色
-     */
-    @Column
-    private long color;
 
     /**
      * 价格 元
@@ -35,12 +30,6 @@ public class ProductKid extends BaseModel{
 
     @Column
     private long spuId;
-
-    /**
-     * 大小
-     */
-    @Column
-    private String size;
 
     /**
      * 是否为主品 1是 2否

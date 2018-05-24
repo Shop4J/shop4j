@@ -20,6 +20,13 @@ public interface BaseService<T extends BaseModel> {
     void add(@NotNull T t);
 
     /**
+     * 返回自增主键得添加方法
+     * 并且属性原对象也有自增主键
+     * @param t
+     */
+     long addReturnKey(@NotNull T t);
+
+    /**
      * 批量添加
      * @param t
      */
@@ -45,4 +52,5 @@ public interface BaseService<T extends BaseModel> {
      */
     List<T> findAll();
 
+    int update(T t);
 }

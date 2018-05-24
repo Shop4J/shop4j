@@ -30,5 +30,17 @@ public class ProductTypeParam extends BaseModel{
      * 排序
      */
     @Column
-    private int sort;
+    private Integer skuSort;
+
+    /**
+     *  是否展示到商品详情页
+     */
+    @Column
+    private boolean isDetail;
+
+    /**
+     * SPU可选选项排序
+     */
+    @Column
+    private Integer spuSort;
 }

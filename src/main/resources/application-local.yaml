@@ -9,9 +9,9 @@ spring:
      type: com.zaxxer.hikari.HikariDataSource
      hikari:
        #连接超时时间 默认为30秒
-       connection-timeout: 3000
+       connection-timeout: 3000000
        #连接池最大容量
-       maximum-pool-size: 8
+       maximum-pool-size: 50
        ##最小可用（如果不设置将和最大一致且永不会被回收）
        #minimumIdle: 2
        ##毫秒 空闲超时时间 当当前超过最小可用时才会被回收 默认10分钟

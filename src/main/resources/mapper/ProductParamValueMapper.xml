@@ -19,7 +19,7 @@
         WHERE
     </sql>
     <select id="findDetailBySkuId" resultMap="ProductParamValue" >
-      SELECT  paramValue.* from <include refid="table_name"/> as paramValue inner join db_products.tbl_product_type_param as typeParam on paramValue.param_id = typeParam.param_id
+      SELECT  DISTINCT paramValue.* from <include refid="table_name"/> as paramValue inner join db_products.tbl_product_type_param as typeParam on paramValue.param_id = typeParam.param_id
       WHERE paramValue.product_id=#{skuId} and paramValue.status=1 and typeParam.status=1 and typeParam.is_detail=1 order by sku_sort desc
     </select>
     

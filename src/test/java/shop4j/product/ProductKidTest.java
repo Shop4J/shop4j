@@ -14,13 +14,13 @@ import shop4j.models.products.ProductKid;
 import shop4j.services.products.ColorService;
 import shop4j.services.products.ProductKidService;
 import shop4j.services.products.ProductService;
-import shop4j.vo.SearchProductVO;
+import shop4j.vo.product.SearchProductVO;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: weixuedong
@@ -49,16 +49,25 @@ public class ProductKidTest {
         List<Long> colorIds = CollectionsParserUtil.collectFieldToList(colors, Color::getId);
         products.getList().forEach(product -> {
             ProductKid kidProduct = new ProductKid();
-            kidProduct.setColor(RandomUtil.rangeRandom(colorIds));
             kidProduct.setNum(RandomUtil.rangeRandom(1,50));
             kidProduct.setPrice(BigDecimal.valueOf(RandomUtil.rangeRandom(40,300)));
             kidProduct.setSpuId(product.getId());
             kidProduct.setAddOperator(1);
             kidProduct.setAddTime(new Date());
             kidProduct.setStatus(1);
-            kidProduct.setSize(RandomUtil.rangeRandom(Arrays.asList("L","M","48","51","121","170","XL")));
             productKids.add(kidProduct);
         });
         productKidService.addList(productKids);
+    }
+
+    @Test
+    public void testUpdate(){
+        List<ProductKid> products = productKidService.findAll();
+        Map<Long, List<ProductKid>> productMap = CollectionsParserUtil.collectFieldToMapList(products, ProductKid::getSpuId);
+        productMap.forEach((key,value)->{
+            ProductKid productKid = value.get(0);
+            productKid.setIsMain(1);
+            productKidService.update(productKid);
+        });
     }
 }

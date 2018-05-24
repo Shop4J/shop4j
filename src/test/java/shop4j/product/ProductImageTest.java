@@ -15,7 +15,7 @@ import shop4j.models.products.ProductKid;
 import shop4j.services.products.ProductImageService;
 import shop4j.services.products.ProductKidService;
 import shop4j.services.products.ProductService;
-import shop4j.vo.SearchProductVO;
+import shop4j.vo.product.SearchProductVO;
 
 import java.util.ArrayList;
 import java.util.Date;

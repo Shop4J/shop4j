@@ -52,7 +52,7 @@ public class ProductParamServiceImpl extends BaseServiceImpl<ProductParam> imple
         List<ProductKid> skus = productKidService.getBySPUId(currentSKU.getSpuId());
         Map<Long, ProductKid> skuMap = CollectionsParserUtil.collectFieldToMap(skus, ProductKid::getId);
         List<ProductParam> spuSeeParams = params.stream().filter(productParam -> productParam.getIsSpuSee() == 1).collect(Collectors.toList());
-        List<ProductParamValue> spuProductParamValues = productParamValueService.findsByParamIds(CollectionsParserUtil.collectFieldToList(spuSeeParams, ProductParam::getId));
+        List<ProductParamValue> spuProductParamValues = productParamValueService.findsByParamIds(CollectionsParserUtil.collectFieldToList(spuSeeParams, ProductParam::getId),currentSKU.getId());
         Map<String,List<SPUParamResult>> spuParamsMap = new LinkedHashMap<>();
         spuSeeParams.forEach(spuSeeParam->{
             List<ProductParamValue> skuProductValuesCurrentParamsValues = spuProductParamValues.stream().filter(productParamValue -> productParamValue.getParamId() == spuSeeParam.getId()).collect(Collectors.toList());

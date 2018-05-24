@@ -8,6 +8,7 @@ import shop4j.models.BaseModel;
 import shop4j.models.products.ProductKid;
 import tk.mybatis.mapper.entity.Example;
 
+import javax.validation.constraints.NotNull;
 import java.lang.reflect.ParameterizedType;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +26,33 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T >{
     protected ThreadLocal<Example> exampleThreadLocal = new ThreadLocal<>();
     @Override
     public void add(T t) {
+        Date now = new Date();
+        if(t.getStatus()==0){//默认有效
+            t.setStatus(CommonDataStatus.OK.getStatus());
+        }
+        if(t.getAddOperator()==0){//默认认为是系统
+            t.setAddOperator(1);
+        }
+        if(Objects.isNull(t.getAddTime())){
+            t.setAddTime(now);
+        }
         baseMapper.insert(t);
+    }
+
+    @Override
+    public long addReturnKey(@NotNull T t) {
+        Date now = new Date();
+        if(t.getStatus()==0){//默认有效
+            t.setStatus(CommonDataStatus.OK.getStatus());
+        }
+        if(t.getAddOperator()==0){//默认认为是系统
+            t.setAddOperator(1);
+        }
+        if(Objects.isNull(t.getAddTime())){
+            t.setAddTime(now);
+        }
+        baseMapper.insertUseGeneratedKeys(t);
+        return t.getId();
     }
 
     @Override
@@ -65,5 +92,10 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T >{
     public List<T> findAll() {
         instanceCriteria().andEqualTo("status", CommonDataStatus.OK.getStatus());
         return baseMapper.selectByExample(exampleThreadLocal.get());
+    }
+
+    @Override
+    public int update(T t) {
+        return baseMapper.updateByPrimaryKey(t);
     }
 }

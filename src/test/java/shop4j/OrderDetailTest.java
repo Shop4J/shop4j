@@ -15,7 +15,7 @@ import shop4j.models.products.ProductKid;
 import shop4j.services.order.OrderDetailService;
 import shop4j.services.products.ProductKidService;
 import shop4j.services.products.ProductService;
-import shop4j.vo.SearchProductVO;
+import shop4j.vo.product.SearchProductVO;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -46,7 +46,8 @@ public class OrderDetailTest {
         PageInfo<Product> productsPage = productService.findBySearchVO(searchProductVO);
         List<Product> products = productsPage.getList();
         List<Long> spuIds = CollectionsParserUtil.collectFieldToList(products, Product::getId);
-        List<ProductKid> productKids = productKidService.getBySPUIds(spuIds);
+        List<Long> radomSPUID = RandomUtil.rangeRandomSize(spuIds, 10000);
+        List<ProductKid> productKids = productKidService.getBySPUIds(radomSPUID);
         productKids.forEach(productKid -> {
             OrderDetail orderDetail = new OrderDetail();
             orderDetail.setStatus(CommonDataStatus.OK.getStatus());

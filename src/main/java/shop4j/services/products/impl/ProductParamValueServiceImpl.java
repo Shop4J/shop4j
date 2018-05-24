@@ -33,8 +33,8 @@ public class ProductParamValueServiceImpl extends BaseServiceImpl<ProductParamVa
     }
 
     @Override
-    public List<ProductParamValue> findsByParamIds(List<Long> paramIds) {
-        instanceCriteria().andIn("paramId",paramIds).andEqualTo("status",CommonDataStatus.OK.getStatus());
+    public List<ProductParamValue> findsByParamIds(List<Long> paramIds,long skuId) {
+        instanceCriteria().andIn("paramId",paramIds).andEqualTo("status",CommonDataStatus.OK.getStatus()).andEqualTo("productId",skuId);
         return productParamValueMapper.selectByExample(exampleThreadLocal.get());
     }
 }

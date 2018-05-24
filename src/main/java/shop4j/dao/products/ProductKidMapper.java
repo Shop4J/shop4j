@@ -31,7 +31,7 @@ public interface ProductKidMapper extends BaseMapper<ProductKid>{
 
     /**
      * 获得一定范围内销量最高得商品
-     * @param dateBegin
+     * @param
      * @return
      */
     List<ProductKid> maxSellCount();

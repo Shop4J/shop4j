@@ -15,7 +15,7 @@ import shop4j.models.products.*;
 import shop4j.result.ProductParamResult;
 import shop4j.services.order.OrderDetailService;
 import shop4j.services.products.*;
-import shop4j.vo.SearchProductVO;
+import shop4j.vo.product.SearchProductVO;
 
 import javax.validation.constraints.NotNull;
 import java.util.*;
@@ -53,13 +53,8 @@ public class ProductController {
     private ProductKidService productKidService;
 
     @Autowired
-    private ProductTypeParamService productTypeParamService;
-
-    @Autowired
     private ProductParamService productParamService;
 
-    @Autowired
-    private ProductParamValueService productParamValueService;
     /**
      * 商品搜索首页控制器
      * @param model thymeleaf模板
