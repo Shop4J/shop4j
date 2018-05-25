@@ -53,4 +53,11 @@ public interface BaseService<T extends BaseModel> {
     List<T> findAll();
 
     int update(T t);
+
+    /**
+     * 通过实体查询，对于这个程序没用 全是基本类型 为null才会过滤
+     * @param t
+     * @return
+     */
+    List<T> select(T t);
 }

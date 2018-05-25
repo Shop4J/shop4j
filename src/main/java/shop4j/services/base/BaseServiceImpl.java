@@ -96,4 +96,9 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T >{
     public int update(T t) {
         return baseMapper.updateByPrimaryKey(t);
     }
+
+    @Override
+    public List<T> select(T t) {
+        return baseMapper.select(t);
+    }
 }

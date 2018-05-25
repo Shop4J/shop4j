@@ -6,13 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shop4j.dao.order.OrderDetailMapper;
 import shop4j.models.order.OrderDetail;
+import shop4j.services.base.BaseServiceImpl;
 import shop4j.services.order.OrderDetailService;
+import tk.mybatis.mapper.entity.Example;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -21,7 +20,7 @@ import java.util.stream.Collectors;
  * @Description:订单详情实现
  */
 @Service
-public class OrderDetailServiceImpl implements OrderDetailService{
+public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetail>implements OrderDetailService{
     @Autowired
     private OrderDetailMapper orderDetailMapper;
     @Override
@@ -43,8 +42,9 @@ public class OrderDetailServiceImpl implements OrderDetailService{
     }
 
     @Override
-    public void addList(List<OrderDetail> details) {
-        orderDetailMapper.insertList(details);
+    public int sellCountBySPUId(long spuId) {
+        Map<Long, Integer> countMap = sellCountBySPUIds(Arrays.asList(spuId));
+        return countMap.get(spuId);
     }
 
     @Override

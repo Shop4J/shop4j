@@ -269,4 +269,12 @@ public class ProductTest {
         productImageVOS.add(productImageVO7);
         return productImageVOS;
     }
+
+    @Test
+    public void testSelect(){
+        Product product = new Product();
+        product.setAddOperator(1);
+        List<Product> products = productService.select(product);
+        System.err.println("products:"+products);
+    }
 }

@@ -135,6 +135,7 @@ public class ProductController {
 
         List<ProductImage> imageIndexes = productImageService.findImagesLists(spuId, skuId);//商品小图片位于详情页左上角
         model.addAttribute("imageIndexes",imageIndexes);
+
         List<Long> spuIds = orderDetailService.findMaxSellCount(15);
         List<Product> spus = productService.getByIds(spuIds);
         Map<Integer, List<Product>> groupMaxCount = CollectionsOperatorUtil.countGroup(3, spus);//上部推荐
@@ -149,6 +150,8 @@ public class ProductController {
         ProductKid currentSku = productKidService.findCurrentSku(spuId, skuId);
         model.addAttribute("currentSku",currentSku);
 
+        int sellCount = orderDetailService.sellCountBySPUId(spuId);
+        model.addAttribute("sellCount",sellCount);
         ProductParamResult paramResult = productParamService.findParams(currentSku);
         model.addAttribute("paramResult",paramResult);
         return "shop/products/product_detail";

@@ -24,7 +24,10 @@ public class SPUParamResult {
     private String url;
 
     /**
-     * 库存是否充足
+     * 库存不足或者无此商品返回 false
      */
-    private boolean isEnough;
+    private boolean isCanUse;
+
+    private long paramId;
+
 }

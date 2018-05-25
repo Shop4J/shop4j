@@ -83,7 +83,7 @@
 					<ul class="item-ind-panel clearfix">
 						<li class="item-ind-item">
 							<span class="ind-label c9">累计销量</span>
-							<span class="ind-count cr">1688</span>
+							<span class="ind-count cr" th:text="${sellCount}"></span>
 						</li>
 						<li class="item-ind-item">
 							<a href=""><span class="ind-label c9">累计评论</span>
@@ -101,8 +101,8 @@
 								<dd>
 									<ul th:data-property="${spuParam.key}" class="clearfix">
 										<li th:each="paramValue:${spuParam.value}">
-											<a  th:class="${paramValue.isCurrent()?'on':''}" th:href="${paramValue.url}" role="button" th:data-value="${paramValue.value}"  aria-disabled="true">
-												<span th:text="${paramValue.value}"></span>
+											<a  th:class="${paramValue.isCurrent()?'on':''}" th:href="${paramValue.isCanUse()?paramValue.url:'javascript:;'}"  role="button" th:data-value="${paramValue.value}"  aria-disabled="true">
+												<span th:class="${paramValue.isCanUse()?'':'offFront'}" th:text="${paramValue.value}"></span>
 											</a>
 										</li>
 									</ul>
@@ -119,7 +119,7 @@
 										<a class="amount-but sub"></a>
 									</div>
 								</div>
-								<div class="item-stock"><span style="margin-left: 10px;">库存 <b id="Stock">1000</b> 件</span></div>
+								<div class="item-stock"><span style="margin-left: 10px;">库存 <b id="Stock" th:text="${currentSku.num}">1000</b> 件</span></div>
 								<script>
 									$(function () {
 										$('.amount-input').onlyReg({reg: /[^0-9]/g});
