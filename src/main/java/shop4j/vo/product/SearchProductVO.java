@@ -26,22 +26,28 @@ public class SearchProductVO {
      * 复选颜色
      */
     private List<Long> colors;
-
     /**
      * 复选产品类型（主类型）
      */
     private List<Long> productTypes;
-
     /**
      * 年龄
      */
     private List<Long> yearOlds;
+    /**
+     * 金额
+     */
+    private List<Long> moneys;
 
     /**
      * 金额
      */
-    private List<Integer> moneys;
+    private Integer  moneyBegin;
 
+    /**
+     * 金额
+     */
+    private Integer  moneyEnd;
     /**
      * 默认当前页
      */

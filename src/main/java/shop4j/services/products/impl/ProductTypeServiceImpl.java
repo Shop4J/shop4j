@@ -24,4 +24,10 @@ public class ProductTypeServiceImpl extends BaseServiceImpl<ProductType> impleme
         instanceCriteria().andEqualTo("status", CommonDataStatus.OK.getStatus()).andNotEqualTo("parentId",0);
         return productTypeMapper.selectByExample(exampleThreadLocal.get());
     }
+
+    @Override
+    public List<ProductType> findByParentIds(List<Long> parentIds) {
+        instanceCriteria().andEqualTo("status", CommonDataStatus.OK.getStatus()).andIn("parentId",parentIds);
+        return productTypeMapper.selectByExample(exampleThreadLocal.get());
+    }
 }

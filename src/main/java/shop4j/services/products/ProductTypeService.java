@@ -18,4 +18,11 @@ public interface ProductTypeService extends BaseService<ProductType>{
      * @return 所有可用子类型
      */
     List<ProductType> findAllKidTypes();
+
+    /**
+     * 通过父类型获得所有子类型
+     * @param parentIds 父类型
+     * @return 所有子类型
+     */
+    List<ProductType> findByParentIds(List<Long> parentIds);
 }

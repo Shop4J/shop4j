@@ -18,15 +18,44 @@
         SELECT <include refid="table_columns"/> from <include refid="table_name"/>
         WHERE
     </sql>
-    <select id="findBySearchVO" resultMap="Product" parameterType="shop4j.vo.product.SearchProductVO">
-        <include refid="select_all_columns"/> status = 1
-        <if test="searchText != null and searchText!=''">
-            and
-            name LIKE concat(concat('%',#{searchText}),'%')
+    <select id="findBySearchVO" resultMap="Product" parameterType="shop4j.vo.product.ProductSearchVOFormat">
+        select DISTINCT spu.id from <include refid="table_name"/> as spu
+        <if test="(ages != null and ages.size>0 ) or (colors!=null and colors.size()>0)">
+          INNER JOIN db_products.tbl_product_kid as sku on sku.spu_id=spu.id and sku.num>0 and sku.status=1
+          INNER JOIN db_products.tbl_product_param_value as paramValue on paramValue.product_id=sku.id and paramValue.status=1
         </if>
-        <if test="productKidType != null and productKidType!=0 ">
+        where spu.status = 1
+        <if test="productName != null and productName!=''">
             and
-            type = ${productKidType}
+            spu.name LIKE concat('%',concat(#{productName}),'%')
+        </if>
+        <if test="ages != null and ages.size>0 ">
+            and paramValue.param_id = 27 and paramValue.value in (
+                <foreach collection="ages" item="age" separator=",">
+                    #{age}
+                </foreach>
+            )
+        </if>
+        <if test="productKidTypes!=null and productKidTypes.size()>0">
+            and spu.type in (
+              <foreach collection="productKidTypes" item="productKidType" separator=",">
+                  #{productKidType}
+              </foreach>
+            )
+        </if>
+        <if test="colors!=null and colors.size()>0">
+            and paramValue.param_id = 19 and paramValue.value in (
+            <foreach collection="colors" item="color" separator=",">
+                #{color}
+            </foreach>
+            )
+        </if>
+        <if test="moneySearchVOS!=null and moneySearchVOS.size()>0">
+            and (
+            <foreach collection="moneySearchVOS" item="moneySearchVO" separator="or">
+                 spu.show_price BETWEEN #{moneySearchVO.begin} AND  #{moneySearchVO.end}
+            </foreach>
+            )
         </if>
     </select>
     <select id="findByTypes" resultMap="Product">

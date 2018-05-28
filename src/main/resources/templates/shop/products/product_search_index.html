@@ -78,18 +78,18 @@
 								<li th:text="${searchMoney.name}" th:attr="onclick = |addSearchTitle('价格：${searchMoney.name}','moneys',${searchMoney.id})|"></li>
 							</a>
                         </span>
-						<form class="price-order">
-							<input type="text">
+						<form class="price-order" id="moneySearch">
+							<input name = "moneyBegin" id="moneyBegin" type="text">
 							<span class="cc">-</span>
-							<input type="text">
-							<input type="button" value="确定">
+							<input name="moneyEnd" id="moneyEnd" type="text" >
+							<input type="button" onclick="loadProductList(1)" value="确定">
 						</form>
 					</ul>
 				</div>
 			</div>
 			<div id="danger" class="alert alert-danger  hidden" role="alert"></div>
 		</section>
-		<div id="product_list">加载中。。。</div>
+		<div id="product_list" class="text-center text-success"></div>
 	</div>
 	<!-- 右侧浮动菜单 -->
 	<div th:include="shop/common/template :: rightMenu"></div>
@@ -128,6 +128,8 @@
     //动态添加上方选中搜索框
     function resetTitle(){
         $(".ul_filter").html("");
+        $("#moneyBegin").val("");
+        $("#moneyEnd").val("");
     }
 
     /**
@@ -137,8 +139,10 @@
 	    if(page==null||page ==0||typeof(page)=="undefined"){
 	        page=1;
 		}
+        $("#product_list").html("加载中，请耐心等待......");
 		var data = $("#searchData").serialize();
-		$.get("/product/list?page="+page+"&"+data,function (data) {
+        var data2 = $("#moneySearch").serialize();
+		$.get("/product/list?page="+page+"&"+data+"&"+data2,function (data) {
 		    $("#product_list").html(data);
         })
         $("html,body").animate({scrollTop:220}, 0);

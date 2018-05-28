@@ -1,24 +1,22 @@
 package shop4j.services.products.impl;
 
 import base.util.collections.CollectionUtil;
+import base.util.collections.parser.CollectionsParserUtil;
+import base.util.string.StringUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import shop4j.dao.products.ProductMapper;
-import shop4j.models.products.Product;
-import shop4j.models.products.ProductImage;
-import shop4j.models.products.ProductKid;
-import shop4j.models.products.ProductParamValue;
+import shop4j.models.products.*;
 import shop4j.services.base.BaseServiceImpl;
-import shop4j.services.products.ProductImageService;
-import shop4j.services.products.ProductKidService;
-import shop4j.services.products.ProductParamValueService;
-import shop4j.services.products.ProductService;
+import shop4j.services.products.*;
 import shop4j.vo.product.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,14 +38,92 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> implements Prod
 
     @Autowired
     private ProductImageService productImageService;
+
+    @Autowired
+    private ColorService colorService;
+
+    @Autowired
+    private SearchMoneyService searchMoneyService;
+
+    @Autowired
+    private ProductTypeService productTypeService;
+
+    @Autowired
+    private YearOldService yearOldService;
     @Override
     public PageInfo<Product> findBySearchVO(SearchProductVO searchProductVO) {
+        ProductSearchVOFormat productSearchVOFormat = formatSearchProductVO(searchProductVO);
         PageHelper.startPage(searchProductVO.getPage(),searchProductVO.getSize());
-        List<Product> products = productMapper.findBySearchVO(searchProductVO);
-        PageInfo<Product> productsPageInfo = new PageInfo<>(products);
-        return productsPageInfo;
+        List<Product> productsIds = productMapper.findBySearchVO(productSearchVOFormat);
+        if(CollectionUtil.isNotEmpty(productsIds)) {
+            List<Product> products = getByIds(CollectionsParserUtil.collectFieldToList(productsIds, Product::getId));
+            PageInfo<Product> productsPageInfo = new PageInfo<>(productsIds);
+            productsPageInfo.setList(products);
+            return productsPageInfo;
+        }
+        return new PageInfo<>(productsIds);
     }
-
+    private ProductSearchVOFormat formatSearchProductVO(SearchProductVO searchProductVO){
+        ProductSearchVOFormat productSearchVOFormat = new ProductSearchVOFormat();
+        List<Long> colorIds = searchProductVO.getColors();
+        if(CollectionUtil.isNotEmpty(colorIds)){
+            List<Color> colors = colorService.getByIds(colorIds);
+            List<String> colorNames = CollectionsParserUtil.collectFieldToList(colors, Color::getName);
+            productSearchVOFormat.setColors(colorNames);
+        }
+        List<Long> olds = searchProductVO.getYearOlds();
+        if(CollectionUtil.isNotEmpty(olds)){
+            List<YearOld> yearOlds = yearOldService.getByIds(olds);
+            List<String> oldNames = CollectionsParserUtil.collectFieldToList(yearOlds, YearOld::getName);
+            productSearchVOFormat.setAges(oldNames);
+        }
+        Long productKidType = searchProductVO.getProductKidType();
+        if(!Objects.isNull(productKidType)){
+            productSearchVOFormat.setProductKidTypes(Arrays.asList(productKidType));
+        }
+        List<Long> productTypes = searchProductVO.getProductTypes();
+        if(CollectionUtil.isNotEmpty(productTypes)){
+            List<ProductType> productKidTypes = productTypeService.findByParentIds(productTypes);
+            productSearchVOFormat.setProductKidTypes(CollectionsParserUtil.collectFieldToList(productKidTypes,ProductType::getId));
+        }
+        String productName = searchProductVO.getSearchText();
+        if(StringUtil.isNotEmpty(productName)){
+            productSearchVOFormat.setProductName(productName);
+        }
+        List<Long> moneyIds = searchProductVO.getMoneys();
+        if(CollectionUtil.isNotEmpty(moneyIds)){
+            List<SearchMoney> moneys = searchMoneyService.getByIds(moneyIds);
+            List<MoneySearchVO> moneySearchVOS = new ArrayList<>();
+            moneys.forEach(searchMoney -> {
+                MoneySearchVO moneySearchVO = new MoneySearchVO();
+                moneySearchVO.setBegin(searchMoney.getBegin());
+                moneySearchVO.setEnd(searchMoney.getEnd());
+                moneySearchVOS.add(moneySearchVO);
+            });
+            productSearchVOFormat.setMoneySearchVOS(moneySearchVOS);
+        }
+        Integer moneyBegin = searchProductVO.getMoneyBegin();
+        Integer moneyEnd = searchProductVO.getMoneyEnd();
+        if(!Objects.isNull(moneyBegin) || !Objects.isNull(moneyEnd)){
+            List<MoneySearchVO> moneySearchVOS = new ArrayList<>();
+            MoneySearchVO moneySearchVO = new MoneySearchVO();
+            if(moneyBegin!=0){
+                moneySearchVO.setBegin(moneyBegin);
+            }
+           if(moneyEnd!=0) {
+               moneySearchVO.setEnd(moneyEnd);
+           }
+            moneySearchVOS.add(moneySearchVO);
+            List<MoneySearchVO> oldMoneySearchVOS = productSearchVOFormat.getMoneySearchVOS();
+            if(CollectionUtil.isEmpty(oldMoneySearchVOS)){
+                productSearchVOFormat.setMoneySearchVOS(moneySearchVOS);
+            }else{
+                oldMoneySearchVOS.addAll(moneySearchVOS);
+                productSearchVOFormat.setMoneySearchVOS(oldMoneySearchVOS);
+            }
+        }
+        return productSearchVOFormat;
+    }
     @Override
     public  List<Product> findByTypesIndexSuggest(List<Long> typeIds) {
         List<Product> products = productMapper.findByTypes(typeIds,10);

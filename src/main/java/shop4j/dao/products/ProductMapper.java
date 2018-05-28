@@ -5,9 +5,8 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 import shop4j.dao.BaseMapper;
 import shop4j.models.products.Product;
-import shop4j.vo.product.SearchProductVO;
+import shop4j.vo.product.ProductSearchVOFormat;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,10 +19,10 @@ import java.util.List;
 public interface ProductMapper extends BaseMapper<Product>{
     /**
      * 自定义查询
-     * @param searchProductVO 自定义参数
+     * @param productSearchVOFormat 自定义参数
      * @return 商品
      */
-    List<Product> findBySearchVO(SearchProductVO searchProductVO);
+    List<Product> findBySearchVO(ProductSearchVOFormat productSearchVOFormat);
 
     List<Product> findByTypes(@Param("typeIds") List<Long> typeIds,@Param("size") int size);
 
