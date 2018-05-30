@@ -18,6 +18,24 @@
     <script src="/js/alert.min.js" charset="UTF-8"></script>
     <title th:text="${webInfo.name}"></title>
 </head>
+
+<head th:fragment="login_header">
+    <meta charset="UTF-8">
+    <meta name="keywords" content="" th:content="${webInfo.keyWorld}"/>
+    <meta name="description" content="" th:content="${webInfo.keyWorld}"/>
+    <link rel="shortcut icon" href="" th:href="${webInfo.icoUrl}">
+    <link rel="stylesheet" href="css/iconfont.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/login.css">
+    <script src="js/jquery.1.12.4.min.js" charset="UTF-8"></script>
+    <script src="js/bootstrap.min.js" charset="UTF-8"></script>
+    <script src="js/jquery.form.js" charset="UTF-8"></script>
+    <script src="js/global.js" charset="UTF-8"></script>
+    <script src="js/login.js" charset="UTF-8"></script>
+    <title  th:text="|${webInfo.name} - 登陆 / 注册|"></title>
+</head>
 <body>
     <!-- 顶部tab -->
     <div th:fragment="top">
@@ -29,7 +47,7 @@
                     <a href="temp_article/udai_article4.html">帮助中心</a>
                 </div>
                 <div class="pull-right">
-                    <a href="login.html"><span class="cr">登录</span></a>
+                    <a href="/login"><span class="cr">登录</span></a>
                     <a href="login.html?p=register">注册</a>
                     <a href="udai_welcome.html">我的U袋</a>
                     <a href="udai_order.html">我的订单</a>
@@ -43,7 +61,9 @@
         <!-- 搜索栏 -->
         <div class="top-search">
             <div class="inner">
-                <a class="logo" href="/"><img src="" th:src="${webInfo.logoUrl}" alt="" th:alt="${webInfo.name}" class="cover"></a>
+                <div th:fragment="body_logo">
+                    <a class="logo" href="/"><img src="" th:src="${webInfo.logoUrl}" alt="" th:alt="${webInfo.name}" class="cover"></a>
+                </div>
                 <div class="search-box">
                     <form class="input-group" action="/product/search">
                         <input placeholder="Ta们都在搜" type="text" name="searchText" th:value="${searchText}">
@@ -75,6 +95,13 @@
         </div>
     </div>
 
+    <div class="footer-login container clearfix" th:fragment="footer_login">
+        <ul class="links" th:include="shop/common/template :: footer_menu">
+        </ul>
+        <!-- 版权 -->
+        <p class="copyright" th:include="shop/common/template :: footer_content">
+        </p>
+    </div>
 
     <div th:fragment="footer">
         <!-- 底部信息 -->
@@ -119,7 +146,7 @@
             </div>
             <div th:fragment="clarfix">
                 <div class="copy-box clearfix">
-                    <ul class="copy-links">
+                    <ul class="copy-links" th:fragment="footer_menu">
                         <a href="agent_level.html"><li>网店代销</li></a>
                         <a href="class_room.html"><li>U袋学堂</li></a>
                         <a href="udai_about.html"><li>联系我们</li></a>
@@ -127,7 +154,7 @@
                         <a href="temp_article/udai_article5.html"><li>新手上路</li></a>
                     </ul>
                     <!-- 版权 -->
-                    <p class="copyright">
+                    <p class="copyright" th:fragment="footer_content">
                         © 2005-2017 U袋网 版权所有，并保留所有权利<br>
                         ICP备案证书号：闽ICP备16015525号-2&nbsp;&nbsp;&nbsp;&nbsp;福建省宁德市福鼎市南下村小区（锦昌阁）1栋1梯602室&nbsp;&nbsp;&nbsp;&nbsp;Tel: 18650406668&nbsp;&nbsp;&nbsp;&nbsp;E-mail: 18650406668@qq.com
                     </p>
