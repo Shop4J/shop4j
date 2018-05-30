@@ -747,7 +747,8 @@ body {overflow-y: scroll}
 }
 .breadcrumb > li { display: inline-block }
 .breadcrumb > li a {color: #333;text-decoration: none}
-.breadcrumb > .active {color: #b31e22}
+.breadcrumb > li a.active {color: #b31e22}
+ li a .active{color: #b31e22;text-decoration: none}
 /* 商品详情 */
 .item-show__div > .pull-left {width: 1000px}
 .item-show__div > .pull-right {width: 200px}

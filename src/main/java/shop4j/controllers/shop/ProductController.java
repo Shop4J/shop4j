@@ -56,6 +56,7 @@ public class ProductController {
     @Autowired
     private ProductParamService productParamService;
 
+
     /**
      * 商品搜索首页控制器
      * @param model thymeleaf模板
@@ -69,6 +70,8 @@ public class ProductController {
         loadCommonData(model);//加载常量数据
         model.addAttribute("searchText",searchText);
         model.addAttribute("productKidType",productKidType);
+        ProductType productType = productTypeService.findById(productKidType);
+        model.addAttribute("productType",productType);
         return "shop/products/product_search_index";
     }
 

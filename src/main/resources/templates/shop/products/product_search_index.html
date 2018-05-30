@@ -17,7 +17,9 @@
 		<section class="filter-section clearfix">
 			<ol class="breadcrumb">
 				<li><a href="/">首页</a></li>
-				<li class="active">商品筛选</li>
+				<li >商品筛选</li>
+				<li th:if="${productType}!=null"   ><a class="active"th:href="|?productKidType=${productType.id}|" th:text="${productType.name}"></a></li>
+				<li th:if="${searchText}!=null"  ><a class="active"  th:href="|?searchText=${searchText}|" th:text="${searchText}"></a></li>
 			</ol>
 			<div class="filter-box">
 				<div class="all-filter">
