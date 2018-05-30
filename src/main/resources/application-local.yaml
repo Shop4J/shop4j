@@ -37,9 +37,7 @@ mapper:
 ##商品图片地址 目标和链接(最好写两个 一个用在linux上 一个用在windows上)
 images:
   handler: /business/images/**
-  location: D:/images/,/opt/images/,
-
-
+  location: D:/images/,/opt/images/
 
 
 
