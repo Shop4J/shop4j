@@ -3,6 +3,20 @@ server:
   http2:
     enabled: true
 spring:
+#  security:
+#   oauth2://登陆授权
+#    client:
+#      registration:
+#       okta:
+#        client-id: okta-client-id
+#        client-secret: okta-client-secret
+#      provider:
+#        okta:
+#          authorization-uri: https://your-subdomain.oktapreview.com/oauth2/v1/authorize
+#          token-uri: https://your-subdomain.oktapreview.com/oauth2/v1/token
+#          user-info-uri: https://your-subdomain.oktapreview.com/oauth2/v1/userinfo
+#          user-name-attribute: sub
+#          jwk-set-uri: https://your-subdomain.oktapreview.com/oauth2/v1/keys
   datasource:
      url: jdbc:mysql://127.0.0.1:3306/mysql?useUnicode=true&characterEncoding=UTF-8&useSSL=false
      username: root

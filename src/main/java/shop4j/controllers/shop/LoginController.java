@@ -28,7 +28,7 @@ public class LoginController{
         return "shop/login/login";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/check")
     public String login(@NotNull LoginVO loginVO){
         return null;
     }
