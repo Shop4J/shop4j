@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import shop4j.annotions.shop.dataload.HeadDataLoad;
 import shop4j.vo.login.LoginVO;
 
@@ -22,14 +23,26 @@ import javax.validation.constraints.NotNull;
 @RequestMapping("/login")
 public class LoginController{
     private Logger log = LoggerFactory.getLogger(this.getClass());
+
+    /**
+     * 登录页
+     * @param model
+     * @return
+     */
     @GetMapping
     @HeadDataLoad
     public String loginView(Model model){
         return "shop/login/login";
     }
 
-    @PostMapping("/check")
-    public String login(@NotNull LoginVO loginVO){
-        return null;
+
+    /**
+     * 成功JSON
+     * @return
+     */
+    @PostMapping("/success")
+    @ResponseBody
+    public String success(){
+        return "success";
     }
 }

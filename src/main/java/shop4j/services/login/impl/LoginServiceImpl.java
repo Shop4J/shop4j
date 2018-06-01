@@ -27,7 +27,7 @@ import java.util.Objects;
  * @Description: 登陆业务实现
  */
 @Service
-public class LoginServiceImpl implements LoginService{
+public class LoginServiceImpl implements LoginService {
     @Autowired
     private UserService userService;
 

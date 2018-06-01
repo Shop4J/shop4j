@@ -2,6 +2,7 @@ package shop4j.services.user.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import shop4j.dao.user.UserMapper;
 import shop4j.models.user.User;
 import shop4j.services.base.BaseServiceImpl;
 import shop4j.services.user.UserService;
@@ -14,9 +15,10 @@ import shop4j.services.user.UserService;
 @Service
 public class UserServiceImpl extends BaseServiceImpl<User> implements UserService{
     @Autowired
-    private UserService userService;
+    private UserMapper userMapper;
     @Override
     public User findByTicket(String ticket) {
-        return userService.findByTicket(ticket);
+        instanceCriteria().andEqualTo("ticket",ticket);
+        return userMapper.selectOneByExample(exampleThreadLocal.get());
     }
 }

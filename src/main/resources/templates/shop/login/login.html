@@ -11,13 +11,13 @@
 					<h2 th:text="|欢迎登录${webInfo.name}|"></h2>
 				</div>
 				<div class="tabs_container">
-					<form class="tabs_form" action="" method="post" id="login_form">
+					<form class="tabs_form" action="/login" method="post" id="login_form">
 						<div class="form-group">
 							<div class="input-group">
 								<div class="input-group-addon">
 									<span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
 								</div>
-								<input class="form-control phone" name="phone" id="login_phone" required placeholder="手机号" maxlength="11" autocomplete="off" type="text">
+								<input class="form-control phone" name="username" id="login_phone" required placeholder="手机号" maxlength="11" autocomplete="off" type="text">
 							</div>
 						</div>
 						<div class="form-group">
@@ -79,12 +79,12 @@
 								<div class="input-group-addon">
 									<span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
 								</div>
-								<input class="form-control phone" name="phone" id="register_phone" required placeholder="手机号" maxlength="11" autocomplete="off" type="text">
+								<input class="form-control phone" name="username" id="register_phone" required placeholder="手机号" maxlength="11" autocomplete="off" type="text">
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="input-group">
-								<input class="form-control" name="smscode" id="register_sms" placeholder="输入验证码" type="text">
+								<input class="form-control" name="tocken" id="register_sms" placeholder="输入验证码" type="text">
 								<span class="input-group-btn">
 									<button class="btn btn-primary getsms" type="button">发送短信验证码</button>
 								</span>
@@ -215,14 +215,6 @@
 						var pwd = form.find('input.password');
 						var error = form.find('.error_msg');
 						var success = form.siblings('.tabs_div');
-						var options = {
-							beforeSubmit: function () {
-								console.log('喵喵喵')
-							},
-							success: function (data) {
-								console.log(data)
-							}
-						}
 						// 验证手机号参考这个
 						switch(phone.validatemobile()) {
 							case 1: error.html(msgtemp('<strong>手机号码为空</strong> 请输入手机号码',    'alert-warning')); return; break;
@@ -235,7 +227,9 @@
 							case 2: error.html(msgtemp('<strong>密码过短</strong> 请输入6位以上的密码','alert-warning')); return; break;
 							case 3: error.html(msgtemp('<strong>密码过于简单</strong><br>密码需为字母、数字或特殊字符组合',  'alert-warning')); return; break;
 						}
-						form.ajaxForm(options);
+						form.ajaxSubmit(function (data) {
+							alert(data);
+                        });
 						// 请求成功执行类似这样的事件
 						// form.fadeOut(150,function() {
 						// 	success.fadeIn(150);

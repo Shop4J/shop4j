@@ -1,5 +1,6 @@
 package shop4j.vo.login;
 
+import base.util.collections.CollectionUtil;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -35,11 +36,13 @@ public class UserDetailVO implements UserDetails{
      */
     private List<Role> roles;
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public List<GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         List<Role> roles = getRoles();
-        for (Role role : roles) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
+        if(CollectionUtil.isNotEmpty(roles)) {
+            for (Role role : roles) {
+                grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
+            }
         }
         return grantedAuthorities;
     }
