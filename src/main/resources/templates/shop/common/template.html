@@ -29,11 +29,11 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/login.css">
-    <script src="js/jquery.1.12.4.min.js" charset="UTF-8"></script>
-    <script src="js/bootstrap.min.js" charset="UTF-8"></script>
-    <script src="js/jquery.form.js" charset="UTF-8"></script>
-    <script src="js/global.js" charset="UTF-8"></script>
-    <script src="js/login.js" charset="UTF-8"></script>
+    <script src="/js/jquery.1.12.4.min.js" charset="UTF-8"></script>
+    <script src="/js/bootstrap.min.js" charset="UTF-8"></script>
+    <script src="/js/jquery.form.js" charset="UTF-8"></script>
+    <script src="/js/global.js" charset="UTF-8"></script>
+    <script src="/js/login.js" charset="UTF-8"></script>
     <title  th:text="|${webInfo.name} - 登陆 / 注册|"></title>
 </head>
 <body>
@@ -48,7 +48,7 @@
                 </div>
                 <div class="pull-right">
                     <a href="/login" target="_blank"><span th:class="${current==1?'cr':''}">登录</span></a>
-                    <a href="/login/register" target="_blank"><span th:class="${current==1?'cr':''}">注册</span></a>
+                    <a href="/login?p=register" target="_blank"><span th:class="${current==1?'cr':''}">注册</span></a>
                     <a href="/user/index" target="_blank"><span th:class="${current==3?'cr':''}">我的</span></a>
                     <a href="/user/order" target="_blank"><span th:class="${current==4?'cr':''}">我的订单</span></a>
                     <a href="/user/integral" target="_blank"><span th:class="${current==5?'cr':''}">积分平台</span></a>
