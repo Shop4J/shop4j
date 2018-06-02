@@ -11,18 +11,19 @@
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/css/swiper.min.css">
     <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="/css/login.css">
     <script src="/js/jquery.1.12.4.min.js" charset="UTF-8"></script>
     <script src="/js/bootstrap.min.js" charset="UTF-8"></script>
     <script src="/js/swiper.min.js" charset="UTF-8"></script>
     <script src="/js/global.js" charset="UTF-8"></script>
     <script src="/js/alert.min.js" charset="UTF-8"></script>
+    <script src="/js/jquery.form.js" charset="UTF-8"></script>
     <script src="/js/login.js" charset="UTF-8"></script>
     <title th:text="${title}"></title>
 </head>
 <body>
     <!-- 顶部tab -->
-    <div th:fragment="top(current)">
+    <div th:fragment="top(current,url)">
         <div class="tab-header">
             <div class="inner">
                 <div class="pull-left">

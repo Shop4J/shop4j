@@ -4,6 +4,7 @@
 <body>
 	<div class="public-head-layout container" th:include="shop/common/template :: body_logo">
 	</div>
+	<input type="hidden" id="back_url" th:value="${back}">
 	<div style="background:url(images/login_bg.jpg) no-repeat center center; ">
 		<div class="login-layout container">
 			<div class="form-box login">
@@ -228,7 +229,10 @@
 							case 3: error.html(msgtemp('<strong>密码过于简单</strong><br>密码需为字母、数字或特殊字符组合',  'alert-warning')); return; break;
 						}
 						form.ajaxSubmit(function (data) {
-							alert(data);
+						    if(data.status==1){
+						        var  backUrl = $("#back_url").val();
+                                window.location.href=backUrl;
+							}
                         });
 						// 请求成功执行类似这样的事件
 						// form.fadeOut(150,function() {

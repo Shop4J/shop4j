@@ -14,7 +14,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import shop4j.services.login.LoginService;
@@ -42,16 +44,23 @@ public class ShopSecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     private LoginService loginService;
 
+    @Bean()
+    AuthenticationEntryPoint entryPoint(){
+        return new CustomLoginUrlAuthenticationEntryPoint("/login");
+    }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authenticationProvider(authenticationProvider).userDetailsService(loginService)
+            .exceptionHandling()
+                .authenticationEntryPoint(new CustomLoginUrlAuthenticationEntryPoint("/login"))
+                .and()
             .authorizeRequests()
                 .antMatchers("/user/**").hasRole("USER")
                 .and()
             .formLogin()
-                .loginPage("/login")
-                .authenticationDetailsSource(customAuthenticationDetailsSource).successForwardUrl("/login/success")
+                .authenticationDetailsSource(customAuthenticationDetailsSource).successHandler(new CustomSavedRequestAwareAuthenticationSuccessHandler())
+                .failureForwardUrl("/login/error").successForwardUrl("/login/success")
                 .and()
             .logout()
                 .logoutUrl("/logout")

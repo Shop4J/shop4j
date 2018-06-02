@@ -19,6 +19,10 @@ import java.util.List;
 @Data
 public class UserDetailVO implements UserDetails{
     /**
+     * 用户主键
+     */
+    private long userId;
+    /**
      * 用户名
      */
     private String username;

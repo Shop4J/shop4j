@@ -34,12 +34,11 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String password = (String) authentication.getCredentials();
         String username = (String) authentication.getPrincipal();
         UserDetails user = loginService.loadUserByUsername(username);
-        if(Objects.isNull(user)){
+        if(Objects.isNull(user) || !user.getPassword().equals(password)){
             throw new LoginErrorException(LoginStatusEnum.Error.getStatus()+"");
         }else {
-            return new UsernamePasswordAuthenticationToken(username,password,user.getAuthorities());
+            return new UsernamePasswordAuthenticationToken(user,password,user.getAuthorities());
         }
-
     }
 
     @Override

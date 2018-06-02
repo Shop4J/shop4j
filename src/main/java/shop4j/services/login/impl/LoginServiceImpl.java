@@ -3,8 +3,12 @@ package shop4j.services.login.impl;
 import base.util.collections.CollectionUtil;
 import base.util.collections.parser.CollectionsParserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.web.util.RedirectUrlBuilder;
 import org.springframework.stereotype.Service;
 import shop4j.enums.LoginStatusEnum;
 import shop4j.models.user.Role;
@@ -18,6 +22,7 @@ import shop4j.services.user.UserService;
 import shop4j.vo.login.LoginVO;
 import shop4j.vo.login.UserDetailVO;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Objects;
 
@@ -42,6 +47,20 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
+    public UserDetailVO getCurrentLogin() {
+        SecurityContext content = SecurityContextHolder.getContext();
+        Authentication authentication = content.getAuthentication();
+        if(Objects.isNull(authentication.getDetails())){
+            return null;
+        }
+        if (authentication.getPrincipal() instanceof UserDetailVO) {
+            UserDetailVO userDetail = (UserDetailVO) authentication.getPrincipal();
+            return userDetail;
+        }
+        return null;
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userService.findByTicket(username);
         if(Objects.isNull(user)){
@@ -51,6 +70,7 @@ public class LoginServiceImpl implements LoginService {
         userDetailVO.setStatus(user.getStatus());
         userDetailVO.setUsername(user.getTicket());
         userDetailVO.setPassword(user.getPassword());
+        userDetailVO.setUserId(user.getId());
         List<UserRole> userRoles = userRoleService.findByUserId(user.getId());
         if(CollectionUtil.isNotEmpty(userRoles)) {
             List<Long> roleIds = CollectionsParserUtil.collectFieldToList(userRoles, UserRole::getRoleId);

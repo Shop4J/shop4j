@@ -1,8 +1,12 @@
 package shop4j.controllers.shop;
 
+import base.util.string.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,9 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import shop4j.annotions.shop.dataload.HeadDataLoad;
-import shop4j.vo.login.LoginVO;
+import shop4j.enums.LoginStatusEnum;
+import shop4j.result.LoginResult;
+import shop4j.services.login.LoginService;
 
-import javax.validation.constraints.NotNull;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * @Author: weixuedong
@@ -22,6 +30,9 @@ import javax.validation.constraints.NotNull;
 @Controller
 @RequestMapping("/login")
 public class LoginController{
+    @Autowired
+    private LoginService loginService;
+
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
     /**
@@ -31,7 +42,12 @@ public class LoginController{
      */
     @GetMapping
     @HeadDataLoad
-    public String loginView(Model model){
+    public String loginView(Model model, HttpSession session,String urlBack){
+        String backUrl = (String) session.getAttribute("back");
+        if(StringUtil.isEmpty(backUrl)){
+            backUrl=urlBack;
+        }
+        model.addAttribute("back",backUrl);
         return "shop/login/login";
     }
 
@@ -42,7 +58,22 @@ public class LoginController{
      */
     @PostMapping("/success")
     @ResponseBody
-    public String success(){
-        return "success";
+    public LoginResult success(HttpServletRequest request, HttpServletResponse response){
+        LoginResult loginResult = new LoginResult();
+        loginResult.setStatus(LoginStatusEnum.Success.getStatus());
+        loginResult.setMsg(LoginStatusEnum.Success.getMsg());
+        return loginResult;
+    }
+    /**
+     * 成功JSON
+     * @return
+     */
+    @PostMapping("/error")
+    @ResponseBody
+    public LoginResult error(){
+        LoginResult loginResult = new LoginResult();
+        loginResult.setStatus(LoginStatusEnum.Success.getStatus());
+        loginResult.setMsg(LoginStatusEnum.Success.getMsg());
+        return loginResult;
     }
 }

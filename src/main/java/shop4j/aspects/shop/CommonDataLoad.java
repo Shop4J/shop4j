@@ -8,10 +8,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import shop4j.models.sets.WebInfo;
+import shop4j.services.login.LoginService;
 import shop4j.services.sets.WebInfoService;
+import shop4j.vo.login.UserDetailVO;
 
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -31,6 +36,8 @@ public class CommonDataLoad {
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
+    @Autowired
+    private LoginService loginService;
     /**
      * 加载头部数据
      */
@@ -57,9 +64,15 @@ public class CommonDataLoad {
 
                     model.addAttribute("webInfo",webInfo);//站点信息
 
+                    UserDetailVO userVO = loginService.getCurrentLogin();
+
+                    model.addAttribute("user",userVO);
+
                     log.debug("加载商城公共页面头信息完成");
+                    return;
                 }
             });
         }
     }
+
 }
