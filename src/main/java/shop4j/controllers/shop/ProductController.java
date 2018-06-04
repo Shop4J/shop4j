@@ -17,6 +17,7 @@ import shop4j.services.order.OrderDetailService;
 import shop4j.services.products.*;
 import shop4j.vo.product.SearchProductVO;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Map;
@@ -132,7 +133,9 @@ public class ProductController {
      */
     @GetMapping("/detail")
     @HeadDataLoad
-    public String searchProduct(Model model,long spuId,@RequestParam(defaultValue = "0",required = false) long skuId){
+    public String searchProduct(Model model,long spuId,@RequestParam(defaultValue = "0",required = false) long skuId,HttpServletRequest request){
+        String queryString = request.getQueryString();
+
         Product product = productService.findById(spuId);
         model.addAttribute("product",product);
 

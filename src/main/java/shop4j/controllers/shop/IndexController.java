@@ -15,6 +15,7 @@ import shop4j.services.products.ProductKidService;
 import shop4j.services.products.ProductService;
 import shop4j.services.products.ProductTypeService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +44,6 @@ public class IndexController {
     @HeadDataLoad
     @GetMapping("/")
     public String index(Model model){
-
         List<ProductType> productTypes = productTypeService.findAll();
 
         Map<Long, List<ProductType>> productTypesMap = CollectionsParserUtil.collectFieldToMapList(productTypes,ProductType::getParentId);

@@ -1,5 +1,7 @@
 package shop4j.aspects.shop;
 
+import base.util.collections.CollectionUtil;
+import base.util.string.StringUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -13,12 +15,19 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import shop4j.models.sets.WebInfo;
 import shop4j.services.login.LoginService;
 import shop4j.services.sets.WebInfoService;
 import shop4j.vo.login.UserDetailVO;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
@@ -52,26 +61,42 @@ public class CommonDataLoad {
 
         if(!Objects.isNull(args) && args.length != 0){
 
-            Stream.of(args).forEach(arg->{
+            List<Object> models = Stream.of(args).filter(arg -> arg instanceof Model).collect(Collectors.toList());
 
-                if (arg instanceof Model) {
+            if(CollectionUtil.isNotEmpty(models)){
+                RequestAttributes ra = RequestContextHolder.getRequestAttributes();
 
-                    Model model = (Model) arg;
+                ServletRequestAttributes sra = (ServletRequestAttributes) ra;
 
-                    log.debug("加载商城公共页面头信息...");
+                HttpServletRequest request = sra.getRequest();
 
-                    WebInfo webInfo = webInfoService.getWebRoot();
+                StringBuffer url = request.getRequestURL();
 
-                    model.addAttribute("webInfo",webInfo);//站点信息
+                String queryString = request.getQueryString();
 
-                    UserDetailVO userVO = loginService.getCurrentLogin();
+                Model model = (Model) models.get(0);
 
-                    model.addAttribute("user",userVO);
+                log.debug("加载商城公共页面头信息...");
 
-                    log.debug("加载商城公共页面头信息完成");
-                    return;
-                }
-            });
+                WebInfo webInfo = webInfoService.getWebRoot();
+
+                model.addAttribute("webInfo",webInfo);//站点信息
+
+                UserDetailVO userVO = loginService.getCurrentLogin();
+
+                model.addAttribute("user",userVO);
+
+                /**
+                 * 回跳URL,手动点击登陆需要
+                 */
+                model.addAttribute("url", StringUtil.isEmpty(queryString)?url.toString():url.append("?").append(queryString).toString());
+
+                log.debug("加载商城公共页面头信息完成");
+
+
+            }
+
+
         }
     }
 

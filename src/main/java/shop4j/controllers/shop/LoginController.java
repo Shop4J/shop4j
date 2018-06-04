@@ -58,7 +58,7 @@ public class LoginController{
      */
     @PostMapping("/success")
     @ResponseBody
-    public LoginResult success(HttpServletRequest request, HttpServletResponse response){
+    public LoginResult success(){
         LoginResult loginResult = new LoginResult();
         loginResult.setStatus(LoginStatusEnum.Success.getStatus());
         loginResult.setMsg(LoginStatusEnum.Success.getMsg());
