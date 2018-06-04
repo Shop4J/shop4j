@@ -74,10 +74,10 @@ public class LoginController{
     @ResponseBody
     public LoginResult error(HttpServletRequest request){
         LoginErrorException e = (LoginErrorException) request.getAttribute("AuthenticationException");
-        int status = Integer.parseInt(e.getMessage());
         LoginResult loginResult = new LoginResult();
-        loginResult.setStatus(status);
-        loginResult.setMsg(LoginStatusEnum.findByStatus(status).getMsg());
+        loginResult.setStatus(e.getCode());
+        loginResult.setMsg(e.getMsg());
+        loginResult.setParamOne(e.getParamOne());
         return loginResult;
     }
 }

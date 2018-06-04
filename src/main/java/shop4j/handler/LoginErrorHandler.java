@@ -16,7 +16,6 @@ import javax.validation.ConstraintViolationException;
  */
 @ControllerAdvice
 public class LoginErrorHandler {
-
     /**
      * 登陆参数格式问题
      * 返回json

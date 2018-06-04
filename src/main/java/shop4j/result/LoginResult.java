@@ -23,4 +23,9 @@ public class LoginResult {
      * 验证码
      */
     private String checkCode;
+
+    /**
+     *  辅助参数，视状态码决定含义
+     */
+    private int paramOne;
 }

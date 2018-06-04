@@ -239,10 +239,21 @@
                                     window.location.href=backUrl;
                                     return; break;
                                 case 2:
-                                    error.html(msgtemp('<strong>用户名或密码错误！</strong>','alert-warning'));
+                                    error.html(msgtemp('<strong>用户名，密码不存在或错误！</strong>','alert-warning'));
                                     return; break;
                                 case 3:
-
+                                    error.html(msgtemp('<strong>账户已冻结，请联系管理员或重置密码解冻！</strong>','alert-warning'));
+                                    return; break;
+                                case 4:
+                                    error.html(msgtemp('<strong>验证码输入错误！</strong>','alert-warning'));
+                                    return; break;
+								case 6:
+                                    error.html(msgtemp('<strong>已连续输入错误'+data.paramOne+'次，账户冻结！</strong>','alert-warning'));
+                                    return; break;
+                                case 7:
+                                    error.html(msgtemp('<strong>再输错'+data.paramOne+'次，账户将会冻结！</strong>','alert-warning'));
+                                    return; break;
+                                default :
                                     error.html(msgtemp('<strong>'+data.msg+'</strong>',  'alert-warning'));
                                     return; break;
                             }

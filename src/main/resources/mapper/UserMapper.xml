@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="shop4j.dao.user.UserMapper"  >
+    <resultMap id="user" type="shop4j.models.user.User">
+
+    </resultMap>
+    <sql id="common_table_columns">
+        id,status,update_time,update_operator,add_operator,add_time
+    </sql>
+    <sql id="table_columns">
+        ticket,password,mobile,email,name,<include refid="common_table_columns"/>
+    </sql>
+    <sql id="table_name">
+        db_user.tbl_user
+    </sql>
+    <sql id="select_all_columns">
+        SELECT <include refid="table_columns"/> from <include refid="table_name"/>
+        WHERE
+    </sql>
+    <update id="freezeByUserId">
+        update <include refid="table_name"/> set status=2 where id =#{id}
+    </update>
+</mapper>

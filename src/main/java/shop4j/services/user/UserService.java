@@ -18,4 +18,10 @@ public interface UserService extends BaseService<User>{
      * @return 用户
      */
     User findByTicket(String ticket);
+
+    /**
+     * 通过客户ID冻结客户
+     * @param id
+     */
+    void freezeUser(long id);
 }

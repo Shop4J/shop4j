@@ -12,13 +12,15 @@ public enum LoginStatusEnum {
 
     Error(2,"用户名，密码不存在或错误！"),
 
-
-    CountFreeze(3,"账户已冻结！请联系管理员"),
+    CountFreeze(3,"账户已冻结！请联系管理员或重置密码解冻"),
 
     CheckCodeError(4,"验证码输入错误！"),
 
     CheckParamError(5,"参数格式校验出错！"),
 
+    FiveCountError(6,"当日连续输错5次，账号冻结！"),
+
+    ThreeCountError(7,"连续输错3次！"),
     ;
     private int status;
 
