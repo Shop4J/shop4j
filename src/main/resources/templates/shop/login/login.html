@@ -233,6 +233,19 @@
 						        var  backUrl = $("#back_url").val();
                                 window.location.href=backUrl;
 							}
+                            switch(data.status) {
+                                case 1:
+                                    var  backUrl = $("#back_url").val();
+                                    window.location.href=backUrl;
+                                    return; break;
+                                case 2:
+                                    error.html(msgtemp('<strong>用户名或密码错误！</strong>','alert-warning'));
+                                    return; break;
+                                case 3:
+
+                                    error.html(msgtemp('<strong>'+data.msg+'</strong>',  'alert-warning'));
+                                    return; break;
+                            }
                         });
 						// 请求成功执行类似这样的事件
 						// form.fadeOut(150,function() {

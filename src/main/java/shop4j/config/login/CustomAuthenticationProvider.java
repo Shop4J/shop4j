@@ -35,8 +35,14 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String username = (String) authentication.getPrincipal();
         UserDetails user = loginService.loadUserByUsername(username);
         if(Objects.isNull(user) || !user.getPassword().equals(password)){
+
             throw new LoginErrorException(LoginStatusEnum.Error.getStatus()+"");
-        }else {
+
+        }else if(!user.isEnabled()){
+
+            throw new LoginErrorException(LoginStatusEnum.CountFreeze.getStatus()+"");
+
+        } else {
             return new UsernamePasswordAuthenticationToken(user,password,user.getAuthorities());
         }
     }
