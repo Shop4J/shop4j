@@ -1,5 +1,7 @@
 package shop4j.enums;
 
+import java.util.stream.Stream;
+
 /**
  * @Author: weixuedong
  * @Date: 2018/5/30 16:08
@@ -41,5 +43,13 @@ public enum LoginStatusEnum {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public static LoginStatusEnum findByStatus(int status){
+        for (LoginStatusEnum statusEnum:values()) {
+            if(statusEnum.getStatus()==status)
+                return statusEnum;
+        }
+        return null;
     }
 }

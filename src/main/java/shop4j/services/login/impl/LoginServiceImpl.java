@@ -8,21 +8,17 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.web.util.RedirectUrlBuilder;
 import org.springframework.stereotype.Service;
 import shop4j.enums.LoginStatusEnum;
 import shop4j.models.user.Role;
 import shop4j.models.user.User;
 import shop4j.models.user.UserRole;
-import shop4j.result.LoginResult;
 import shop4j.services.login.LoginService;
 import shop4j.services.user.RoleService;
 import shop4j.services.user.UserRoleService;
 import shop4j.services.user.UserService;
-import shop4j.vo.login.LoginVO;
 import shop4j.vo.login.UserDetailVO;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Objects;
 
@@ -41,10 +37,6 @@ public class LoginServiceImpl implements LoginService {
 
     @Autowired
     private RoleService roleService;
-    @Override
-    public LoginResult login(LoginVO loginVO) {
-        return null;
-    }
 
     @Override
     public UserDetailVO getCurrentLogin() {

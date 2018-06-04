@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import shop4j.annotions.shop.dataload.HeadDataLoad;
+import shop4j.config.login.LoginErrorException;
 import shop4j.enums.LoginStatusEnum;
 import shop4j.result.LoginResult;
 import shop4j.services.login.LoginService;
@@ -36,7 +38,7 @@ public class LoginController{
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
     /**
-     * 登录页
+     * 登录页，存入目标跳转位置
      * @param model
      * @return
      */
@@ -53,7 +55,7 @@ public class LoginController{
 
 
     /**
-     * 成功JSON
+     * 成功JSON，跳转功能已存入前端
      * @return
      */
     @PostMapping("/success")
@@ -70,10 +72,12 @@ public class LoginController{
      */
     @PostMapping("/error")
     @ResponseBody
-    public LoginResult error(){
+    public LoginResult error(HttpServletRequest request){
+        LoginErrorException e = (LoginErrorException) request.getAttribute("AuthenticationException");
+        int status = Integer.parseInt(e.getMessage());
         LoginResult loginResult = new LoginResult();
-        loginResult.setStatus(LoginStatusEnum.Success.getStatus());
-        loginResult.setMsg(LoginStatusEnum.Success.getMsg());
+        loginResult.setStatus(status);
+        loginResult.setMsg(LoginStatusEnum.findByStatus(status).getMsg());
         return loginResult;
     }
 }
