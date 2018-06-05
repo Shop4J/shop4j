@@ -28,7 +28,7 @@ public class LoginLogServiceImpl extends BaseServiceImpl<LoginLog> implements Lo
         loginLog.setIp(ip);
         loginLog.setStatus(status.getStatus());
         loginLog.setTicket(ticket);
-        loginLogMapper.insert(loginLog);
+        add(loginLog);
     }
 
     @Override
@@ -37,6 +37,7 @@ public class LoginLogServiceImpl extends BaseServiceImpl<LoginLog> implements Lo
         instanceCriteria().andEqualTo("ticket",ticket)
                 .andGreaterThanOrEqualTo("addTime", LocalDate.now())
                 .andLessThanOrEqualTo("addTime",LocalDate.now().plusDays(1));
-        return loginLogMapper.selectByExample(exampleThreadLocal.get().orderBy("id desc"));
+        exampleThreadLocal.get().setOrderByClause("id desc");
+        return loginLogMapper.selectByExample(exampleThreadLocal.get());
     }
 }

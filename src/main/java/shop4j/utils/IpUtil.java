@@ -44,7 +44,9 @@ public class IpUtil {
             ipAddress="";
         }
         // ipAddress = this.getRequest().getRemoteAddr();
-
+        if("0:0:0:0:0:0:0:1".equals(ipAddress)){
+            ipAddress="127.0.0.1";
+        }
         return ipAddress;
     }
 }

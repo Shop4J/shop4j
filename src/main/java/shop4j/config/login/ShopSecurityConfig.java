@@ -37,21 +37,27 @@ import java.io.IOException;
 public class ShopSecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     private AuthenticationProvider authenticationProvider;
-
     @Autowired
     private CustomAuthenticationDetailsSource customAuthenticationDetailsSource;
 
-    @Autowired
-    private LoginService loginService;
+    /**
+     * 不复写将会把自带得provider也加载进来
+     */
+    public ShopSecurityConfig() {
+        super(true);
+    }
 
-    @Bean()
-    AuthenticationEntryPoint entryPoint(){
-        return new CustomLoginUrlAuthenticationEntryPoint("/login");
+    /**
+     * 不复写如果写再下面将会导致存在父类得provider导致重复调用2次验证
+     * @param auth
+     * @throws Exception
+     */
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(authenticationProvider);
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .authenticationProvider(authenticationProvider).userDetailsService(loginService)
             .exceptionHandling()
                 .authenticationEntryPoint(new CustomLoginUrlAuthenticationEntryPoint("/login"))
                 .and()
@@ -59,7 +65,8 @@ public class ShopSecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/user/**").hasRole("USER")
                 .and()
             .formLogin()
-                .authenticationDetailsSource(customAuthenticationDetailsSource).failureHandler(new LoginFailHandler())
+                .authenticationDetailsSource(customAuthenticationDetailsSource)
+                .failureHandler(new LoginFailHandler())
                 .successForwardUrl("/login/success")
                 .and()
             .logout()

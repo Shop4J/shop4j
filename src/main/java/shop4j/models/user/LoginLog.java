@@ -4,6 +4,7 @@ import lombok.Data;
 import shop4j.models.BaseModel;
 
 import javax.persistence.Column;
+import javax.persistence.Table;
 
 /**
  * @Author: weixuedong
@@ -11,6 +12,7 @@ import javax.persistence.Column;
  * @Description:用户登陆日志
  */
 @Data
+@Table(name ="db_user.tbl_login_log")
 public class LoginLog extends BaseModel{
     @Column
     private String ip;

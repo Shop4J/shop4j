@@ -49,7 +49,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
     private UserService userService;
-    @Transactional
+    @Transactional(noRollbackFor=AuthenticationException.class)
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
