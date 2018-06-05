@@ -228,6 +228,7 @@
 							case 2: error.html(msgtemp('<strong>密码过短</strong> 请输入6位以上的密码','alert-warning')); return; break;
 							case 3: error.html(msgtemp('<strong>密码过于简单</strong><br>密码需为字母、数字或特殊字符组合',  'alert-warning')); return; break;
 						}
+                        error.html();
 						form.ajaxSubmit(function (data) {
 						    if(data.status==1){
 						        var  backUrl = $("#back_url").val();

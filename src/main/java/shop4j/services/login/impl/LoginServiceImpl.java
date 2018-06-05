@@ -42,7 +42,7 @@ public class LoginServiceImpl implements LoginService {
     public UserDetailVO getCurrentLogin() {
         SecurityContext content = SecurityContextHolder.getContext();
         Authentication authentication = content.getAuthentication();
-        if(Objects.isNull(authentication.getDetails())){
+        if(Objects.isNull(authentication)||Objects.isNull(authentication.getDetails())){
             return null;
         }
         if (authentication.getPrincipal() instanceof UserDetailVO) {

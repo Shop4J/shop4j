@@ -18,7 +18,11 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
+import org.springframework.security.web.authentication.logout.ForwardLogoutSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 import shop4j.services.login.LoginService;
 import shop4j.services.login.impl.LoginServiceImpl;
 
@@ -63,9 +67,10 @@ public class ShopSecurityConfig extends WebSecurityConfigurerAdapter{
                 .successForwardUrl("/login/success")
                 .and()
             .logout()
-                .logoutUrl("/logout")
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login")
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout","GET"))
+                .deleteCookies("JSESSIONID")
+                .invalidateHttpSession(true)
+                .logoutSuccessHandler(new ForwardLogoutSuccessHandler("/login"))
                 .and()
             .csrf().disable();
     }
@@ -74,4 +79,8 @@ public class ShopSecurityConfig extends WebSecurityConfigurerAdapter{
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+//    @Bean
+//    public SpringTemplateEngine springTemplateEngine(){
+//        return new SpringSecurityDialect();
+//    }
 }

@@ -93,9 +93,7 @@ public class CommonDataLoad {
 
                 log.debug("加载商城公共页面头信息完成");
 
-
             }
-
 
         }
     }

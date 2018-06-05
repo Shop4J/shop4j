@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:fragment="header(title)">
     <meta charset="UTF-8">
     <meta name="keywords" content="" th:content="${webInfo.keyWorld}"/>
@@ -32,8 +32,14 @@
                     <a href="temp_article/udai_article4.html">帮助中心</a>
                 </div>
                 <div class="pull-right">
-                    <a href="" th:href="|/login?urlBack=${url}|" target="_blank"><span th:class="${current==1?'cr':''}">登录</span></a>
-                    <a href="/login?p=register" target="_blank"><span th:class="${current==1?'cr':''}">注册</span></a>
+                     <span sec:authorize="isAuthenticated()">
+                         <a  href="/user/index" target="_blank"><span sec:authentication="principal.username"></span></a>
+                         <a  th:href="|/logout?urlBack=${url}|" ><span th:class="${current==1?'cr':''}">退出</span></a>
+                    </span>
+                    <span sec:authorize="!isAuthenticated()">
+                        <a href="" th:href="|/login?urlBack=${url}|" ><span th:class="${current==1?'cr':''}">登录</span></a>
+                        <a href="/login?p=register"><span th:class="${current==1?'cr':''}">注册</span></a>
+                    </span>
                     <a href="/user/index" target="_blank"><span th:class="${current==3?'cr':''}">我的</span></a>
                     <a href="/user/order" target="_blank"><span th:class="${current==4?'cr':''}">我的订单</span></a>
                     <a href="/user/integral" target="_blank"><span th:class="${current==5?'cr':''}">积分平台</span></a>
