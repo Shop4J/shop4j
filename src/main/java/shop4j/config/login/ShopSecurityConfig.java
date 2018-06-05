@@ -41,13 +41,6 @@ public class ShopSecurityConfig extends WebSecurityConfigurerAdapter{
     private CustomAuthenticationDetailsSource customAuthenticationDetailsSource;
 
     /**
-     * 不复写将会把自带得provider也加载进来
-     */
-    public ShopSecurityConfig() {
-        super(true);
-    }
-
-    /**
      * 不复写如果写再下面将会导致存在父类得provider导致重复调用2次验证
      * @param auth
      * @throws Exception
