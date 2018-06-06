@@ -1,9 +1,9 @@
-package shop4j.services.user.impl;
+package shop4j.services.login.impl;
 
 import org.springframework.stereotype.Service;
 import shop4j.models.user.Role;
 import shop4j.services.base.BaseServiceImpl;
-import shop4j.services.user.RoleService;
+import shop4j.services.login.RoleService;
 
 /**
  * @Author: weixuedong

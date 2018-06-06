@@ -1,4 +1,4 @@
-package shop4j.services.user;
+package shop4j.services.login;
 
 import org.springframework.stereotype.Service;
 import shop4j.models.user.UserRole;

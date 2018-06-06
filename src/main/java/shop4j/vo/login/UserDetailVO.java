@@ -39,6 +39,7 @@ public class UserDetailVO implements UserDetails{
      * 用户可用权限
      */
     private List<Role> roles;
+
     @Override
     public List<GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();

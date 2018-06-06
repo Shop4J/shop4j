@@ -1,4 +1,4 @@
-package shop4j.services.user.impl;
+package shop4j.services.login.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -6,7 +6,7 @@ import shop4j.dao.user.UserRoleMapper;
 import shop4j.enums.CommonDataStatus;
 import shop4j.models.user.UserRole;
 import shop4j.services.base.BaseServiceImpl;
-import shop4j.services.user.UserRoleService;
+import shop4j.services.login.UserRoleService;
 
 import java.util.List;
 

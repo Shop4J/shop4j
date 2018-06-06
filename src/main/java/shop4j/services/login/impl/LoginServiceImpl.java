@@ -14,8 +14,8 @@ import shop4j.models.user.Role;
 import shop4j.models.user.User;
 import shop4j.models.user.UserRole;
 import shop4j.services.login.LoginService;
-import shop4j.services.user.RoleService;
-import shop4j.services.user.UserRoleService;
+import shop4j.services.login.RoleService;
+import shop4j.services.login.UserRoleService;
 import shop4j.services.user.UserService;
 import shop4j.vo.login.UserDetailVO;
 
