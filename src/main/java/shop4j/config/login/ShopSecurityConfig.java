@@ -44,6 +44,8 @@ public class ShopSecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     private CustomAuthenticationDetailsSource customAuthenticationDetailsSource;
 
+    @Autowired
+    private LoginService loginService;
     /**
      * 不复写如果写再下面将会导致存在父类得provider导致重复调用2次验证
      * @param auth
@@ -66,9 +68,23 @@ public class ShopSecurityConfig extends WebSecurityConfigurerAdapter{
                 .failureHandler(new LoginFailHandler())
                 .successForwardUrl("/login/success")
                 .and()
+            .rememberMe()
+                /**
+                 * 分布式登陆可以在这里控制登陆保持 但是sessionId存储得信息需要给分布式数据库
+                 */
+                .key("remember")
+                .tokenValiditySeconds(30*24*60*60)
+                .alwaysRemember(false)
+                .rememberMeParameter("remember")
+                /**
+                 * 处理离线重装
+                 */
+                .userDetailsService(loginService)
+                .and()
             .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout","GET"))
                 .deleteCookies("JSESSIONID")
+                .deleteCookies("remember-me")
                 .invalidateHttpSession(true)
                 .logoutSuccessHandler(new ForwardLogoutSuccessHandler("/login"))
                 .and()

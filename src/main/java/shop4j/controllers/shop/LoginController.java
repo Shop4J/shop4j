@@ -4,6 +4,7 @@ import base.util.string.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import shop4j.annotions.shop.dataload.HeadDataLoad;
 import shop4j.config.login.LoginErrorException;
+import shop4j.config.login.TokenImage;
 import shop4j.enums.LoginStatusEnum;
 import shop4j.result.LoginResult;
 import shop4j.services.login.LoginService;
@@ -79,5 +81,12 @@ public class LoginController{
         loginResult.setMsg(e.getMsg());
         loginResult.setParamOne(e.getParamOne());
         return loginResult;
+    }
+
+    @GetMapping("/token")
+    @ResponseBody
+    public ResponseEntity checkToken(String userName){
+        TokenImage tokenImage = new TokenImage();
+        return ResponseEntity.ok(tokenImage.getBuffImg());
     }
 }

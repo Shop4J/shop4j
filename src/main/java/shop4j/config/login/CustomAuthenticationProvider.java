@@ -98,7 +98,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
                     throw new LoginErrorException(LoginStatusEnum.FiveCountError.getStatus(),LoginStatusEnum.FiveCountError.getMsg(),errorTimes);
                 }
                 if(errorTimes>=2){
-                    userService.freezeUser(user.getUserId());
                     loginLogService.log(IpUtil.getIpAddr(request),username, CommonDataStatus.NO);
                     throw new LoginErrorException(LoginStatusEnum.ThreeCountError.getStatus(),LoginStatusEnum.ThreeCountError.getMsg(),5-(errorTimes+1));
                 }
