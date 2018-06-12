@@ -1,7 +1,5 @@
 server:
   port: 80
-  http2:
-    enabled: true
 spring:
 #  security:
 #   oauth2://登陆授权

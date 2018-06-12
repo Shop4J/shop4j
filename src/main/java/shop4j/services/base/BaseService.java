@@ -52,6 +52,12 @@ public interface BaseService<T extends BaseModel> {
      */
     List<T> findAll();
 
+    /**
+     * 并发会出现 Duplicate entry '1' for key '类型不重复'问题，应该是更新操作没有采用引用类型导致得
+     * @param t
+     * @return
+     */
+    @Deprecated
     int update(T t);
 
     /**

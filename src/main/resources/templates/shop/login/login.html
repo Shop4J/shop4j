@@ -31,8 +31,7 @@
 								<div class="input-group-addon pwd-toggle" title="显示密码"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></div>
 							</div>
 						</div>
-						<div class="form-group">
-
+						<div class="form-group" hidden>
 							<div class="input-group">
 								<div id="mpanel5">
 								</div>
@@ -236,6 +235,7 @@
 						        var  backUrl = $("#back_url").val();
                                 window.location.href=backUrl;
 							}
+                            $("#login_pwd").value("");//错误清空密码
                             switch(data.status) {
                                 case 1:
                                     var  backUrl = $("#back_url").val();
@@ -276,6 +276,15 @@
 	<div th:include="shop/common/template :: footer_login"></div>
 	<script type="text/javascript" src="js/verify.js" ></script>
 	<script type="text/javascript">
+        /**
+		 *加载
+         */
+        $("#login_phone").blur(function(){
+            var userName = $("#login_phone").value();
+            $.get("/login/token?userName="+userName,function (data) {
+				
+            })
+        }
         $('#mpanel5').pointsVerify({
             defaultNum : 4,	//默认的文字数量
             checkNum : 2,	//校对的文字数量

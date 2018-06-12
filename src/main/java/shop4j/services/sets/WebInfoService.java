@@ -17,4 +17,5 @@ public interface WebInfoService extends BaseService<WebInfo>{
      * @return 站点信息
      */
     WebInfo getWebRoot();
+
 }

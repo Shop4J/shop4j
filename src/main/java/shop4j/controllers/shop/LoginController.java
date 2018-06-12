@@ -25,6 +25,7 @@ import shop4j.services.login.LoginService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  * @Author: weixuedong
@@ -85,7 +86,7 @@ public class LoginController{
 
     @GetMapping("/token")
     @ResponseBody
-    public ResponseEntity checkToken(String userName){
+    public ResponseEntity checkToken(String userName) throws IOException {
         TokenImage tokenImage = new TokenImage();
         return ResponseEntity.ok(tokenImage.getBuffImg());
     }
